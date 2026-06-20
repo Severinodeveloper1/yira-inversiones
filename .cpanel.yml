@@ -1,0 +1,24 @@
+---
+deployment:
+  tasks:
+    # Copiar archivos del repositorio al directorio raíz del dominio
+    - export DEPLOYPATH=/home/$USER/public_html
+    - /bin/cp -R . $DEPLOYPATH
+
+    # Instalar dependencias de Composer (sin dev)
+    - cd $DEPLOYPATH && /usr/local/bin/php /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction
+
+    # Optimizar Laravel para producción
+    - cd $DEPLOYPATH && /usr/local/bin/php artisan config:cache
+    - cd $DEPLOYPATH && /usr/local/bin/php artisan route:cache
+    - cd $DEPLOYPATH && /usr/local/bin/php artisan view:cache
+
+    # Ejecutar migraciones
+    - cd $DEPLOYPATH && /usr/local/bin/php artisan migrate --force
+
+    # Crear enlace simbólico de storage
+    - cd $DEPLOYPATH && /usr/local/bin/php artisan storage:link
+
+    # Establecer permisos correctos
+    - chmod -R 755 $DEPLOYPATH/storage
+    - chmod -R 755 $DEPLOYPATH/bootstrap/cache

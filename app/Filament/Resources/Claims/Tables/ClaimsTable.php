@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Claims\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -37,22 +38,22 @@ class ClaimsTable
                 TextColumn::make('type')
                     ->label('Tipo')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'reclamo' => 'danger',
                         'queja' => 'warning',
                         default => 'gray',
                     })
-                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->formatStateUsing(fn(string $state): string => ucfirst($state))
                     ->searchable(),
                 TextColumn::make('status')
                     ->label('Estado')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'pendiente' => 'danger',
                         'atendido' => 'success',
                         default => 'gray',
                     })
-                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->formatStateUsing(fn(string $state): string => ucfirst($state))
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->label('Fecha Registro')
@@ -69,6 +70,7 @@ class ClaimsTable
             ])
             ->recordActions([
                 EditAction::make(),
+                ViewAction::make()
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

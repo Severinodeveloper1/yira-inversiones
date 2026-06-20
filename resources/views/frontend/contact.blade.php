@@ -3,15 +3,12 @@
 @section('title', 'Contacto y Preguntas Frecuentes | Yira Inversiones')
 
 @section('content')
-<!-- Hero Decorative Section -->
-<section class="relative h-[30vh] w-full overflow-hidden bg-on-surface">
-    <img alt="Yira Inversiones Workshop" class="w-full h-full object-cover grayscale opacity-40" src="https://lh3.googleusercontent.com/aida/AP1WRLuJP25Abvdua39V3C2A_S6RNdTBGMb7k5j9CnJH48jHxZ4DVpKnVrsPaYCsbxrwIQnFQxrww_2CguykGLVMWPXaStIVwFRLTf82qwIq8ytjIrTkrMwhJWCeK3AW0RZbxj26mk6Xtka3QVUuj7ubv4j4dUzpd0su03Dn7NA27R4k_HAlPb_NNVAWnQsiippMe7U3gPvZk1pp1U6rmhIBGci1gw5MlK656y67mfHU1eFC_fAFSM6LWt4xSQ">
-    <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
-    <div class="absolute bottom-12 left-0 w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-        <h1 class="font-headline-xl text-on-surface">Contacto &amp; Soporte</h1>
-        <p class="text-secondary font-body-lg max-w-2xl">Diseño de vanguardia y atención personalizada para sus espacios.</p>
-    </div>
-</section>
+@include('frontend.partials._page_hero', [
+    'pageBanners'     => $pageBanners ?? collect(),
+    'fallbackBg'      => 'https://lh3.googleusercontent.com/aida/AP1WRLuJP25Abvdua39V3C2A_S6RNdTBGMb7k5j9CnJH48jHxZ4DVpKnVrsPaYCsbxrwIQnFQxrww_2CguykGLVMWPXaStIVwFRLTf82qwIq8ytjIrTkrMwhJWCeK3AW0RZbxj26mk6Xtka3QVUuj7ubv4j4dUzpd0su03Dn7NA27R4k_HAlPb_NNVAWnQsiippMe7U3gPvZk1pp1U6rmhIBGci1gw5MlK656y67mfHU1eFC_fAFSM6LWt4xSQ',
+    'defaultSubtitle' => 'Atención Personalizada',
+    'defaultTitle'    => 'Contacto & Soporte',
+])
 
 <!-- Contact Form & Info Section -->
 <section class="py-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">

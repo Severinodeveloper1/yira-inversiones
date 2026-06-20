@@ -3,24 +3,12 @@
 @section('title', 'Nosotros | Yira Inversiones')
 
 @section('content')
-<!-- Hero Section -->
-<section class="relative h-[80vh] w-full overflow-hidden">
-    <div class="absolute inset-0 z-0">
-        <img alt="Nuestra Historia" class="w-full h-full object-cover grayscale-[0.2] brightness-[0.8]" src="{{ $company->about_hero_image_path ? asset('storage/' . $company->about_hero_image_path) : 'https://lh3.googleusercontent.com/aida/AP1WRLtZwqlaDFmeHVNuGcJB1sbqvhvchPZlxD-DDFulYi-SN4S2FMlXhTnhOzwlaS010vFitglXV7xSXihGqZu6qs0U52hdH2FDR2qJ_vaGU0g57b-07HHVu67JmnPzkFzevD5faVECb2lTy8EoFtFRoSOCwJ9O1pknQZmvwiaWTGT9NTydgvOTtof5C-yztmSbnSNoWqmHtvQC6CySb3AgcbGmwnKgnNjGcbQ0XMWlt-HS59qiz_BvfRbTsfI' }}">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent z-10"></div>
-    <div class="relative z-20 max-w-container-max mx-auto px-margin-desktop h-full flex flex-col justify-end pb-24">
-        <div class="max-w-3xl">
-            <span class="font-label-sm text-label-sm uppercase tracking-[0.3em] text-primary mb-4 block">{{ $company->about_hero_subtitle ?? 'Legado y Excelencia' }}</span>
-            <h1 class="font-headline-xl text-headline-xl text-on-surface mb-6 perspective-text">{!! nl2br(e($company->about_hero_title ?? "Nuestra Historia:\nArquitectura y Confort")) !!}</h1>
-            @if($company->about_hero_description)
-                <p class="font-body-lg text-body-lg text-secondary max-w-xl">
-                    {{ $company->about_hero_description }}
-                </p>
-            @endif
-        </div>
-    </div>
-</section>
+@include('frontend.partials._page_hero', [
+    'pageBanners'     => $pageBanners ?? collect(),
+    'fallbackBg'      => 'https://lh3.googleusercontent.com/aida/AP1WRLtZwqlaDFmeHVNuGcJB1sbqvhvchPZlxD-DDFulYi-SN4S2FMlXhTnhOzwlaS010vFitglXV7xSXihGqZu6qs0U52hdH2FDR2qJ_vaGU0g57b-07HHVu67JmnPzkFzevD5faVECb2lTy8EoFtFRoSOCwJ9O1pknQZmvwiaWTGT9NTydgvOTtof5C-yztmSbnSNoWqmHtvQC6CySb3AgcbGmwnKgnNjGcbQ0XMWlt-HS59qiz_BvfRbTsfI',
+    'defaultSubtitle' => $company->about_hero_subtitle ?? 'Legado y Excelencia',
+    'defaultTitle'    => $company->about_hero_title ?? 'Nuestra Historia',
+])
 
 <!-- The Workshop Section (El Taller) -->
 <section class="py-24 bg-surface-container-lowest">

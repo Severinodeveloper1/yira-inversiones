@@ -3,6 +3,13 @@
 @section('title', 'Tienda y Catálogos | Yira Inversiones')
 
 @section('content')
+@include('frontend.partials._page_hero', [
+    'pageBanners'     => $pageBanners ?? collect(),
+    'fallbackBg'      => null,
+    'defaultSubtitle' => 'Catálogo',
+    'defaultTitle'    => 'Tienda y Catálogos',
+])
+
 <main class="py-12 pb-24 max-w-container-max mx-auto px-margin-desktop">
     <!-- Page Header -->
     <header class="mb-12">

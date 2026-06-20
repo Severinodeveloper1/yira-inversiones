@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\PageBanner;
 use App\Models\Product;
 use App\Models\Post;
 use App\Models\Claim;
@@ -35,7 +36,8 @@ class PageController extends Controller
 
     public function nosotros()
     {
-        return view('frontend.nosotros');
+        $pageBanners = PageBanner::forPage('nosotros');
+        return view('frontend.nosotros', compact('pageBanners'));
     }
 
     public function tienda(Request $request)
@@ -65,10 +67,11 @@ class PageController extends Controller
             });
         }
 
-        $products = $query->paginate(12)->withQueryString();
+        $products   = $query->paginate(12)->withQueryString();
         $categories = Category::all();
+        $pageBanners = PageBanner::forPage('tienda');
 
-        return view('frontend.tienda', compact('products', 'categories'));
+        return view('frontend.tienda', compact('products', 'categories', 'pageBanners'));
     }
 
     public function product($slug)
@@ -106,7 +109,9 @@ class PageController extends Controller
             ->orderBy('published_at', 'desc')
             ->paginate(6);
 
-        return view('frontend.blog', compact('posts'));
+        $pageBanners = PageBanner::forPage('blog');
+
+        return view('frontend.blog', compact('posts', 'pageBanners'));
     }
 
     public function blogPost($slug)
@@ -127,7 +132,8 @@ class PageController extends Controller
     public function contact()
     {
         $faqs = Faq::where('is_active', true)->get();
-        return view('frontend.contact', compact('faqs'));
+        $pageBanners = PageBanner::forPage('contacto');
+        return view('frontend.contact', compact('faqs', 'pageBanners'));
     }
 
     public function storeClaim(Request $request)

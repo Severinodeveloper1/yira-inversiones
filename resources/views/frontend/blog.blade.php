@@ -3,17 +3,12 @@
 @section('title', 'Blog | Yira Inversiones')
 
 @section('content')
-<!-- Hero Section -->
-<section class="relative h-[50vh] w-full overflow-hidden bg-on-surface">
-    <div class="absolute inset-0 bg-cover bg-center opacity-60" style="background-image: url('https://lh3.googleusercontent.com/aida/AP1WRLtZwqlaDFmeHVNuGcJB1sbqvhvchPZlxD-DDFulYi-SN4S2FMlXhTnhOzwlaS010vFitglXV7xSXihGqZu6qs0U52hdH2FDR2qJ_vaGU0g57b-07HHVu67JmnPzkFzevD5faVECb2lTy8EoFtFRoSOCwJ9O1pknQZmvwiaWTGT9NTydgvOTtof5C-yztmSbnSNoWqmHtvQC6CySb3AgcbGmwnKgnNjGcbQ0XMWlt-HS59qiz_BvfRbTsfI');"></div>
-    <div class="relative h-full max-w-container-max mx-auto px-margin-desktop flex flex-col justify-center items-start">
-        <span class="inline-block px-4 py-1 mb-6 bg-primary text-white font-label-sm text-label-sm tracking-widest uppercase">Editorial</span>
-        <h1 class="font-headline-xl text-headline-xl text-white max-w-2xl leading-none">Inspiración y Diseño</h1>
-        <p class="mt-6 text-white/90 font-body-lg text-body-lg max-w-lg">
-            Descubra las últimas tendencias en espacios corporativos, donde la ergonomía y la estética se encuentran para inspirar su trabajo.
-        </p>
-    </div>
-</section>
+@include('frontend.partials._page_hero', [
+    'pageBanners'     => $pageBanners ?? collect(),
+    'fallbackBg'      => 'https://lh3.googleusercontent.com/aida/AP1WRLtZwqlaDFmeHVNuGcJB1sbqvhvchPZlxD-DDFulYi-SN4S2FMlXhTnhOzwlaS010vFitglXV7xSXihGqZu6qs0U52hdH2FDR2qJ_vaGU0g57b-07HHVu67JmnPzkFzevD5faVECb2lTy8EoFtFRoSOCwJ9O1pknQZmvwiaWTGT9NTydgvOTtof5C-yztmSbnSNoWqmHtvQC6CySb3AgcbGmwnKgnNjGcbQ0XMWlt-HS59qiz_BvfRbTsfI',
+    'defaultSubtitle' => 'Editorial',
+    'defaultTitle'    => 'Inspiración y Diseño',
+])
 
 <!-- Divider -->
 <div class="max-w-container-max mx-auto px-margin-desktop">

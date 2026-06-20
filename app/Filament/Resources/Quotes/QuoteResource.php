@@ -28,7 +28,9 @@ class QuoteResource extends Resource
 
     protected static ?string $modelLabel = 'Cotización';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Administración';
+    protected static string|\UnitEnum|null $navigationGroup = 'Gestión Comercial';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

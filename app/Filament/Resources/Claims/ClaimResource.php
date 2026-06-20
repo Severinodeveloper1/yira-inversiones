@@ -18,7 +18,17 @@ class ClaimResource extends Resource
 {
     protected static ?string $model = Claim::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedExclamationTriangle;
+
+    protected static ?string $navigationLabel = 'Reclamos';
+
+    protected static ?string $modelLabel = 'Reclamo';
+
+    protected static ?string $pluralModelLabel = 'Reclamos';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Gestión Comercial';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Schema $schema): Schema
     {

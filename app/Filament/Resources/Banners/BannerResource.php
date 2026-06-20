@@ -18,7 +18,17 @@ class BannerResource extends Resource
 {
     protected static ?string $model = Banner::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
+
+    protected static ?string $navigationLabel = 'Banners';
+
+    protected static ?string $modelLabel = 'Banner';
+
+    protected static ?string $pluralModelLabel = 'Banners';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Contenido Web';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

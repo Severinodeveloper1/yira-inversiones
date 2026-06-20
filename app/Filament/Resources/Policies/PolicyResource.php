@@ -18,7 +18,17 @@ class PolicyResource extends Resource
 {
     protected static ?string $model = Policy::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+
+    protected static ?string $navigationLabel = 'Políticas';
+
+    protected static ?string $modelLabel = 'Política';
+
+    protected static ?string $pluralModelLabel = 'Políticas';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Contenido Web';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Schema $schema): Schema
     {

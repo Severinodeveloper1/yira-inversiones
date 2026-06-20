@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Bloquear acceso directo a archivos sensibles
+    RewriteRule ^\.env$ - [F,L]
+    RewriteRule ^composer\.(json|lock)$ - [F,L]
+    RewriteRule ^(app|bootstrap|config|database|lang|resources|routes|tests|vendor)/ - [F,L]
+
+    # Si ya viene de /public/, no redirigir (evitar bucle)
+    RewriteCond %{REQUEST_URI} !^/public/
+
+    # Redirigir todo lo demás a public/
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
+</IfModule>

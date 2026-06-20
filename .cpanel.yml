@@ -1,9 +1,14 @@
 ---
 deployment:
   tasks:
-    # Copiar archivos del repositorio al directorio raíz del dominio
+    # Definir ruta destino
     - export DEPLOYPATH=/home/$USER/public_html
+
+    # Copiar archivos del repositorio al public_html
     - /bin/cp -R . $DEPLOYPATH
+
+    # Asegurar que el .htaccess raíz esté en su lugar
+    - /bin/cp $DEPLOYPATH/.htaccess $DEPLOYPATH/.htaccess.bak 2>/dev/null || true
 
     # Instalar dependencias de Composer (sin dev)
     - cd $DEPLOYPATH && /usr/local/bin/php /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction

@@ -13,6 +13,7 @@ class FaqForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(1)
             ->components([
                 Section::make('Pregunta Frecuente')
                     ->schema([

@@ -116,13 +116,13 @@
                 <!-- Fallback categories -->
                 <div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
                     <img alt="Mobiliario Oficina" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLtSE3TB-5aqg1Yzq3JRqVyhQ2Em7vlMj7uY5EYUtIlNER-KZFDuZi9a2iVlF5lvoyZByn2m-dA5lwF8MnEo1m4uG_HB8zANArN6awiS6l0M2SdfZOwtRxgMPgEK7K7B3zcsk4lZZoTfZftxgFwvaS2ApJOvJChNB9gKPe9hjlvSGnV2Jj2UCfo3X1G3DK90Dy8Y75tYhyZ3NAaI7NYFaN55fYL9fQq38Z6HChHMS-D4_JBxtOgpUgyRYS4">
-                    <div class="absolute inset-0 bg-black/40 flex items-end p-6 group-hover:bg-black/0 transition-all duration-500">
+                    <div class="absolute inset-0 bg-black/0 flex items-end p-6 group-hover:bg-black/0 transition-all duration-500">
                         <a href="{{ route('tienda', ['type' => 'oficina']) }}" class="text-white font-headline-lg text-body-lg font-bold group-hover:opacity-0 transition-opacity duration-500">Oficina Ejecutiva</a>
                     </div>
                 </div>
                 <div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
                     <img alt="Mobiliario Hogar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLs0NmaJeLTYqrTAhSV2PlT4eh4CEcNjUTjlqDq7iB8TkLlyVno1p9Usn37pVWv2DRZKFl1OgOMik0UOGL_T53whPHK8qIUWom8B6MtvZSMR7y3uYgKVTm1yvISuiNA9HWB2o8NfgORK2CCJgJjaxbv9EqeWDGUZkMdu8EGojxPe3TccgvcQL6xPdkJe9d_H74LIxM6dU9ZiUlCO0KIgTJh3jnK-wsxzvGhXQRy5ymQfdIcQ6PG0OfQZOg">
-                    <div class="absolute inset-0 bg-black/40 flex items-end p-6 group-hover:bg-black/0 transition-all duration-500">
+                    <div class="absolute inset-0 bg-black/00 flex items-end p-6 group-hover:bg-black/0 transition-all duration-500">
                         <a href="{{ route('tienda', ['type' => 'hogar']) }}" class="text-white font-headline-lg text-body-lg font-bold group-hover:opacity-0 transition-opacity duration-500">Sala &amp; Confort</a>
                     </div>
                 </div>
@@ -144,8 +144,8 @@
         @if($featuredProducts->count() > 0)
             @foreach($featuredProducts as $product)
                 @php
-                    $mainImage = $product->hasMedia('products') 
-                        ? $product->getFirstMediaUrl('products') 
+                    $mainImage = $product->hasMedia('products')
+                        ? $product->getFirstMediaUrl('products')
                         : 'https://placehold.co/400x500';
                 @endphp
                 <div class="group">
@@ -204,8 +204,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         @foreach($promoProducts as $product)
             @php
-                $mainImage = $product->hasMedia('products') 
-                    ? $product->getFirstMediaUrl('products') 
+                $mainImage = $product->hasMedia('products')
+                    ? $product->getFirstMediaUrl('products')
                     : 'https://placehold.co/400x500';
             @endphp
             <div class="group bg-white p-4 rounded shadow-sm hover:shadow-md transition-shadow">
@@ -278,7 +278,7 @@
                 </div>
                 <h3 class="font-headline-lg text-headline-lg mb-2">Catálogo Hogar</h3>
                 <p class="text-secondary mb-8 max-w-xs">Mobiliario de diseño para salas, dormitorios y comedores con estilo contemporáneo.</p>
-                <a href="{{ $company->catalog_home_path ? asset('storage/' . $company->catalog_home_path) : '#' }}" 
+                <a href="{{ $company->catalog_home_path ? asset('storage/' . $company->catalog_home_path) : '#' }}"
                    @if($company->catalog_home_path) target="_blank" @else onclick="alert('El catálogo de Hogar estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                    class="flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded hover:bg-primary-container transition-colors">
                     <span>Descargar PDF</span>
@@ -291,7 +291,7 @@
                 </div>
                 <h3 class="font-headline-lg text-headline-lg text-white mb-2">Catálogo Oficina</h3>
                 <p class="text-surface-variant mb-8 max-w-xs">Soluciones ergonómicas y arquitectura de espacios corporativos de alto rendimiento.</p>
-                <a href="{{ $company->catalog_office_path ? asset('storage/' . $company->catalog_office_path) : '#' }}" 
+                <a href="{{ $company->catalog_office_path ? asset('storage/' . $company->catalog_office_path) : '#' }}"
                    @if($company->catalog_office_path) target="_blank" @else onclick="alert('El catálogo de Oficina estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                    class="flex items-center gap-2 px-8 py-4 bg-white text-on-surface font-bold rounded hover:bg-primary hover:text-white transition-all">
                     <span>Descargar PDF</span>
@@ -363,9 +363,9 @@
     function moveSlider(index, count) {
         const slider = document.getElementById('hero-slider');
         const dots = document.querySelectorAll('.slider-dot');
-        
+
         slider.style.transform = `translateX(-${index * (100 / count)}%)`;
-        
+
         dots.forEach((dot, i) => {
             if (i === index) {
                 dot.classList.add('bg-primary', 'w-12');

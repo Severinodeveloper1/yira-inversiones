@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,8 +15,9 @@ use OwenIt\Auditing\Auditable as AuditableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements Auditable, HasMedia
+class User extends Authenticatable implements Auditable, HasMedia, FilamentUser
 {
+
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasRoles, AuditableTrait, InteractsWithMedia;
 
@@ -50,5 +53,10 @@ class User extends Authenticatable implements Auditable, HasMedia
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->hasRole('super_admin') || $this->hasAnyRole(\Spatie\Permission\Models\Role::all());
     }
 }

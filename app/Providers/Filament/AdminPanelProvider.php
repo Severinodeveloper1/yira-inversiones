@@ -28,6 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandLogo(asset('img/LOGO_FONDO_ROJO.png'))
+            ->brandName('YIRA INVERSIONES')
+            ->favicon(asset('img/ICON_ROJO.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])

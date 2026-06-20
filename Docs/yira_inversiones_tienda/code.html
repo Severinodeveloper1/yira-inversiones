@@ -1,0 +1,297 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tienda y Catálogos | Yira Inversiones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Work+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#906f6b",
+                    "on-surface": "#1b1c1c",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#ffdad6",
+                    "surface-tint": "#bb1619",
+                    "surface-container-low": "#f4f3f3",
+                    "tertiary-fixed": "#e3e3de",
+                    "on-secondary-container": "#656464",
+                    "on-primary-container": "#ffd9d5",
+                    "secondary-container": "#e4e2e1",
+                    "primary": "#9e000c",
+                    "on-tertiary-container": "#e2e2de",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "inverse-on-surface": "#f2f0f0",
+                    "tertiary-container": "#636561",
+                    "on-primary-fixed-variant": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e3e2e2",
+                    "on-secondary-fixed-variant": "#474747",
+                    "inverse-primary": "#ffb4ab",
+                    "on-background": "#1b1c1c",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#e4e2e1",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "background": "#faf9f9",
+                    "surface-container-high": "#e9e8e8",
+                    "surface-bright": "#faf9f9",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#c6c7c2",
+                    "primary-container": "#c41e1e",
+                    "outline-variant": "#e5bdb9",
+                    "on-tertiary-fixed-variant": "#454744",
+                    "error": "#ba1a1a",
+                    "secondary": "#5f5e5e",
+                    "surface-container-highest": "#e3e2e2",
+                    "surface": "#faf9f9",
+                    "surface-dim": "#dbdad9",
+                    "surface-container": "#efeded",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#410002",
+                    "on-tertiary-fixed": "#1a1c19",
+                    "inverse-surface": "#2f3031",
+                    "tertiary": "#4b4d4a",
+                    "on-surface-variant": "#5c403d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "margin-desktop": "64px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Manrope"],
+                    "label-sm": ["Work Sans"],
+                    "body-lg": ["Work Sans"],
+                    "headline-lg": ["Manrope"],
+                    "headline-xl": ["Manrope"],
+                    "body-md": ["Work Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #faf9f9; }
+        .product-carousel-btn { opacity: 0; transition: opacity 0.3s; }
+        .product-card:hover .product-carousel-btn { opacity: 1; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e3e2e2; border-radius: 10px; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-lg text-headline-lg font-bold text-primary">Yira Inversiones</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Inicio</a>
+<a class="font-body-md text-primary border-b-2 border-primary pb-1" href="#">Sofás</a>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Oficina</a>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Accesorios</a>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Acerca de</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-200">person</button>
+<div class="relative cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<!-- Page Header -->
+<header class="mb-12">
+<nav class="flex text-label-sm font-label-sm text-secondary mb-2">
+<a class="hover:text-primary" href="#">Inicio</a>
+<span class="mx-2">/</span>
+<span class="text-on-surface-variant">Tienda</span>
+</nav>
+<div class="flex items-center gap-4"><button onclick="toggleDrawer(true)" class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest hover:bg-surface-variant rounded-lg transition-colors active:scale-95"><span class="material-symbols-outlined text-primary">tune</span><span class="font-label-sm uppercase tracking-widest">Filtros</span></button><h1 class="font-headline-xl text-headline-xl text-on-surface">Tienda y Catálogos</h1></div>
+</header>
+<div class="flex flex-col md:flex-row gap-gutter">
+<!-- Left Sidebar (Filter System) -->
+
+<!-- Right Main Grid -->
+<div class="flex-grow">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter lg:grid-cols-4">
+<!-- Product Card 1 -->
+<article class="product-card bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-500">
+<div class="relative group aspect-[4/5] bg-surface-container">
+<div class="absolute inset-0 flex transition-transform duration-500" id="carousel-1">
+<div class="w-full h-full flex-shrink-0 bg-cover bg-center" data-alt="A professional product shot of a minimalist, deep-seated charcoal grey sofa in a brightly lit architectural studio. The lighting is soft and natural, emphasizing the rich texture of the premium fabric. The background is a clean white wall with a hint of a concrete floor, reflecting a luxury showroom aesthetic. The mood is calm, modern, and high-end." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDUvMDrbxk0sFfXtfs9la_aae4BN9ZVP1OUmiqtdbpuY40dbW8Y5UNjo7QU5vbDHIeA7WP9tsfdZ3qbxTaYNgXuYZh798SNOlf_7qig5JfUQa_zkt3PAgVfeNz6p42O9hYD_A7gF_NyizK4kuHHRJnDZRxA9SK3GiiYBusrg2vJra9u_LwEx_ICa5glSau5SBTjkJFS64LDM1KAPIV3mc86uE0r_T12jTUrRuNMfX5KT1uIF05YnA3FXgQYS9NtGKXZKvZcueIdPAw')"></div>
+<div class="w-full h-full flex-shrink-0 bg-cover bg-center" data-alt="A close-up architectural detail shot of the wooden legs and precision stitching of a modern designer sofa. The lighting is high-key and professional, focusing on the materiality of light oak and woven grey textile. Set in a minimalist interior with plenty of negative space. The image exudes professional craftsmanship and selective minimalism." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCyrPY4DoFQS0V4VAr_pGBtvPmPcf0pXCNz9r83rwQQV3U1djF0hCKjGhmMOLbs1xQEv__93TrW0hHuAOKxDAxf61R9tVDh9jjrE-h1s7thv0MuykxlbOBn99dFbHza1CqjA4DgngruLqdqr-KB5_1PMPIbd2KxWbPgdAc-CUDAp5UI3GsIXhAlLn6UfARIy3OD060WnaPtRRh8f4f2wCd_cgkjmGQ7gk92SCWrw4C70KHm-FO2iu8sDdDY6HhIjtBSeig5spKlaSI')"></div>
+</div>
+<button class="product-carousel-btn absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-sm flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all" onclick="rotateCarousel('carousel-1', -1)">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="product-carousel-btn absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-sm flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all" onclick="rotateCarousel('carousel-1', 1)">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<div class="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold px-2 py-1 uppercase tracking-tighter">Nuevo</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-lg text-body-lg font-bold leading-tight">Sofa Modular Aethel</h3>
+<span class="text-secondary font-bold text-body-md">$1,299</span>
+</div>
+<p class="text-secondary text-label-sm mb-6">Textil Premium • Gris Carbón</p>
+<button class="w-full py-4 bg-on-surface text-white font-bold text-label-sm uppercase tracking-widest hover:bg-primary transition-colors duration-300">Ver Detalles</button>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="product-card bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-500">
+<div class="relative group aspect-[4/5] bg-surface-container">
+<div class="absolute inset-0 flex transition-transform duration-500" id="carousel-2">
+<div class="w-full h-full flex-shrink-0 bg-cover bg-center" data-alt="An ergonomic high-end executive office chair in polished chrome and black mesh, positioned in a spacious corporate office with floor-to-ceiling windows. The aesthetic is professional and corporate, with cool daylight and a sense of authority. The design focus is on structural integrity and sleek minimalist lines." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmTmM8tb-4b0zRaeyyGM2mAYOCr23uu0zo_DviGesJpb_HSC24KUJ4Xt9r4HtKJ8AEue7TFdOVuIQt1TsfZntvVJOALuHgP-RWAet8xQKM3iGM1m3W9D5b_Zbva6OUkH14hffyCaXRRyu2ZZQ6C1rwrhgl1piKvhwgeYDpCZLBtNP1pZik0Tjfad-FVVAVAiUZfVqR50N4O9l0dguPWAs1ILzGsr1GIPxpteFLF3gn9BNDRTC4R_-cVT_I2-_JhZXIVwLhdAaoBf0')"></div>
+</div>
+<button class="product-carousel-btn absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-on-surface opacity-30 cursor-not-allowed">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="product-carousel-btn absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-on-surface opacity-30 cursor-not-allowed">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-lg text-body-lg font-bold leading-tight">Silla Ejecutiva Vertex</h3>
+<span class="text-secondary font-bold text-body-md">$450</span>
+</div>
+<p class="text-secondary text-label-sm mb-6">Ergonómica • Malla Técnica</p>
+<button class="w-full py-4 bg-on-surface text-white font-bold text-label-sm uppercase tracking-widest hover:bg-primary transition-colors duration-300">Ver Detalles</button>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="product-card bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-500">
+<div class="relative group aspect-[4/5] bg-surface-container">
+<div class="absolute inset-0 flex transition-transform duration-500" id="carousel-3">
+<div class="w-full h-full flex-shrink-0 bg-cover bg-center" data-alt="A minimalist solid oak dining table with slim, tapered legs in a high-key residential kitchen setting. The space is filled with warm, soft sunlight, casting delicate shadows. The table is styled with a single ceramic vase, emphasizing a quiet, luxury domestic life. The color palette is composed of natural wood tones and off-whites." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMG5WWRu1Uceyf_b7JSKqEiRtEjNYKCSHPikA67PFUVszIhlbyVdq_VgPb3_JnICXUi8w_PHxpmoCJGmwzGlX1oktDeH-HsRqGlmtf_NrUDQ8JfeJijntrMoL501PUkm9lsFk3uqkyL0eyacNkPwRuOcvam2kn_591Ff17dePek8_Dd4Igh2vTLgFrmDvSfBS7C10vliTXZFjNdikH_5OLA5xHxwBAVUWnpfKqDKIjxw1t3JXHwUA6XCYLdqEkqQEEB58x61A7pP0')"></div>
+</div>
+<button class="product-carousel-btn absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-on-surface opacity-30 cursor-not-allowed">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="product-carousel-btn absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-on-surface opacity-30 cursor-not-allowed">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-lg text-body-lg font-bold leading-tight">Mesa Comedor Nordic</h3>
+<span class="text-secondary font-bold text-body-md">$890</span>
+</div>
+<p class="text-secondary text-label-sm mb-6">Madera Sólida • Roble Claro</p>
+<button class="w-full py-4 bg-on-surface text-white font-bold text-label-sm uppercase tracking-widest hover:bg-primary transition-colors duration-300">Ver Detalles</button>
+</div>
+</article>
+<article class="product-card bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-500"><div class="relative group aspect-[4/5] bg-surface-container"><div class="absolute inset-0 flex transition-transform duration-500" id="carousel-4"><div class="w-full h-full flex-shrink-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&amp;fit=crop&amp;q=80&amp;w=800')"></div></div><button class="product-carousel-btn absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-on-surface opacity-30 cursor-not-allowed"><span class="material-symbols-outlined">chevron_left</span></button><button class="product-carousel-btn absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-on-surface opacity-30 cursor-not-allowed"><span class="material-symbols-outlined">chevron_right</span></button></div><div class="p-6"><div class="flex justify-between items-start mb-2"><h3 class="font-headline-lg text-body-lg font-bold leading-tight">Mesa de Centro</h3><span class="text-secondary font-bold text-body-md">$320</span></div><p class="text-secondary text-label-sm mb-6">Mármol • Base Metálica</p><button class="w-full py-4 bg-on-surface text-white font-bold text-label-sm uppercase tracking-widest hover:bg-primary transition-colors duration-300">Ver Detalles</button></div></article><article class="product-card bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_2px_15px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-500"><div class="relative group aspect-[4/5] bg-surface-container"><div class="absolute inset-0 flex transition-transform duration-500" id="carousel-5"><div class="w-full h-full flex-shrink-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&amp;fit=crop&amp;q=80&amp;w=800')"></div></div><button class="product-carousel-btn absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-on-surface opacity-30 cursor-not-allowed"><span class="material-symbols-outlined">chevron_left</span></button><button class="product-carousel-btn absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-on-surface opacity-30 cursor-not-allowed"><span class="material-symbols-outlined">chevron_right</span></button></div><div class="p-6"><div class="flex justify-between items-start mb-2"><h3 class="font-headline-lg text-body-lg font-bold leading-tight">Estante Minimalista</h3><span class="text-secondary font-bold text-body-md">$580</span></div><p class="text-secondary text-label-sm mb-6">Nogal • Estructura Abierta</p><button class="w-full py-4 bg-on-surface text-white font-bold text-label-sm uppercase tracking-widest hover:bg-primary transition-colors duration-300">Ver Detalles</button></div></article></div>
+<!-- Pagination (Implicit for high-end shops) -->
+<div class="mt-16 flex justify-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-on-surface text-white font-bold">1</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container text-secondary hover:bg-surface-variant transition-colors">2</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container text-secondary hover:bg-surface-variant transition-colors">3</button>
+</div>
+</div>
+</div>
+<!-- Catalog Section -->
+
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest w-full py-16">
+<div class="flex flex-col md:flex-row justify-between items-start px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="max-w-xs">
+<div class="font-headline-lg text-headline-lg text-on-surface mb-4 font-bold">Yira Inversiones</div>
+<p class="text-secondary font-body-md">Excelencia en mobiliario y diseño de interiores corporativos y residenciales. Calidad artesanal, visión moderna.</p>
+</div>
+<div class="grid grid-cols-2 gap-12">
+<div class="space-y-4">
+<h4 class="text-on-surface font-bold text-label-sm uppercase tracking-widest">Empresa</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-secondary hover:text-primary transition-all" href="#">Acerca de</a>
+<a class="text-secondary hover:text-primary transition-all" href="#">Proyectos</a>
+<a class="text-secondary hover:text-primary transition-all" href="#">Sostenibilidad</a>
+</nav>
+</div>
+<div class="space-y-4">
+<h4 class="text-on-surface font-bold text-label-sm uppercase tracking-widest">Soporte</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-secondary hover:text-primary transition-all" href="#">Shipping</a>
+<a class="text-secondary hover:text-primary transition-all" href="#">Returns</a>
+<a class="text-secondary hover:text-primary transition-all" href="#">Support</a>
+<a class="text-secondary hover:text-primary transition-all" href="#">Legal</a>
+</nav>
+</div>
+</div>
+<div class="w-full md:w-auto">
+<h4 class="text-on-surface font-bold text-label-sm uppercase tracking-widest mb-4">Suscríbete</h4>
+<div class="flex border-b border-outline py-2">
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full" placeholder="Correo electrónico" type="email">
+<button class="material-symbols-outlined text-primary ml-2">arrow_forward</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-16 pt-8 border-t border-surface-variant flex flex-col md:flex-row justify-between text-secondary text-label-sm">
+<span class="">© 2024 Yira Inversiones. Arquitectura y Confort.</span>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a href="#" class="">Instagram</a>
+<a href="#" class="">LinkedIn</a>
+<a href="#" class="">Pinterest</a>
+</div>
+</div>
+</footer>
+<script>
+        function rotateCarousel(id, direction) {
+            const container = document.getElementById(id);
+            const slides = container.children.length;
+            
+            // Get current index from data attribute or default to 0
+            let currentIndex = parseInt(container.getAttribute('data-index') || 0);
+            
+            currentIndex += direction;
+            
+            if (currentIndex < 0) currentIndex = slides - 1;
+            if (currentIndex >= slides) currentIndex = 0;
+            
+            container.setAttribute('data-index', currentIndex);
+            container.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Simple parallax effect for header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.1}px)`;
+                header.style.opacity = 1 - (scrolled / 500);
+            }
+        });
+    </script>
+
+
+
+
+<!-- Filter Drawer Overlay --><div id="drawer-overlay" class="fixed inset-0 bg-on-surface/20 backdrop-blur-sm z-[60] hidden transition-opacity duration-300 opacity-0" onclick="toggleDrawer(false)"></div><!-- Filter Drawer --><div id="filter-drawer" class="fixed top-0 right-0 h-full w-full md:w-96 bg-surface shadow-xl z-[70] translate-x-full transition-transform duration-300 overflow-y-auto custom-scrollbar"><div class="p-8"><div class="flex justify-between items-center mb-12"><h2 class="font-headline-lg text-headline-lg">Filtros</h2><button onclick="toggleDrawer(false)" class="material-symbols-outlined text-secondary hover:text-primary transition-colors">close</button></div><div class="space-y-10"><!-- Category Filter --><div class="space-y-4"><span class="text-label-sm uppercase tracking-widest text-secondary block">Categoría</span><div class="space-y-3"><label class="flex items-center gap-3 cursor-pointer group"><input class="w-5 h-5 border-outline rounded-sm text-primary focus:ring-primary" type="checkbox"><span class="text-body-md group-hover:text-primary transition-colors">Hogar</span></label><label class="flex items-center gap-3 cursor-pointer group"><input class="w-5 h-5 border-outline rounded-sm text-primary focus:ring-primary" type="checkbox"><span class="text-body-md group-hover:text-primary transition-colors">Oficina</span></label></div></div><!-- Type Filter --><div class="space-y-4"><span class="text-label-sm uppercase tracking-widest text-secondary block">Tipo</span><div class="space-y-3"><label class="flex items-center gap-3 cursor-pointer group"><input class="w-5 h-5 border-outline rounded-sm text-primary focus:ring-primary" type="checkbox"><span class="text-body-md group-hover:text-primary transition-colors">Sofás</span></label><label class="flex items-center gap-3 cursor-pointer group"><input class="w-5 h-5 border-outline rounded-sm text-primary focus:ring-primary" type="checkbox"><span class="text-body-md group-hover:text-primary transition-colors">Sillas</span></label><label class="flex items-center gap-3 cursor-pointer group"><input class="w-5 h-5 border-outline rounded-sm text-primary focus:ring-primary" type="checkbox"><span class="text-body-md group-hover:text-primary transition-colors">Escritorios</span></label></div></div><!-- Price Range --><div class="space-y-4"><span class="text-label-sm uppercase tracking-widest text-secondary block">Precio</span><input class="w-full h-1 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" type="range"><div class="flex justify-between text-label-sm text-secondary"><span class="">$0</span><span class="">$5000+</span></div></div><!-- Color Filter --><div class="space-y-4"><span class="text-label-sm uppercase tracking-widest text-secondary block">Color</span><div class="flex gap-3 flex-wrap"><button class="w-8 h-8 rounded-full bg-on-surface border border-outline-variant hover:scale-110 transition-transform"></button><button class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant hover:scale-110 transition-transform"></button><button class="w-8 h-8 rounded-full bg-outline border border-outline-variant hover:scale-110 transition-transform"></button><button class="w-8 h-8 rounded-full bg-primary border border-outline-variant hover:scale-110 transition-transform"></button></div></div><div class="pt-8 border-t border-surface-variant"><button onclick="toggleDrawer(false)" class="w-full py-4 bg-primary text-white font-bold text-label-sm uppercase tracking-widest hover:bg-on-surface transition-colors">Aplicar Filtros</button></div></div></div></div></body></html>

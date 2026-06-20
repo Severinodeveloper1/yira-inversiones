@@ -1,0 +1,384 @@
+<!DOCTYPE html><html class="light" lang="es" style="width: 1280px; height: 1298px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mis Pedidos | Yira Inversiones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#ffd9d5",
+                    "surface-tint": "#bb1619",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e9e8e8",
+                    "secondary": "#5f5e5e",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "primary-container": "#c41e1e",
+                    "on-tertiary-fixed-variant": "#454744",
+                    "on-surface": "#1b1c1c",
+                    "surface-container": "#efeded",
+                    "secondary-fixed": "#e4e2e1",
+                    "on-surface-variant": "#5c403d",
+                    "tertiary-fixed-dim": "#c6c7c2",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-tertiary-container": "#e2e2de",
+                    "on-primary-fixed-variant": "#93000a",
+                    "surface-variant": "#e3e2e2",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "secondary-container": "#e4e2e1",
+                    "surface-container-low": "#f4f3f3",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface": "#faf9f9",
+                    "on-secondary-container": "#656464",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#474747",
+                    "tertiary": "#4b4d4a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#dbdad9",
+                    "primary-fixed": "#ffdad6",
+                    "surface-bright": "#faf9f9",
+                    "background": "#faf9f9",
+                    "on-tertiary-fixed": "#1a1c19",
+                    "inverse-surface": "#2f3031",
+                    "primary": "#9e000c",
+                    "outline": "#906f6b",
+                    "tertiary-container": "#636561",
+                    "surface-container-highest": "#e3e2e2",
+                    "inverse-primary": "#ffb4ab",
+                    "on-background": "#1b1c1c",
+                    "outline-variant": "#e5bdb9",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#e3e3de",
+                    "on-primary-fixed": "#410002",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Manrope"],
+                    "label-sm": ["Work Sans"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "body-lg": ["Work Sans"],
+                    "body-md": ["Work Sans"],
+                    "headline-xl": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #faf9f9; /* Surface */
+            color: #1b1c1c; /* On-Surface */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for Selective Minimalism */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e3e2e2; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c8c6c6; }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Layout Shell -->
+<div class="flex min-h-screen">
+<!-- Sidebar (Filament Style) -->
+<aside class="hidden md:flex flex-col w-64 bg-surface border-r border-outline-variant/20 sticky top-0 h-screen overflow-y-auto">
+<div class="p-8">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tighter">
+                    Yira Inversiones
+                </span>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary font-medium hover:bg-surface-container-low transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg group shadow-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Mis Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary font-medium hover:bg-surface-container-low transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Mi Cuenta</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary font-medium hover:bg-surface-container-low transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px]">chair</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Catálogo</span>
+</a>
+<div class="pt-8 pb-4">
+<span class="px-4 text-[10px] font-bold text-secondary uppercase tracking-[0.2em] opacity-50">Soporte</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary font-medium hover:bg-surface-container-low transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px]">help_center</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Ayuda</span>
+</a>
+</nav>
+<div class="p-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-3 px-4 py-2">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean, professional headshot of a corporate executive in a modern minimalist office with soft warm lighting and neutral colors. The image has an airy, high-end editorial feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvRfbBTivhbVxzVqdE6K9-GQrfHGLHD8O-rTHHRMFuwh83IhKYuELw5x9c7LY3SwP1l13IxQhhgVAy_aB9kEP6pM3IB1E4weIsOSSME7IpNozYFOZPKq_XhSsJ99L949ktPVezZmMknb8C5EGPE7vXR6xvqQVtGNIKyB3Yxm4hGSivULXfBrz2gHnbuTHVr2afwNpVJyCLqe92N66-bg-RIhdhCLvSKHRLEGgzc7Z0sPGsiTntlFcvpTsDvgl-_1eSaPgDSzf7gn8">
+</div>
+<div class="flex flex-col">
+<span class="text-label-sm font-bold truncate max-w-[120px]">Carlos Mendoza</span>
+<span class="text-[10px] text-secondary">Premium Client</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col bg-background">
+<!-- Mobile Header (Hidden on Desktop) -->
+<header class="md:hidden flex items-center justify-between h-20 px-margin-mobile bg-surface/80 backdrop-blur-md border-b border-outline-variant/10 sticky top-0 z-50">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface tracking-tighter">Yira</span>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Content Canvas -->
+<div class="max-w-container-max w-full mx-auto p-margin-mobile md:p-margin-desktop space-y-10">
+<!-- Header & Breadcrumbs -->
+<div class="space-y-4">
+<nav class="flex items-center text-secondary font-label-sm text-[11px] uppercase tracking-[0.15em]">
+<a class="hover:text-primary transition-colors" href="#">Yira</a>
+<span class="mx-2 opacity-30">/</span>
+<span class="text-on-surface font-bold">Mis Pedidos</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Mis Pedidos</h1>
+<p class="text-secondary max-w-xl">Gestione sus adquisiciones recientes y realice un seguimiento detallado de sus pedidos de mobiliario corporativo.</p>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 font-label-sm text-label-sm uppercase tracking-widest hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-primary/10">
+                            Nuevo Proyecto
+                        </button>
+</div>
+</div>
+<!-- Filters & Actions (Selective Minimalism) -->
+<div class="flex flex-wrap items-center justify-between gap-4 py-4 border-b border-outline-variant/10">
+<div class="flex items-center gap-4 overflow-x-auto pb-1 no-scrollbar">
+<button class="px-6 py-2 bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase tracking-widest rounded-full transition-all">Todos</button>
+<button class="px-6 py-2 text-secondary hover:text-on-surface font-label-sm text-label-sm uppercase tracking-widest rounded-full transition-all">Pendientes</button>
+<button class="px-6 py-2 text-secondary hover:text-on-surface font-label-sm text-label-sm uppercase tracking-widest rounded-full transition-all">Enviados</button>
+<button class="px-6 py-2 text-secondary hover:text-on-surface font-label-sm text-label-sm uppercase tracking-widest rounded-full transition-all">Entregados</button>
+</div>
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary opacity-50">search</span>
+<input class="w-full pl-12 pr-4 py-2.5 bg-surface-container-lowest border-none ring-1 ring-outline-variant/20 focus:ring-primary/40 rounded-lg text-body-md transition-all placeholder:text-secondary/40" placeholder="Buscar ID de pedido..." type="text">
+</div>
+</div>
+<!-- Table Content (Bento Style Shadow) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-8 py-6 font-label-sm text-label-sm uppercase tracking-widest text-secondary border-b border-outline-variant/10">Order ID</th>
+<th class="px-8 py-6 font-label-sm text-label-sm uppercase tracking-widest text-secondary border-b border-outline-variant/10">Fecha</th>
+<th class="px-8 py-6 font-label-sm text-label-sm uppercase tracking-widest text-secondary border-b border-outline-variant/10">Estado</th>
+<th class="px-8 py-6 font-label-sm text-label-sm uppercase tracking-widest text-secondary border-b border-outline-variant/10">Total</th>
+<th class="px-8 py-6 font-label-sm text-label-sm uppercase tracking-widest text-secondary border-b border-outline-variant/10 text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-8 py-6">
+<span class="font-bold text-on-surface">#YR-2941-O</span>
+</td>
+<td class="px-8 py-6 text-secondary">
+                                        12 de Mayo, 2024
+                                    </td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container/10 text-primary-container text-[11px] font-bold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                                            Pendiente
+                                        </span>
+</td>
+<td class="px-8 py-6 font-semibold text-on-surface">
+                                        $4,250.00
+                                    </td>
+<td class="px-8 py-6 text-right">
+<button class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all duration-300">
+<span class="">Ver</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-8 py-6">
+<span class="font-bold text-on-surface">#YR-2850-A</span>
+</td>
+<td class="px-8 py-6 text-secondary">
+                                        04 de Mayo, 2024
+                                    </td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-container/10 text-tertiary-container text-[11px] font-bold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                                            Enviado
+                                        </span>
+</td>
+<td class="px-8 py-6 font-semibold text-on-surface">
+                                        $12,800.00
+                                    </td>
+<td class="px-8 py-6 text-right">
+<button class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all duration-300">
+<span class="">Ver</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-8 py-6">
+<span class="font-bold text-on-surface">#YR-2712-S</span>
+</td>
+<td class="px-8 py-6 text-secondary">
+                                        28 de Abril, 2024
+                                    </td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-on-tertiary-fixed-variant/10 text-on-tertiary-fixed-variant text-[11px] font-bold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-fixed-variant"></span>
+                                            Entregado
+                                        </span>
+</td>
+<td class="px-8 py-6 font-semibold text-on-surface">
+                                        $2,100.00
+                                    </td>
+<td class="px-8 py-6 text-right">
+<button class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all duration-300">
+<span class="">Ver</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-8 py-6">
+<span class="font-bold text-on-surface">#YR-2605-B</span>
+</td>
+<td class="px-8 py-6 text-secondary">
+                                        15 de Abril, 2024
+                                    </td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-on-tertiary-fixed-variant/10 text-on-tertiary-fixed-variant text-[11px] font-bold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-fixed-variant"></span>
+                                            Entregado
+                                        </span>
+</td>
+<td class="px-8 py-6 font-semibold text-on-surface">
+                                        $850.00
+                                    </td>
+<td class="px-8 py-6 text-right">
+<button class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all duration-300">
+<span class="">Ver</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-outline-variant/10 bg-surface-container-low/20">
+<span class="text-label-sm text-secondary">Mostrando 1-4 de 24 pedidos</span>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg ring-1 ring-outline-variant/20 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg ring-1 ring-outline-variant/20 hover:bg-surface-container transition-all">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg ring-1 ring-outline-variant/20 hover:bg-surface-container transition-all">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg ring-1 ring-outline-variant/20 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Showcase Highlight (Architectural Precision) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="relative group h-64 overflow-hidden rounded-xl">
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface to-transparent z-10 opacity-80"></div>
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="High-end architectural photography of a luxury office interior featuring ergonomic mesh chairs and a minimalist oak desk. The space is filled with natural light and sharp architectural lines, reflecting the Yira brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnTzVVJg1Xqqs6bRJ-LM8--mzeY_lXde9uRdg5pVooOPW1WooXDh1bIaC5K-wcvDkHRtmT__c8IeuxZmgs9uuyovMv9wlob9WoSTmk7xhSY8mqPcVxImfWy7vFH_PUErFMnqHw4XWhwegOvvt384G7tNRQ9lST1J3dUaN02kZ9Pl33MPhVq8a42EtTnGpflSVBgmiIDQnMqXm5P3fVHxwIUYj8F7DekFDK0HHWiMdD5QuKdYKIHfvulIUxGOaEN4NNN87ytIkUehE">
+<div class="absolute bottom-0 left-0 p-8 z-20 space-y-2">
+<h3 class="font-headline-lg text-headline-lg text-white">Nuevas Colecciones</h3>
+<p class="text-white/70 text-body-md">Descubra la ergonomía elevada para su espacio ejecutivo.</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-8 flex flex-col justify-center space-y-6">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Garantía Yira</h3>
+<p class="text-secondary">Todos sus pedidos incluyen 10 años de garantía certificada en materiales y estructura.</p>
+</div>
+<a class="text-primary font-bold hover:underline underline-offset-8 decoration-2" href="#">Leer Política de Servicio</a>
+</div>
+</div>
+</div>
+<!-- Footer (Shared Component Guidance) -->
+<footer class="bg-secondary-fixed mt-auto">
+
+
+</footer>
+</main>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        // Smooth hover effect for table rows
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+                row.style.transition = 'transform 0.3s ease';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Search highlight logic
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-primary');
+            searchInput.parentElement.classList.remove('ring-outline-variant/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-primary');
+            searchInput.parentElement.classList.add('ring-outline-variant/20');
+        });
+    </script>
+
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

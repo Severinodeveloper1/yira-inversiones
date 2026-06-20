@@ -1,0 +1,478 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Yira Inversiones | Arquitectura y Confort</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&amp;family=Work+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efeded",
+                    "on-tertiary-fixed": "#1a1c19",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "secondary": "#5f5e5e",
+                    "tertiary-fixed-dim": "#c6c7c2",
+                    "surface-tint": "#bb1619",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-surface": "#1b1c1c",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "on-surface-variant": "#5c403d",
+                    "outline": "#906f6b",
+                    "tertiary-fixed": "#e3e3de",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#e4e2e1",
+                    "surface": "#faf9f9",
+                    "tertiary-container": "#636561",
+                    "on-tertiary-fixed-variant": "#454744",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "on-secondary-fixed-variant": "#474747",
+                    "surface-variant": "#e3e2e2",
+                    "on-primary-fixed": "#410002",
+                    "surface-bright": "#faf9f9",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#656464",
+                    "surface-dim": "#dbdad9",
+                    "surface-container-highest": "#e3e2e2",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1b1c1c",
+                    "inverse-primary": "#ffb4ab",
+                    "on-error": "#ffffff",
+                    "background": "#faf9f9",
+                    "surface-container-high": "#e9e8e8",
+                    "primary": "#9e000c",
+                    "outline-variant": "#e5bdb9",
+                    "primary-container": "#c41e1e",
+                    "on-tertiary-container": "#e2e2de",
+                    "on-primary-container": "#ffd9d5",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#ffdad6",
+                    "tertiary": "#4b4d4a",
+                    "on-primary-fixed-variant": "#93000a",
+                    "secondary-container": "#e4e2e1",
+                    "surface-container-low": "#f4f3f3",
+                    "inverse-surface": "#2f3031"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "unit": "8px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Manrope"],
+                    "body-md": ["Work Sans"],
+                    "label-sm": ["Work Sans"],
+                    "body-lg": ["Work Sans"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .slider-container { transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        .grain-texture::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-12">
+<a class="cursor-pointer active:scale-95 duration-200" href="#">
+<img alt="Yira Inversiones Logo" class="h-12 w-12 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCErTIh_KFo4nY1Mc8NUpEVwBolL1PW1HpcNW3suhx05Fl99WD8emwJuvi3wwb91MiIKYsqSSn2xU3TezSzQkJ9muwNUhekRY6qa_bRmEwYxdk4Q350EW_uas3EH3aBLDszWI-1CJWTLTu3fsqLfvMhNcOmaZ04vb3SOS6-w21aMy-THu1xQl4OXIRHUDNw1NOXJW3cK7Zdb9n5wfQZXJCD5zY81fIRFmXzf9G2kX_ongylT442FWqMOKgaDCRYfC21qCoW6bJYF_0">
+</a>
+<div class="hidden md:flex gap-4 items-center">
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1 transition-colors cursor-pointer active:scale-95 duration-200" href="#">Inicio</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 px-4" href="#">Sofás</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 px-4" href="#">Oficina</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 px-4" href="#">Accesorios</a>
+<a class="font-body-md text-body-md text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 px-4" href="#">Acerca de</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">search</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">person</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 relative">
+                    shopping_cart
+                    <span class="absolute -top-2 -right-2 bg-primary text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">3</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Slider -->
+<section class="relative w-full h-[80vh] overflow-hidden bg-surface-container-low">
+<div class="flex w-[200%] h-full slider-container" id="hero-slider" style="transform: translateX(0%);">
+<div class="w-1/2 h-full relative flex items-center">
+<div class="absolute inset-0 z-0">
+<img alt="Ergonomic Office Banner" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLu7NNfM3MLBq3cembPtwaLermhly3rUbyGMlH8z7ZcLSR5YfwjKr3Urcb5s6yFqzEpWYWMYiuDLlLPk54VVxfkCwZnR3HEkbmJzNOf3LoCoavOCrOGO1ifOSXKsj8YCECEpeOeU1lX06Lon7JH88nK5OASpKSx-XvDGuOnWeBPv5I6qpj4JcAUCXUFXzuBDG68U94cn6Z1ug1dR4wOqgASPOYHJdeAAL2inP6y4QRTzZHUE2KhnKFKPE_M">
+<div class="absolute inset-0 bg-gradient-to-r from-surface/60 to-transparent"></div>
+</div>
+<div class="relative z-10 px-margin-desktop max-w-container-max mx-auto w-full">
+<div class="max-w-xl animate-fade-in-up">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Colección 2024</span>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-6">Regresa a Clases con Ergonomía y Confort</h1>
+<p class="font-body-lg text-body-lg text-secondary mb-10 max-w-md">Diseños pensados para maximizar tu productividad y bienestar durante las largas jornadas de estudio.</p>
+<button class="bg-secondary px-8 py-4 text-white font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary transition-all duration-300 active:scale-95 rounded">
+                                Ver Colección Oficina
+                            </button>
+</div>
+</div>
+</div>
+<div class="w-1/2 h-full relative flex items-center">
+<div class="absolute inset-0 z-0">
+<img alt="Mother's Day Sofa Promotion" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLsVyyc4Jv1GKi8g9G_9Xjhl0aVcrm3Bxhs-jzOAL-gLSWPPA3sDpnfX6VQM4cMTwx8COisqBdLuRJ8gfC0smjOTKenhDLpbktyBZNEUzCyP3xlfCXkDtseUYlzYKUagF4LpJVXWHFKugFCe3TreIjbkIB_kd7kYaTu_agUfETR82Plq-tAdMCwhsMX3oPIuLLq5UpP8atAYkZjbmryNzUxv0hvejCAvQwr9NiE1twzEjIfxP08ObdjMcw">
+<div class="absolute inset-0 bg-gradient-to-l from-surface/40 to-transparent"></div>
+</div>
+<div class="relative z-10 px-margin-desktop max-w-container-max mx-auto w-full text-right flex flex-col items-end">
+<div class="max-w-xl">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Especial Mamá</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-6">Un Regalo para Mamá: Elegancia en cada Detalle</h2>
+<p class="font-body-lg text-body-lg text-secondary mb-10 max-w-md ml-auto">Transforma su espacio favorito con piezas de diseño atemporal y confort inigualable.</p>
+<button class="bg-secondary px-8 py-4 text-white font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary transition-all duration-300 active:scale-95 rounded">
+                                Explorar Sofás
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-4 z-20">
+<button class="slider-dot h-1 transition-all duration-300 bg-primary w-12" onclick="moveSlider(0)"></button>
+<button class="slider-dot h-1 transition-all duration-300 hover:bg-secondary/60 bg-secondary/30 w-8" onclick="moveSlider(1)"></button>
+</div>
+</section>
+<!-- Categories Section: Smaller Cards + Horizontal Scroll -->
+<section class="py-16 bg-surface-container-low overflow-hidden">
+<div class="px-margin-desktop max-w-container-max mx-auto mb-8 flex justify-between items-end">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Categorías</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Explora por Estilo</h2>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-full border border-outline/20 hover:bg-white transition-colors" onclick="scrollCategories(-1)">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-full border border-outline/20 hover:bg-white transition-colors" onclick="scrollCategories(1)">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="px-margin-desktop max-w-container-max mx-auto">
+<div class="flex gap-6 overflow-x-auto hide-scroll pb-8 snap-x snap-mandatory" id="category-scroll">
+<div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
+<img alt="Mobiliario Oficina" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLtSE3TB-5aqg1Yzq3JRqVyhQ2Em7vlMj7uY5EYUtIlNER-KZFDuZi9a2iVlF5lvoyZByn2m-dA5lwF8MnEo1m4uG_HB8zANArN6awiS6l0M2SdfZOwtRxgMPgEK7K7B3zcsk4lZZoTfZftxgFwvaS2ApJOvJChNB9gKPe9hjlvSGnV2Jj2UCfo3X1G3DK90Dy8Y75tYhyZ3NAaI7NYFaN55fYL9fQq38Z6HChHMS-D4_JBxtOgpUgyRYS4">
+<div class="absolute inset-0 bg-black/40 flex items-end p-6 group-hover:bg-black/50 transition-colors">
+<h3 class="text-white font-headline-lg text-body-lg font-bold">Oficina Ejecutiva</h3>
+</div>
+</div>
+<div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
+<img alt="Mobiliario Hogar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLs0NmaJeLTYqrTAhSV2PlT4eh4CEcNjUTjlqDq7iB8TkLlyVno1p9Usn37pVWv2DRZKFl1OgOMik0UOGL_T53whPHK8qIUWom8B6MtvZSMR7y3uYgKVTm1yvISuiNA9HWB2o8NfgORK2CCJgJjaxbv9EqeWDGUZkMdu8EGojxPe3TccgvcQL6xPdkJe9d_H74LIxM6dU9ZiUlCO0KIgTJh3jnK-wsxzvGhXQRy5ymQfdIcQ6PG0OfQZOg">
+<div class="absolute inset-0 bg-black/40 flex items-end p-6 group-hover:bg-black/50 transition-colors">
+<h3 class="text-white font-headline-lg text-body-lg font-bold">Sala &amp; Confort</h3>
+</div>
+</div>
+<div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
+<img alt="Accesorios" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGbM6ZYauCbqgPKjsREqxxVHg4bhY_lzLnBYXbGJrgp9fIaon8Io6Qi2F124cv8Cj6JwxKJFgVkDz_YhTtAoT9W5FWH1mzXuiume9FqxsGSoTJWNFGFIIRhrEUe11slNQ-sXe4ORWR4jxQiGkZUjC3foRj5qcqcLgrxwXHEUp979niG1RRnmE46xHg3Ch9EnH5rZNUZyCAizypLgvFlxzkRtCshbmxB0jGPnefubBXQtY3lOfhcZcCdjJZBESe_qZTYYByePqKShU">
+<div class="absolute inset-0 bg-black/40 flex items-end p-6 group-hover:bg-black/50 transition-colors">
+<h3 class="text-white font-headline-lg text-body-lg font-bold">Accesorios de Autor</h3>
+</div>
+</div>
+<div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
+<img alt="Comedores" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMG5WWRu1Uceyf_b7JSKqEiRtEjNYKCSHPikA67PFUVszIhlbyVdq_VgPb3_JnICXUi8w_PHxpmoCJGmwzGlX1oktDeH-HsRqGlmtf_NrUDQ8JfeJijntrMoL501PUkm9lsFk3uqkyL0eyacNkPwRuOcvam2kn_591Ff17dePek8_Dd4Igh2vTLgFrmDvSfBS7C10vliTXZFjNdikH_5OLA5xHxwBAVUWnpfKqDKIjxw1t3JXHwUA6XCYLdqEkqQEEB58x61A7pP0">
+<div class="absolute inset-0 bg-black/40 flex items-end p-6 group-hover:bg-black/50 transition-colors">
+<h3 class="text-white font-headline-lg text-body-lg font-bold">Comedores Nórdicos</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Shop Preview -->
+<section class="py-24 px-margin-desktop max-w-container-max mx-auto bg-surface grain-texture relative">
+<div class="flex justify-between items-end mb-16">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Destacados</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Diseño para el Confort</h2>
+</div>
+<a class="text-secondary hover:text-primary transition-colors font-label-sm text-label-sm underline underline-offset-4" href="#">VER TODO EL CATÁLOGO</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+<!-- Product 1 -->
+<div class="group">
+<div class="relative aspect-[4/5] bg-white overflow-hidden mb-6 shadow-sm group-hover:shadow-lg transition-shadow">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaje49fmXAkGYrH1wA1TLGYnlPuzpD_maCNYl6UyrZzdr5XSBQevPoVStzLIhurgLfGdWDw4nUY1NKZHo_hb4g6xlSDe1x7iLPaiqJu2p0GlQoYTAqKqG9kq4ecqXlDJ1mFhhWP5Ees_1tGUYg8fq82LuZd8jDQw5UVyb5v-mIXTRXY5VqB_2DWNA3zsHTlsgY12gOKbtrCbSO2C6bZO42xw31BEUoeEbfztgY02RN-g3vT5r0jooeGV9hI2-S8C2eGSaBG6YHzKM">
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-white text-[10px] px-3 py-1 font-bold uppercase">Nuevo</span>
+</div>
+<button class="absolute bottom-0 left-0 w-full bg-secondary text-white py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+                            AÑADIR AL CARRITO
+                        </button>
+</div>
+<div class="text-center">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1">Sofá "Alba"</h4>
+<p class="text-primary font-bold">$1,299.00</p>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group">
+<div class="relative aspect-[4/5] bg-white overflow-hidden mb-6 shadow-sm group-hover:shadow-lg transition-shadow">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4J7WJ8NjsYsJKB5NKhPCdaHHK-xgXIzTWg20nWaPdXReYB9ZZb5qaJQhyNyaoUdNDaAvSv7zkNmlRZ5ia8BjVsqb0e_P4q9rD4FEBZVVIaRZlEsRP8WsT_6UZukxAJyOLA5DQZOF2tCcEuT-nmmseiGjdYW3u5UbiRULUhhzM55tO_Wqzk6SuV_k-6VxF3z0nEwz1Bj8aFPVqcyk3Hhs-2Ky7XZUg873FE3OaWxJ7D2vwKblp5FThzCxHX1bR4QiFoDtptZTLl-E">
+<button class="absolute bottom-0 left-0 w-full bg-secondary text-white py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+                            AÑADIR AL CARRITO
+                        </button>
+</div>
+<div class="text-center">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1">Silla "Ergo-Pro"</h4>
+<p class="text-primary font-bold">$450.00</p>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group">
+<div class="relative aspect-[4/5] bg-white overflow-hidden mb-6 shadow-sm group-hover:shadow-lg transition-shadow">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGbM6ZYauCbqgPKjsREqxxVHg4bhY_lzLnBYXbGJrgp9fIaon8Io6Qi2F124cv8Cj6JwxKJFgVkDz_YhTtAoT9W5FWH1mzXuiume9FqxsGSoTJWNFGFIIRhrEUe11slNQ-sXe4ORWR4jxQiGkZUjC3foRj5qcqcLgrxwXHEUp979niG1RRnmE46xHg3Ch9EnH5rZNUZyCAizypLgvFlxzkRtCshbmxB0jGPnefubBXQtY3lOfhcZcCdjJZBESe_qZTYYByePqKShU">
+<div class="absolute top-4 right-4">
+<span class="bg-surface-container-highest text-secondary text-[10px] px-3 py-1 font-bold uppercase border border-outline/20">Edición Limitada</span>
+</div>
+<button class="absolute bottom-0 left-0 w-full bg-secondary text-white py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+                            AÑADIR AL CARRITO
+                        </button>
+</div>
+<div class="text-center">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1">Set Escritorio "Cenit"</h4>
+<p class="text-primary font-bold">$85.00</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Craftsmanship Section -->
+<section class="py-32 bg-white relative overflow-hidden">
+<div class="px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 items-center gap-16">
+<div class="md:col-span-5 z-10">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-6 block">Nuestra Esencia</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-8">Artesanía que define espacios modernos.</h2>
+<p class="font-body-lg text-body-lg text-secondary mb-8">En Yira Inversiones, combinamos técnicas tradicionales de ebanistería con tecnología de punta para crear piezas que no solo llenan espacios, sino que cuentan historias de calidad y compromiso.</p>
+<p class="font-body-lg text-body-lg text-secondary mb-12">Cada material es seleccionado bajo los más altos estándares de durabilidad y estética institucional.</p>
+<a class="inline-flex items-center gap-4 text-primary font-bold hover:gap-6 transition-all group uppercase text-label-sm" href="#">
+                        Conoce nuestro taller
+                        <span class="material-symbols-outlined">arrow_right_alt</span>
+</a>
+</div>
+<div class="md:col-span-7 relative h-[600px]">
+<div class="absolute top-0 right-0 w-[90%] h-full shadow-2xl rounded-lg overflow-hidden">
+<img alt="Workshop Craftsmanship" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuJP25Abvdua39V3C2A_S6RNdTBGMb7k5j9CnJH48jHxZ4DVpKnVrsPaYCsbxrwIQnFQxrww_2CguykGLVMWPXaStIVwFRLTf82qwIq8ytjIrTkrMwhJWCeK3AW0RZbxj26mk6Xtka3QVUuj7ubv4j4dUzpd0su03Dn7NA27R4k_HAlPb_NNVAWnQsiippMe7U3gPvZk1pp1U6rmhIBGci1gw5MlK656y67mfHU1eFC_fAFSM6LWt4xSQ">
+</div>
+<div class="absolute -bottom-8 -left-8 w-64 h-64 bg-surface-container-highest flex items-center justify-center p-8 border-4 border-white shadow-xl rounded">
+<div class="text-center">
+<span class="block font-headline-xl text-headline-xl text-primary mb-2">25+</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">Años de Excelencia</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Catalogs Section -->
+<section class="py-24 bg-surface-container-low">
+<div class="px-margin-desktop max-w-container-max mx-auto">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Descarga nuestros Catálogos</h2>
+<p class="text-secondary font-body-md">Explora las colecciones completas en formato digital de alta resolución.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="group relative overflow-hidden bg-white rounded-lg p-12 flex flex-col items-center text-center transition-all duration-500 hover:shadow-lg">
+<div class="w-20 h-20 mb-6 bg-primary/5 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">picture_as_pdf</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg mb-2">Catálogo Hogar 2024</h3>
+<p class="text-secondary mb-8 max-w-xs">Mobiliario de diseño para salas, dormitorios y comedores con estilo contemporáneo.</p>
+<button class="flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded hover:bg-primary-container transition-colors">
+<span class="">Descargar PDF</span>
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<div class="group relative overflow-hidden bg-on-surface rounded-lg p-12 flex flex-col items-center text-center transition-all duration-500">
+<div class="w-20 h-20 mb-6 bg-white/10 rounded-xl flex items-center justify-center text-primary-fixed-dim group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">picture_as_pdf</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-white mb-2">Catálogo Oficina</h3>
+<p class="text-surface-variant mb-8 max-w-xs">Soluciones ergonómicas y arquitectura de espacios corporativos de alto rendimiento.</p>
+<button class="flex items-center gap-2 px-8 py-4 bg-white text-on-surface font-bold rounded hover:bg-primary hover:text-white transition-all">
+<span class="">Descargar PDF</span>
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Form Section -->
+<section class="py-24 bg-surface">
+<div class="px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Contacto</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-6">¿Tienes un proyecto ?</h2>
+<p class="text-body-lg text-secondary mb-8">Nuestro equipo de arquitectos y diseñadores está listo para asesorarte en la creación de espacios únicos.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4 text-secondary">
+<span class="material-symbols-outlined text-primary">call</span>
+<span class="">+502 1234-5678</span>
+</div>
+<div class="flex items-center gap-4 text-secondary">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="">info@yirainversiones.com</span>
+</div>
+<div class="flex items-center gap-4 text-secondary">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="">Ciudad de Guatemala, Guatemala</span>
+</div>
+</div>
+</div>
+<form class="bg-white p-8 rounded-lg shadow-sm border border-outline/10 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Nombre</label>
+<input class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all" placeholder="Tu nombre" type="text">
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Correo</label>
+<input class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all" placeholder="correo@ejemplo.com" type="email">
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Mensaje</label>
+<textarea class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all h-32" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+</div>
+<button class="w-full py-4 bg-primary text-white font-bold rounded uppercase tracking-widest hover:bg-primary-container transition-all active:scale-[0.98]">Enviar Mensaje</button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container py-16">
+<div class="flex flex-col md:flex-row justify-between items-start px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="flex-1">
+<h4 class="font-headline-lg text-headline-lg text-on-surface mb-6">Yira Inversiones</h4>
+<p class="text-secondary max-w-xs mb-8">Arquitectura y Confort para espacios que inspiran grandeza. Calidad artesanal con visión moderna.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-highest text-secondary hover:text-primary transition-all" href="#">
+<img alt="Instagram" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkrwBp-NeAKxdNhpi-gQgXdr9tHjepvR6LwCs2pA1buPPrS33sJX-uTNISR4OkvlYf2u0Kw-coY_GdglGORSDMXxxwaB6U0UUeCaHda2P1o--8Kf5GWG_ySxehGS-126jt1EEiEMkrIgwQA8_suopDHWwhmpfzp1B9HarNXzrra96d-ATUQIao29j2pJMzg7n04z1NOLPLxBMrI26_AKji0dxxGj9Ef44X51DjADg8YYzSa8yPMMBJxJOx5A19ELeuYY9L_8WF_Xc">
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-highest text-secondary hover:text-primary transition-all" href="#">
+<img alt="LinkedIn" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1lg0uiLSVifAFYctCZZQIi66pmu6qPDkwYwGhD0YRBMWCcYh82ixqtzvXQQgrpHSEPzIimx34x_WZbp3GtR-5ncSxO4nPpB3lBoA8KolRiBVVpTIolAOgIpwXEQ4pWoYp4D3O3AriFJo8ezr1Wj-l4C2nbZpm9dXrmCfqUXiWTVfAgIH0DFxYh0VUpam4VF7nd7j2zI0r2NgNdv1UAFUArDKHbAnYUisBrAizYNsyJj9jnNrXF9VwbOUJ-vcL-owwZQKZz4WGxIg">
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-highest text-secondary hover:text-primary transition-all" href="#">
+<img alt="Facebook" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDguDy_qYnLvBpW4r1YrhSL-a9aB4Sj0EigD-_BiAYhYQMARlpirVatxwGJB_1zczfbpTiDXh0cqEXDQTAeuGWWBIKeTapP0PTIGZdoMBNzkXJYPlr4-MJ1RNH5T4vKEtgZ6mBNGf1a1pkBhCD6EFfuVWbFarl3i9bmwXx2a4u_By19oS4a5_Go3JFgYj0pGrmnrLIqXWpG95n4rtOZo3o8DqcCJQq_VzYzRrAIpd3Lf-0ybUk5kWYazLAA9JwvM5JuSL6-1BPruz8">
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12 flex-[2]">
+<div>
+<h5 class="font-label-sm text-label-sm text-on-surface uppercase mb-6 tracking-widest">Catálogo</h5>
+<ul class="space-y-4">
+<li class=""><a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md" href="#">Mobiliario Oficina</a></li>
+<li class=""><a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md" href="#">Sofás &amp; Estar</a></li>
+<li class=""><a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md" href="#">Accesorios</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-sm text-label-sm text-on-surface uppercase mb-6 tracking-widest">Quick Access</h5>
+<ul class="space-y-4">
+<li class=""><a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md" href="#">Inicio</a></li>
+<li class=""><a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md" href="#">Sobre Nosotros</a></li>
+<li class=""><a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md" href="#">Envíos y Entregas</a></li>
+<li class=""><a class="text-secondary hover:text-primary underline transition-all font-body-md text-body-md" href="#">Políticas de Garantía</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-sm text-label-sm text-on-surface uppercase mb-6 tracking-widest">Contacto</h5>
+<ul class="space-y-4 text-secondary font-body-md">
+<li class=""><span class="block text-on-surface font-semibold">Taller y Showroom:</span> Zona 4, Ciudad de Guatemala</li>
+<li class=""><span class="block text-on-surface font-semibold">Teléfono:</span> +502 1234 5678</li>
+<li class=""><span class="block text-on-surface font-semibold">Email:</span> info@yira.gt</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-16 pt-8 border-t border-outline/10 text-center md:text-left">
+<p class="text-secondary font-body-md text-body-md">© 2024 Yira Inversiones. Arquitectura y Confort.</p>
+</div>
+</footer>
+<script>
+        function moveSlider(index) {
+            const slider = document.getElementById('hero-slider');
+            const dots = document.querySelectorAll('.slider-dot');
+            
+            slider.style.transform = `translateX(-${index * 50}%)`;
+            
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('bg-primary', 'w-12');
+                    dot.classList.remove('bg-secondary/30', 'w-8');
+                } else {
+                    dot.classList.remove('bg-primary', 'w-12');
+                    dot.classList.add('bg-secondary/30', 'w-8');
+                }
+            });
+        }
+
+        function scrollCategories(direction) {
+            const container = document.getElementById('category-scroll');
+            const scrollAmount = 300;
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        let currentSlide = 0;
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % 2;
+            moveSlider(currentSlide);
+        }, 8000);
+    </script>
+
+
+</body></html>

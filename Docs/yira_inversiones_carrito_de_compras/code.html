@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Su Carrito | AURA DESIGN</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#efeded",
+                    "tertiary-fixed-dim": "#c6c7c2",
+                    "secondary": "#5f5e5e",
+                    "outline": "#906f6b",
+                    "on-tertiary-container": "#e2e2de",
+                    "surface-container-low": "#f4f3f3",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1b1c1c",
+                    "outline-variant": "#e5bdb9",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dbdad9",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#474747",
+                    "on-secondary-container": "#656464",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#454744",
+                    "tertiary-fixed": "#e3e3de",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "surface-bright": "#faf9f9",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#ffdad6",
+                    "on-background": "#1b1c1c",
+                    "secondary-fixed": "#e4e2e1",
+                    "inverse-primary": "#ffb4ab",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "surface": "#faf9f9",
+                    "primary-container": "#c41e1e",
+                    "primary": "#9e000c",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2f3031",
+                    "on-surface-variant": "#5c403d",
+                    "error-container": "#ffdad6",
+                    "background": "#faf9f9",
+                    "tertiary": "#4b4d4a",
+                    "surface-tint": "#bb1619",
+                    "secondary-container": "#e4e2e1",
+                    "on-tertiary-fixed": "#1a1c19",
+                    "inverse-on-surface": "#f2f0f0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e3e2e2",
+                    "surface-container-highest": "#e3e2e2",
+                    "on-primary-fixed": "#410002",
+                    "surface-container-high": "#e9e8e8",
+                    "on-primary-container": "#ffd9d5",
+                    "tertiary-container": "#636561",
+                    "on-primary-fixed-variant": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Manrope"],
+                    "label-sm": ["Work Sans"],
+                    "body-lg": ["Work Sans"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Work Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #faf9f9; /* Surface/Background */
+            color: #1b1c1c; /* On-Surface */
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #efeded;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #5f5e5e;
+            border-radius: 2px;
+        }
+        /* Fade in effect for cart items */
+        .cart-item {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-sm dark:shadow-none transition-all duration-300 ease-in-out">
+<div class="max-w-container-max mx-auto px-margin-desktop flex justify-between items-center h-20">
+<a class="font-headline-lg text-headline-lg font-bold tracking-tighter text-on-surface dark:text-on-surface" href="#">AURA DESIGN</a>
+<!-- Desktop Navigation -->
+<div class="hidden md:flex items-center gap-10">
+<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed hover:text-on-surface transition-opacity duration-300" href="#">Home</a>
+<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed hover:text-on-surface transition-opacity duration-300" href="#">Sofas</a>
+<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed hover:text-on-surface transition-opacity duration-300" href="#">Office</a>
+<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed hover:text-on-surface transition-opacity duration-300" href="#">Accessories</a>
+<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed hover:text-on-surface transition-opacity duration-300" href="#">About Us</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-6">
+<button class="relative hover:opacity-70 transition-opacity duration-300">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">2</span>
+</button>
+<button class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop min-h-screen">
+<!-- Header -->
+<header class="mb-12">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-2">Su Carrito</h1>
+<p class="text-secondary font-body-md">Gestione su selección de mobiliario premium antes de finalizar su pedido.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Product List Section -->
+<section class="lg:col-span-8">
+<div class="hidden md:grid grid-cols-12 border-b border-surface-variant pb-4 mb-8 text-secondary font-label-sm uppercase tracking-widest">
+<div class="col-span-6">Producto</div>
+<div class="col-span-2 text-center">Cantidad</div>
+<div class="col-span-2 text-right">Precio</div>
+<div class="col-span-2 text-right">Total</div>
+</div>
+<!-- Cart Item 1 -->
+<div class="cart-item grid grid-cols-1 md:grid-cols-12 gap-6 items-center border-b border-surface-variant/50 py-8 group transition-colors hover:bg-surface-container-low/30 px-2">
+<div class="col-span-6 flex gap-6 items-center">
+<div class="w-32 h-32 flex-shrink-0 bg-surface-container-low overflow-hidden rounded">
+<img alt="Sofá Modular Aethel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div>
+<h3 class="font-headline-lg text-[20px] font-semibold text-on-surface mb-1">Sofá Modular Aethel</h3>
+<p class="text-secondary font-body-md mb-2">Acabado: <span class="text-on-surface-variant">Roble Natural / Cuero Cognac</span></p>
+<button class="flex items-center text-error font-label-sm hover:underline transition-all">
+<span class="material-symbols-outlined text-[16px] mr-1">delete</span>
+                                ELIMINAR
+                            </button>
+</div>
+</div>
+<div class="col-span-2 flex justify-center items-center">
+<div class="flex items-center border border-outline/30 rounded px-1">
+<button class="w-8 h-10 flex items-center justify-center hover:text-primary transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<span class="w-8 text-center font-semibold">1</span>
+<button class="w-8 h-10 flex items-center justify-center hover:text-primary transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-secondary">$3,250.00</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-headline-lg text-[20px] font-bold text-on-surface">$3,250.00</span>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="cart-item grid grid-cols-1 md:grid-cols-12 gap-6 items-center border-b border-surface-variant/50 py-8 group transition-colors hover:bg-surface-container-low/30 px-2" style="animation-delay: 0.1s;">
+<div class="col-span-6 flex gap-6 items-center">
+<div class="w-32 h-32 flex-shrink-0 bg-surface-container-low overflow-hidden rounded">
+<div class="w-full h-full bg-cover bg-center" data-alt="Close-up of a high-end designer office chair with premium leather upholstery and polished chrome base. The studio lighting highlights the texture of the material and the ergonomic curves of the backrest. The overall aesthetic is professional, modern, and expensive, fitting for a corporate executive suite. Light mode color scheme with soft shadows." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHeGXB2sEL25QAFtvs6-QvYdWBEbDb-YFVeREbqgdU60Fc8vZF0I3IcicvXBCHRUszWIbGum6TdL7NnjCH7wWikwB8emaVoYTRXTqX-EygnCihdum5MJ7Ub-hCv7pmlIb074qj3ZGPXZmqqVs1nnFeKZi1y_1kEZdhrJWwtWu10vHKkwos4wmJXovlcbxw2Ho_DpmyrveOIrOibpsyD3AzobLV1XSoSSpJsozBsvoEGgeAxX0d4dPIO4-q-5kVGbfFgBgZb8lDZzM')"></div>
+</div>
+<div>
+<h3 class="font-headline-lg text-[20px] font-semibold text-on-surface mb-1">Silla Ejecutiva Aura</h3>
+<p class="text-secondary font-body-md mb-2">Acabado: <span class="text-on-surface-variant">Carbono / Malla Técnica</span></p>
+<button class="flex items-center text-error font-label-sm hover:underline transition-all">
+<span class="material-symbols-outlined text-[16px] mr-1">delete</span>
+                                ELIMINAR
+                            </button>
+</div>
+</div>
+<div class="col-span-2 flex justify-center items-center">
+<div class="flex items-center border border-outline/30 rounded px-1">
+<button class="w-8 h-10 flex items-center justify-center hover:text-primary transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<span class="w-8 text-center font-semibold">2</span>
+<button class="w-8 h-10 flex items-center justify-center hover:text-primary transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-secondary">$890.00</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-headline-lg text-[20px] font-bold text-on-surface">$1,780.00</span>
+</div>
+</div>
+<!-- Continue Shopping (Mobile) -->
+<div class="mt-8">
+<a class="inline-flex items-center text-secondary font-body-md hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-2">arrow_back</span>
+                        Continuar Comprando
+                    </a>
+</div>
+</section>
+<!-- Summary Section -->
+<aside class="lg:col-span-4">
+<div class="bg-surface-container-lowest p-8 shadow-sm rounded-lg sticky top-28 border border-surface-variant/20">
+<h2 class="font-headline-lg text-headline-lg mb-8">Resumen de Pedido</h2>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between font-body-md">
+<span class="text-secondary">Subtotal</span>
+<span class="text-on-surface font-semibold">$5,030.00</span>
+</div>
+<div class="flex justify-between font-body-md">
+<span class="text-secondary">Envío (Calculado)</span>
+<span class="text-on-surface font-semibold">$120.00</span>
+</div>
+<div class="flex justify-between font-body-md">
+<span class="text-secondary">Impuestos</span>
+<span class="text-on-surface font-semibold">$402.40</span>
+</div>
+</div>
+<div class="pt-6 border-t border-surface-variant mb-8">
+<div class="flex justify-between items-baseline">
+<span class="font-headline-lg text-[20px] font-bold">Total</span>
+<span class="font-headline-xl text-[32px] text-on-surface">$5,552.40</span>
+</div>
+<p class="text-label-sm text-secondary text-right mt-1 italic">Incluye entrega y montaje</p>
+</div>
+<button class="w-full bg-primary-container text-on-primary py-5 rounded font-bold font-body-lg hover:bg-primary transition-colors shadow-lg shadow-primary/10 mb-4 uppercase tracking-widest">
+                        Tramitar Pedido
+                    </button>
+<div class="flex flex-col gap-4 mt-8 pt-8 border-t border-surface-variant/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<span class="text-label-sm text-secondary">Pago Seguro Garantizado</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">local_shipping</span>
+<span class="text-label-sm text-secondary">Envío Premium 48-72h</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Recommended For You Slider -->
+<section class="mt-32">
+<div class="flex justify-between items-end mb-10">
+<div>
+<span class="text-primary font-label-sm uppercase tracking-[0.2em] block mb-2">Completar el espacio</span>
+<h2 class="font-headline-lg text-headline-lg">Recomendado para usted</h2>
+</div>
+<div class="flex gap-2">
+<button class="w-12 h-12 rounded-full border border-surface-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-surface-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-gutter overflow-x-auto pb-8 custom-scrollbar snap-x snap-mandatory">
+<!-- Recommended 1 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-start group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden rounded-sm relative mb-4">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist architectural floor lamp with a slender matte black stem and a soft warm glowing orb light. The lamp stands in a modern concrete-walled living room with high-end furniture. The lighting is moody yet bright enough to see textures. Corporate modern aesthetic, very clean and luxury." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGn90CIrmlJWpUIW5fHT7zlb_TdmaNXb2GRtdME57n1-mgvCX_oh2WaAUAD3WWQaREP7_z0UadM0mH-pdTCs4aA-nTw-B7dcGcSdl6JiB_rGPV8GZQXXVNIf6WZyawWtWRe35U6HILZvGUJ1m9WhUbKc9riYj3cQPCkLf22ZNCa09V0-BAr-rlrHuG-QZlkAl1f6ntw6VOodXjDaqdsgobb1RU4_yVxH2I_dmtCV6_JweSaVyum8TIzj6g3GxIOaCzdtuNm7LZv-E')"></div>
+<div class="absolute top-4 right-4 bg-white px-3 py-1 text-label-sm font-bold tracking-tight rounded-sm">NUEVO</div>
+</div>
+<h4 class="font-headline-lg text-[18px] mb-1">Lámpara de Pie Orbe</h4>
+<p class="text-secondary font-label-sm mb-2 uppercase">Iluminación</p>
+<p class="font-bold text-on-surface">$420.00</p>
+</div>
+<!-- Recommended 2 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-start group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden rounded-sm relative mb-4">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A low-profile solid oak coffee table with refined joinery details and a smooth natural finish. It sits on a premium neutral-toned wool rug in a bright, airy showroom. Soft natural morning light creates gentle shadows. Minimalist luxury furniture design. High-end corporate residential style." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_NaOniU_YlSBft7iGmzs4_hdZZGfiTOqa-Gi2v0Gnduk63i6OPCIQEVIyRocU7ib9bLtz8ZZyBzanooYGqSER2bJi6wXh5EtJCuzhUP0AeqO34_SPG8BzInQ1VXoJi7AqEu5UFbRpLq7aHxs-uYC3kDzIJQ-o6Lj4TxbXe5GHXZ2Ot9d4MeJLSE8nD3AuMXpudBOA43N6cDAbzYFpi-dNzG0dzGofSwanxRTjYaLAWk-OjB81ZL8qtTqmdVw6dlL4wsjAIIXsKew')"></div>
+</div>
+<h4 class="font-headline-lg text-[18px] mb-1">Mesa de Centro Nordic Oak</h4>
+<p class="text-secondary font-label-sm mb-2 uppercase">Living</p>
+<p class="font-bold text-on-surface">$1,150.00</p>
+</div>
+<!-- Recommended 3 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-start group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden rounded-sm relative mb-4">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="An artistic hand-tufted rug with an abstract geometric pattern in shades of slate grey, bone, and charcoal. The texture of the high-quality wool is visible in the detailed close-up shot. Professional interior design photography with clean lines and soft studio lighting. Minimalist color palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu7YBdED9I9GJ9bnsyAGbYqBYWrffGR1Nm1vnVADXo4i6jNry4MPICbjb5DQHoj9Ys9TeQHb7oqiXcjRgPeCDMKKjDtE7GJe1mdU8ylHtFBZrFPQLlqb4giZyR79N_wDmG4Z-8j_UiJU7SMCgu2zOBc0AJw_qc0ZeUXVQJKq6_hFHURpi6s-OcN8u9AwB-PQmglZE9TDwiWzCXdsvlRpYUuumG5OHgfRHZ1Xfnp5H7zPzP0575S59KzhdDQTRJvGnq1JJNZKmJqnM')"></div>
+</div>
+<h4 class="font-headline-lg text-[18px] mb-1">Alfombra Monocromática Laine</h4>
+<p class="text-secondary font-label-sm mb-2 uppercase">Decoración</p>
+<p class="font-bold text-on-surface">$890.00</p>
+</div>
+<!-- Recommended 4 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-start group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden rounded-sm relative mb-4">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A sleek minimalist desk organizer set made from brushed aluminum and dark walnut wood. The set includes a pen holder, tray, and phone stand. It is perfectly arranged on a clean white desk surface in a bright corporate office. Sharp focus, professional lighting, luxury desk accessories." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCduuSY_pBhqFAFR3KBgcO07Hpkh6Jo3zF0lhdPOOzqstEdSvP5j5XSIdFWKEOIiytl1JUyEAbzc5-zaoq2nYlClOFQgQItIddWv3bbHOU2D9l-qMGIdIeoH41IYt7kMHrvd_SVNGI0aU_hTcHrYea2K-qtb-f9Twmnhi0-TpsQm1Nr9nV08tGrH6j7huo-KYv1TDVXitVt0bKd3AjV6wkAaZpcPcYuo-B_PIw7OH46WRWcT1hwgZO5tf-Qijdvs0oAYJ9WPvqXW_E')"></div>
+</div>
+<h4 class="font-headline-lg text-[18px] mb-1">Set Organizador Escritorio Zinc</h4>
+<p class="text-secondary font-label-sm mb-2 uppercase">Accesorios</p>
+<p class="font-bold text-on-surface">$185.00</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full pt-20 pb-10 bg-tertiary dark:bg-tertiary-container text-on-tertiary dark:text-on-tertiary-container font-body-md text-body-md">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1 md:col-span-1">
+<h2 class="font-headline-lg text-headline-lg text-on-tertiary mb-6">AURA</h2>
+<p class="text-on-tertiary-container/80 mb-6">Mobiliario de autor para espacios que inspiran excelencia y bienestar.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-on-tertiary-container/30 flex items-center justify-center hover:bg-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-on-tertiary-container/30 flex items-center justify-center hover:bg-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">alternate_email</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-on-tertiary">Categorías</h4>
+<ul class="space-y-4">
+<li><a class="text-on-tertiary-container/80 hover:text-primary transition-colors" href="#">Sofás y Sillones</a></li>
+<li><a class="text-on-tertiary-container/80 hover:text-primary transition-colors" href="#">Sillas de Oficina</a></li>
+<li><a class="text-on-tertiary-container/80 hover:text-primary transition-colors" href="#">Mesas de Trabajo</a></li>
+<li><a class="text-on-tertiary-container/80 hover:text-primary transition-colors" href="#">Accesorios Premium</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-on-tertiary">Información</h4>
+<ul class="space-y-4">
+<li><a class="text-on-tertiary-container/80 hover:text-primary transition-colors" href="#">Shipping</a></li>
+<li><a class="text-on-tertiary-container/80 hover:text-primary transition-colors" href="#">Returns</a></li>
+<li><a class="text-on-tertiary-container/80 hover:text-primary transition-colors" href="#">Support</a></li>
+<li><a class="text-on-tertiary-container/80 hover:text-primary transition-colors" href="#">Legal</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6 text-on-tertiary">Newsletter</h4>
+<p class="text-on-tertiary-container/80 mb-4">Suscríbase para recibir actualizaciones sobre nuevas colecciones.</p>
+<form class="flex flex-col gap-3">
+<input class="bg-transparent border-b border-on-tertiary-container/50 py-2 focus:outline-none focus:border-primary transition-colors placeholder:text-on-tertiary-container/40" placeholder="Email" type="email"/>
+<button class="bg-on-tertiary text-tertiary py-3 font-bold hover:bg-primary hover:text-white transition-all uppercase tracking-widest text-label-sm">Suscribirse</button>
+</form>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-20 pt-10 border-t border-on-tertiary-container/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-on-tertiary-container/60 text-label-sm">© 2024 Aura Design. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="text-on-tertiary-container/60 text-label-sm hover:text-white transition-colors" href="#">Digital Complaints Book</a>
+<a class="text-on-tertiary-container/60 text-label-sm hover:text-white transition-colors" href="#">Cookies Policy</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple quantity interaction
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            icon.parentElement.addEventListener('click', function(e) {
+                if (this.textContent.includes('add') || this.textContent.includes('remove')) {
+                    const span = this.parentElement.querySelector('span:not(.material-symbols-outlined)');
+                    let val = parseInt(span.textContent);
+                    if (this.textContent.includes('add')) val++;
+                    if (this.textContent.includes('remove') && val > 1) val--;
+                    span.textContent = val;
+                }
+            });
+        });
+
+        // Floating nav interaction on scroll
+        let lastScrollTop = 0;
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.remove('py-2');
+                nav.classList.add('py-4');
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body></html>

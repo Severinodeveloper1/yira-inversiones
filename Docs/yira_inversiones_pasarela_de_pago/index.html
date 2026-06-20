@@ -1,0 +1,340 @@
+<!DOCTYPE html><html class="light" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Checkout | Yira Inversiones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Work+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#ffd9d5",
+                        "secondary": "#5f5e5e",
+                        "on-primary-fixed": "#410002",
+                        "surface-dim": "#dbdad9",
+                        "primary-fixed": "#ffdad6",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "surface-variant": "#e3e2e2",
+                        "outline-variant": "#e5bdb9",
+                        "surface": "#faf9f9",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#ffb4ab",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#656464",
+                        "tertiary": "#4b4d4a",
+                        "secondary-fixed": "#e4e2e1",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e3e2e2",
+                        "on-surface-variant": "#5c403d",
+                        "on-error": "#ffffff",
+                        "on-background": "#1b1c1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "tertiary-fixed": "#e3e3de",
+                        "on-tertiary-fixed": "#1a1c19",
+                        "on-secondary-fixed-variant": "#474747",
+                        "inverse-surface": "#2f3031",
+                        "surface-tint": "#bb1619",
+                        "surface-container-low": "#f4f3f3",
+                        "surface-container-high": "#e9e8e8",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "surface-bright": "#faf9f9",
+                        "on-tertiary-fixed-variant": "#454744",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#636561",
+                        "primary": "#9e000c",
+                        "background": "#faf9f9",
+                        "on-surface": "#1b1c1c",
+                        "primary-container": "#c41e1e",
+                        "on-primary-fixed-variant": "#93000a",
+                        "secondary-container": "#e4e2e1",
+                        "surface-container": "#efeded",
+                        "on-tertiary-container": "#e2e2de",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "outline": "#906f6b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Work Sans"],
+                        "headline-xl": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-sm": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active { color: #9e000c; font-weight: 700; }
+        .step-completed { color: #1b1c1c; opacity: 0.6; }
+        .checkout-input {
+            border: none;
+            border-bottom: 1px solid #906f6b;
+            background: transparent;
+            border-radius: 0;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+        }
+        .checkout-input:focus {
+            outline: none;
+            border-bottom: 2px solid #1b1c1c;
+            box-shadow: none;
+        }
+        .custom-radio:checked + label {
+            border-color: #9e000c;
+            background-color: #faf9f9;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed">
+<!-- Header (Suppressed Nav - Task Focused) -->
+<header class="h-20 flex items-center border-b border-outline-variant/10 bg-surface/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full flex justify-between items-center">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tighter">Yira Inversiones</span>
+<div class="flex items-center gap-2 text-secondary font-label-sm uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span class="">Pago Seguro</span>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Multi-step Progress Indicator -->
+<nav class="flex justify-between md:justify-center items-center gap-4 md:gap-16 mb-16 overflow-x-auto pb-4 scrollbar-hide">
+<div class="flex items-center gap-3 shrink-0">
+<span class="w-8 h-8 rounded-full border border-on-surface flex items-center justify-center font-label-sm">1</span>
+<span class="font-label-sm uppercase tracking-widest text-on-surface/60">Carrito</span>
+</div>
+<div class="h-[1px] w-8 md:w-16 bg-outline-variant/30 hidden md:block"></div>
+<div class="flex items-center gap-3 shrink-0">
+
+
+</div>
+<div class="h-[1px] w-8 md:w-16 bg-outline-variant/30 hidden md:block"></div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-label-sm">3</span>
+<span class="font-label-sm uppercase tracking-widest text-primary font-bold">Pago</span>
+</div>
+<div class="h-[1px] w-8 md:w-16 bg-outline-variant/30 hidden md:block"></div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="w-8 h-8 rounded-full border border-outline flex items-center justify-center font-label-sm text-outline">4</span>
+<span class="font-label-sm uppercase tracking-widest text-outline">Confirmación</span>
+</div>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Checkout Details -->
+<div class="lg:col-span-7 space-y-12">
+<!-- Shipping Address -->
+<section>
+<h2 class="font-headline-lg text-headline-lg mb-8">Información de Envío</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+<div class="flex flex-col">
+<label class="font-label-sm text-secondary uppercase mb-1">Nombre Completo</label>
+<input class="checkout-input font-body-md" placeholder="Ej. Alejandro Valdés" type="text">
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-secondary uppercase mb-1">Teléfono</label>
+<input class="checkout-input font-body-md" placeholder="+34 600 000 000" type="tel">
+</div>
+<div class="md:col-span-2 flex flex-col">
+<label class="font-label-sm text-secondary uppercase mb-1">Dirección de Entrega</label>
+<input class="checkout-input font-body-md" placeholder="Calle de la Innovación 42, 4B" type="text">
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-secondary uppercase mb-1">Ciudad</label>
+<input class="checkout-input font-body-md" placeholder="Madrid" type="text">
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-secondary uppercase mb-1">Código Postal</label>
+<input class="checkout-input font-body-md" placeholder="28001" type="text">
+</div>
+</form>
+</section>
+<!-- Shipping Method -->
+
+<!-- Payment Method -->
+<section class="bg-surface-container-low p-8 border border-outline-variant/10">
+<h2 class="font-headline-lg text-headline-lg mb-8">Método de Pago</h2>
+<div class="space-y-6">
+<!-- Card Payment -->
+<div class="bg-white p-6 shadow-sm">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+<span class="font-bold uppercase tracking-widest text-on-surface">Tarjeta de Crédito / Débito</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+<div class="md:col-span-2 flex flex-col">
+<label class="font-label-sm text-secondary uppercase mb-1">Número de Tarjeta</label>
+<div class="relative">
+<input class="checkout-input font-body-md w-full" placeholder="0000 0000 0000 0000" type="text">
+<div class="absolute right-0 bottom-3 flex gap-2">
+<span class="material-symbols-outlined text-outline-variant">payments</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-secondary uppercase mb-1">Vencimiento (MM/AA)</label>
+<input class="checkout-input font-body-md" placeholder="09/27" type="text">
+</div>
+<div class="flex flex-col">
+<label class="font-label-sm text-secondary uppercase mb-1">CVV</label>
+<input class="checkout-input font-body-md" placeholder="***" type="password">
+</div>
+</div>
+</div>
+<!-- Other Methods -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<button class="flex items-center justify-between p-4 border border-outline-variant/30 bg-white hover:bg-surface-container-high transition-colors" type="button">
+<span class="font-label-sm uppercase font-bold">Transferencia</span>
+<span class="material-symbols-outlined text-secondary">account_balance</span>
+</button>
+<button class="flex items-center justify-between p-4 border border-outline-variant/30 bg-white hover:bg-surface-container-high transition-colors" type="button">
+<span class="font-label-sm uppercase font-bold">Apple / Google Pay</span>
+<span class="material-symbols-outlined text-secondary">contactless</span>
+</button>
+<button class="flex items-center justify-between p-4 border border-outline-variant/30 bg-white hover:bg-surface-container-high transition-colors" type="button"><span class="font-label-sm uppercase font-bold">Billeteras Digitales</span><span class="material-symbols-outlined text-secondary">wallet</span></button></div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-5">
+<div class="sticky top-28 space-y-8">
+<div class="bg-white p-8 shadow-sm border border-outline-variant/5">
+<h3 class="font-headline-lg text-headline-lg mb-8">Resumen del Pedido</h3>
+<!-- Item Breakdown -->
+<div class="space-y-6 mb-8 border-b border-outline-variant/10 pb-8">
+<div class="flex gap-4">
+<div class="w-20 h-20 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A studio photograph of a high-end ergonomic executive chair, featuring deep charcoal mesh, polished aluminum base, and a sleek architectural profile. The lighting is soft and focused, emphasizing the premium textures of the material against a clean light gray background, following the selective minimalism aesthetic of Yira Inversiones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHO-4dbidyxUZqnLcg2SGHnV797qX_EzH_DyCmkHCp2hXiPb9hKg0HqzEfPK6w14Ryjp0AlC80Lm3VErqFUfX1X3aMA0onWGsBFqiHktXeY5aCLI7y3_FDYH3S3WwUyLzjEFFJKU38sOjC6pSRd7Kiyc8Z8ufaxZ6mnTGQMer4oA6yP8aRKF37wyY9KJnAa_wIc-hv7-jEAhuaC015MF8KhmKksV6_flPxzhMeMC-V8bFOCIvLT_GElcQ9iVeoigkm3xXVUQF_utg">
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<h4 class="font-bold text-on-surface">Silla Ejecutiva Aura</h4>
+<p class="text-secondary font-label-sm">Cant: 1 • Slate Gray</p>
+<span class="text-primary font-bold mt-1">1.250,00 €</span>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-20 h-20 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist oak wood desk with a leather writing pad, shot from a professional low angle to highlight the grain and craftmanship. The setting is a bright, high-ceiling modern office with soft daylight and clean vertical lines, reflecting corporate luxury and ergonomic excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgRFc0pahbgwqBKjUQePLYdM5-X0HCZBCnvmnaF3deF8ga-s_nSyT7JtQUsPiqxxEYgWHfwtXu_vipH5rk82nh84z1ydoBWA6a8Q08XIrP7_tPQl5rfiDOMa7I67fJ_FXYJR8fqXWxbjYEPasFA5rOKf73tpTV8h5ssha0zWi6oCcegO_vbLm-8GefXuPfLzjGNm3LiCjJ9Og6tLlvgef4_c6F4-laY5Mlk9jU7h4W2NjBiIekoDPPTZs1x3gO24RahGMxGxEBb10">
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<h4 class="font-bold text-on-surface">Escritorio Nórdico Pro</h4>
+<p class="text-secondary font-label-sm">Cant: 1 • Roble Macizo</p>
+<span class="text-primary font-bold mt-1">2.400,00 €</span>
+</div>
+</div>
+</div>
+<!-- Calculations -->
+<div class="space-y-3 mb-8">
+<div class="flex justify-between text-secondary">
+<span class="">Subtotal</span>
+<span class="">3.650,00 €</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span class="">Gastos de Envío</span>
+<span class="">25,00 €</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span class="">Impuestos (IVA 21%)</span>
+<span class="">771,75 €</span>
+</div>
+<div class="flex justify-between text-headline-lg font-bold text-on-surface pt-4 border-t border-outline-variant/10">
+<span class="">Total</span>
+<span class="">4.446,75 €</span>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full bg-primary-container text-white py-6 font-bold uppercase tracking-widest hover:bg-primary transition-all active:scale-[0.98] duration-200">
+                            Finalizar Pedido
+                        </button>
+<p class="text-center text-outline text-label-sm mt-6 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+                            Transacción encriptada de extremo a extremo
+                        </p>
+</div>
+<!-- Trust Seals -->
+<div class="flex justify-center items-center gap-8 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl mb-1">security</span>
+<span class="text-[10px] font-bold uppercase">SSL Secure</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl mb-1">account_balance_wallet</span>
+<span class="text-[10px] font-bold uppercase">Safe Payment</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl mb-1">local_shipping</span>
+<span class="text-[10px] font-bold uppercase">Global Trust</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer (Suppressed Full Footer for Focus) -->
+<footer class="bg-secondary-fixed dark:bg-inverse-surface mt-20">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-secondary font-label-sm uppercase tracking-wider text-[11px]">
+<p class="">© 2024 Yira Inversiones. Arquitectura de Interiores &amp; Ergonomía.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacidad</a>
+<a class="hover:text-primary transition-colors" href="#">Términos</a>
+<a class="hover:text-primary transition-colors" href="#">Ayuda</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for input fields and focus states
+        document.querySelectorAll('.checkout-input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').style.color = '#9e000c';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').style.color = '';
+            });
+        });
+
+        // Simple Radio Toggle Logic
+        const radios = document.querySelectorAll('input[name="shipping"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                // Potential dynamic shipping cost update logic could go here
+                console.log('Shipping selected:', e.target.id);
+            });
+        });
+    </script>
+
+
+</body></html>

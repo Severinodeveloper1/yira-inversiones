@@ -5,6 +5,10 @@ namespace App\Filament\Resources\PageBanners;
 use App\Filament\Resources\PageBanners\Pages\CreatePageBanner;
 use App\Filament\Resources\PageBanners\Pages\EditPageBanner;
 use App\Filament\Resources\PageBanners\Pages\ListPageBanners;
+use App\Filament\Resources\PageBanners\Pages\ViewPageBanner;
+use App\Filament\Resources\PageBanners\Schemas\PageBannerForm;
+use App\Filament\Resources\PageBanners\Schemas\PageBannerInfolist;
+use App\Filament\Resources\PageBanners\Tables\PageBannersTable;
 use App\Models\PageBanner;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -16,7 +20,7 @@ class PageBannerResource extends Resource
 {
     protected static ?string $model = PageBanner::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedViewColumns;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $navigationLabel = 'Banners de Páginas';
 
@@ -28,27 +32,37 @@ class PageBannerResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    protected static ?string $recordTitleAttribute = 'title';
+
     public static function form(Schema $schema): Schema
     {
         return PageBannerForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return PageBannerInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
-        return PageBannerTable::configure($table);
+        return PageBannersTable::configure($table);
     }
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index'  => ListPageBanners::route('/'),
+            'index' => ListPageBanners::route('/'),
             'create' => CreatePageBanner::route('/create'),
-            'edit'   => EditPageBanner::route('/{record}/edit'),
+            'view' => ViewPageBanner::route('/{record}'),
+            'edit' => EditPageBanner::route('/{record}/edit'),
         ];
     }
 }

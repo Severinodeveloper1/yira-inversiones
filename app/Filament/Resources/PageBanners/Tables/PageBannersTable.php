@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\PageBanners;
+namespace App\Filament\Resources\PageBanners\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -10,7 +10,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class PageBannerTable
+class PageBannersTable
 {
     public static function configure(Table $table): Table
     {
@@ -30,17 +30,20 @@ class PageBannerTable
                     ->width(120),
                 TextColumn::make('sort_order')
                     ->label('Orden')
+                    ->numeric()
                     ->sortable()
                     ->alignCenter(),
                 TextColumn::make('page')
                     ->label('Página')
                     ->formatStateUsing(fn($state) => $pageLabels[$state] ?? ucfirst($state))
                     ->badge()
-                    ->color('primary'),
+                    ->color('primary')
+                    ->searchable(),
                 TextColumn::make('title')
                     ->label('Título')
                     ->default('—')
-                    ->limit(50),
+                    ->limit(50)
+                    ->searchable(),
                 TextColumn::make('subtitle')
                     ->label('Subtítulo')
                     ->default('—')
@@ -48,14 +51,15 @@ class PageBannerTable
                 TextColumn::make('updated_at')
                     ->label('Actualizado')
                     ->since()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make()->label('Editar'),
-                ViewAction::make()->label('Ver')
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

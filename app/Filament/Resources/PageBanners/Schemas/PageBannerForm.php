@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\PageBanners;
+namespace App\Filament\Resources\PageBanners\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -16,7 +16,7 @@ class PageBannerForm
             ->columns(1)
             ->components([
                 Section::make('Configuración del Banner')
-                    ->description('Configura la imagen de cabecera que aparecerá en la parte superior de la página seleccionada.')
+                    ->description('Selecciona la página y sube la imagen que aparecerá como cabecera.')
                     ->schema([
                         Select::make('page')
                             ->label('Página')
@@ -26,12 +26,14 @@ class PageBannerForm
                                 'nosotros' => 'Nosotros',
                                 'blog'     => 'Blog / Noticias',
                                 'contacto' => 'Contacto',
-                            ]),
+                            ])
+                            ->placeholder('Selecciona una página...')
+                            ->native(false),
                         TextInput::make('sort_order')
                             ->label('Orden de visualización')
                             ->numeric()
                             ->default(0)
-                            ->helperText('Número menor = aparece primero. Útil cuando hay múltiples banners en la misma página.'),
+                            ->helperText('Número menor = aparece primero. Útil si hay múltiples banners en la misma página.'),
                         FileUpload::make('image_path')
                             ->label('Imagen del Banner')
                             ->image()

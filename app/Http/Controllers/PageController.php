@@ -207,24 +207,12 @@ class PageController extends Controller
     public function checkout()
     {
         $customer = auth('customers')->user();
-        if (!$customer) {
-            return redirect()->route('filament.clientes.auth.login');
-        }
-
         return view('frontend.checkout', compact('customer'));
     }
 
     public function processCheckout(Request $request)
     {
         $customer = auth('customers')->user();
-        if (!$customer) {
-            return response()->json(['success' => false, 'message' => 'Sesión no iniciada.'], 401);
-        }
-
-        if (!$customer->is_active) {
-            auth('customers')->logout();
-            return response()->json(['success' => false, 'message' => 'Su cuenta está inactiva y no puede realizar pedidos.'], 403);
-        }
 
         $request->validate([
             'document_type' => 'required|string|in:boleta,factura,ticket',
@@ -239,6 +227,32 @@ class PageController extends Controller
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.color' => 'required|string|max:255',
         ]);
+
+        if (!$customer) {
+            $email = $request->input('email');
+            $docNumber = $request->input('document_number');
+
+            $customer = \App\Models\Customer::where('email', $email)
+                ->orWhere('document_number', $docNumber)
+                ->first();
+
+            if (!$customer) {
+                // Auto-create guest customer account
+                $customer = \App\Models\Customer::create([
+                    'name' => $request->input('billing_name'),
+                    'email' => $email,
+                    'phone' => $request->input('phone'),
+                    'document_type' => $request->input('document_type_detail') ?? 'DNI',
+                    'document_number' => $docNumber,
+                    'password' => bcrypt(Str::random(16)),
+                    'is_active' => true,
+                ]);
+            }
+        }
+
+        if (!$customer->is_active) {
+            return response()->json(['success' => false, 'message' => 'Su cuenta está inactiva y no puede realizar pedidos.'], 403);
+        }
 
         $items = $request->input('items');
         $subtotal = 0;
@@ -294,11 +308,18 @@ class PageController extends Controller
             return $order;
         });
 
+        // Store the order number in the session to authorize guest receipt download
+        session()->put('last_order_number', $order->order_number);
+
+        $redirectUrl = auth('customers')->check()
+            ? '/clientes/orders'
+            : route('pedidos.pdf', ['order_number' => $order->order_number]);
+
         return response()->json([
             'success' => true,
             'message' => '¡Pedido registrado con éxito! Nro: ' . $order->order_number,
             'order_number' => $order->order_number,
-            'redirect_url' => '/clientes/orders',
+            'redirect_url' => $redirectUrl,
         ]);
     }
 
@@ -308,8 +329,9 @@ class PageController extends Controller
 
         $isOwner = auth('customers')->check() && auth('customers')->id() === $order->customer_id;
         $isAdmin = auth('web')->check();
+        $isGuestSession = session()->get('last_order_number') === $order->order_number;
 
-        if (!$isOwner && !$isAdmin) {
+        if (!$isOwner && !$isAdmin && !$isGuestSession) {
             abort(403, 'No tiene autorización para descargar este comprobante.');
         }
 

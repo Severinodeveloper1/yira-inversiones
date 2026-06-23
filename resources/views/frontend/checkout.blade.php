@@ -49,31 +49,31 @@
                     <div class="space-y-4">
                         <div>
                             <label class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1" id="billing-name-label">Nombre Completo *</label>
-                            <input type="text" name="billing_name" value="{{ $customer->name }}" required class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
+                            <input type="text" name="billing_name" value="{{ $customer?->name }}" required class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1">Tipo de Documento *</label>
                                 <select name="doc_type_select" id="doc_type_select" class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all" onchange="updateDocFieldLabel()">
-                                    <option value="DNI" {{ $customer->document_type == 'DNI' ? 'selected' : '' }}>DNI</option>
-                                    <option value="RUC" {{ $customer->document_type == 'RUC' ? 'selected' : '' }}>RUC</option>
-                                    <option value="CE" {{ $customer->document_type == 'CE' ? 'selected' : '' }}>Carnet de Extranjería</option>
-                                    <option value="PASAPORTE" {{ $customer->document_type == 'PASAPORTE' ? 'selected' : '' }}>Pasaporte</option>
+                                    <option value="DNI" {{ $customer?->document_type == 'DNI' ? 'selected' : '' }}>DNI</option>
+                                    <option value="RUC" {{ $customer?->document_type == 'RUC' ? 'selected' : '' }}>RUC</option>
+                                    <option value="CE" {{ $customer?->document_type == 'CE' ? 'selected' : '' }}>Carnet de Extranjería</option>
+                                    <option value="PASAPORTE" {{ $customer?->document_type == 'PASAPORTE' ? 'selected' : '' }}>Pasaporte</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1" id="doc-number-label">Número de Documento *</label>
-                                <input type="text" name="document_number" value="{{ $customer->document_number }}" required class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
+                                <input type="text" name="document_number" value="{{ $customer?->document_number }}" required class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
                             </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1">Teléfono de Contacto *</label>
-                                <input type="text" name="phone" value="{{ $customer->phone }}" required class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
+                                <input type="text" name="phone" value="{{ $customer?->phone }}" required class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
                             </div>
                             <div>
                                 <label class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1">Correo Electrónico *</label>
-                                <input type="email" name="email" value="{{ $customer->email }}" required class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
+                                <input type="email" name="email" value="{{ $customer?->email }}" required class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
                             </div>
                         </div>
                     </div>

@@ -16,11 +16,9 @@ Route::get('/politicas', [PageController::class, 'policies'])->name('policies');
 Route::post('/cotizacion', [PageController::class, 'storeQuote'])->name('quote.store');
 Route::post('/libro-reclamaciones', [PageController::class, 'storeClaim'])->name('claim.store');
 
-// Clientes / Checkout routes under customer auth middleware
-Route::middleware('auth:customers')->group(function () {
-    Route::get('/checkout', [PageController::class, 'checkout'])->name('checkout');
-    Route::post('/checkout/process', [PageController::class, 'processCheckout'])->name('checkout.process');
-});
+// Checkout routes (accessible by guests and logged-in customers)
+Route::get('/checkout', [PageController::class, 'checkout'])->name('checkout');
+Route::post('/checkout/process', [PageController::class, 'processCheckout'])->name('checkout.process');
 
 // PDF invoice download route (secured via owner check in controller)
 Route::get('/pedidos/{order_number}/pdf', [PageController::class, 'downloadOrderPdf'])->name('pedidos.pdf');
@@ -32,4 +30,10 @@ Route::post('/logout-customer', function() {
     request()->session()->regenerateToken();
     return redirect()->route('home');
 })->name('clientes.logout');
+
+// Login redirect fallback for auth middleware
+Route::get('/login', function() {
+    return redirect()->route('filament.clientes.auth.login');
+})->name('login');
+
 

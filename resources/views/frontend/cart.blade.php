@@ -55,12 +55,16 @@
                     <p class="text-label-sm text-secondary text-right mt-1 italic">Envío e instalación a cotizar</p>
                 </div>
                 <div class="flex flex-col gap-3">
-                    <button onclick="sendWhatsAppCheckout()" class="w-full bg-[#25D366] text-white py-5 rounded font-bold font-body-lg hover:bg-[#128C7E] transition-colors shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest">
-                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+                    <a href="{{ route('checkout') }}" class="w-full bg-primary text-white py-5 rounded font-bold font-body-lg hover:bg-primary-container transition-colors shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-center cursor-pointer">
+                        <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                        Procesar Pedido
+                    </a>
+                    <button onclick="sendWhatsAppCheckout()" class="w-full bg-[#25D366] text-white py-4 rounded font-bold font-body-md hover:bg-[#128C7E] transition-colors shadow-md flex items-center justify-center gap-2 uppercase tracking-widest">
+                        <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">chat</span>
                         Pedir por WhatsApp
                     </button>
-                    <button onclick="openQuoteModalFromCart()" class="w-full bg-primary text-white py-5 rounded font-bold font-body-lg hover:bg-primary-container transition-colors shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest">
-                        <span class="material-symbols-outlined">description</span>
+                    <button onclick="openQuoteModalFromCart()" class="w-full bg-secondary text-white py-4 rounded font-bold font-body-md hover:bg-secondary/90 transition-colors shadow-md flex items-center justify-center gap-2 uppercase tracking-widest">
+                        <span class="material-symbols-outlined text-[20px]">description</span>
                         Solicitar Cotización
                     </button>
                 </div>

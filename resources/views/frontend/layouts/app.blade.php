@@ -151,7 +151,26 @@
         </div>
         <div class="flex items-center gap-6">
             <a href="{{ route('tienda') }}" class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">search</a>
-            <a href="/admin" class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">person</a>
+            @if(auth('customers')->check())
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-secondary hover:text-primary transition-colors cursor-pointer duration-200 focus:outline-none" type="button">
+                        <span class="material-symbols-outlined">person</span>
+                        <span class="text-sm font-semibold max-w-[120px] truncate hidden md:inline">{{ auth('customers')->user()->name }}</span>
+                    </button>
+                    <!-- Dropdown -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white border border-outline/10 rounded shadow-lg py-2 hidden group-hover:block z-50">
+                        <a href="/clientes" class="block px-4 py-2 text-sm text-secondary hover:bg-surface-container-low hover:text-primary">Mi Panel</a>
+                        <a href="/clientes/profile" class="block px-4 py-2 text-sm text-secondary hover:bg-surface-container-low hover:text-primary">Mi Perfil</a>
+                        <hr class="border-outline/10 my-1">
+                        <form action="{{ route('clientes.logout') }}" method="POST" class="block w-full">
+                            @csrf
+                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-error hover:bg-surface-container-low">Cerrar Sesión</button>
+                        </form>
+                    </div>
+                </div>
+            @else
+                <a href="/clientes/login" class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200" title="Iniciar Sesión / Registrarse">person</a>
+            @endif
             <a href="{{ route('cart') }}" class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 relative">
                 shopping_cart
                 <span id="cart-badge" class="absolute -top-2 -right-2 bg-primary text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold hidden">0</span>

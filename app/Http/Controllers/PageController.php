@@ -10,6 +10,8 @@ use App\Models\Post;
 use App\Models\Claim;
 use App\Models\Faq;
 use App\Models\Policy;
+use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -200,5 +202,118 @@ class PageController extends Controller
     {
         $policies = Policy::all()->keyBy('key');
         return view('frontend.policies', compact('policies'));
+    }
+
+    public function checkout()
+    {
+        $customer = auth('customers')->user();
+        if (!$customer) {
+            return redirect()->route('filament.clientes.auth.login');
+        }
+
+        return view('frontend.checkout', compact('customer'));
+    }
+
+    public function processCheckout(Request $request)
+    {
+        $customer = auth('customers')->user();
+        if (!$customer) {
+            return response()->json(['success' => false, 'message' => 'Sesión no iniciada.'], 401);
+        }
+
+        if (!$customer->is_active) {
+            auth('customers')->logout();
+            return response()->json(['success' => false, 'message' => 'Su cuenta está inactiva y no puede realizar pedidos.'], 403);
+        }
+
+        $request->validate([
+            'document_type' => 'required|string|in:boleta,factura,ticket',
+            'document_number' => 'required|string|max:20',
+            'billing_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'shipping_method' => 'required|string|in:recojo_tienda,delivery,envio_agencia',
+            'shipping_address' => 'required_if:shipping_method,delivery,envio_agencia|nullable|string|max:1000',
+            'items' => 'required|array|min:1',
+            'items.*.id' => 'required|exists:products,id',
+            'items.*.quantity' => 'required|integer|min:1',
+            'items.*.color' => 'required|string|max:255',
+        ]);
+
+        $items = $request->input('items');
+        $subtotal = 0;
+        $orderItemsData = [];
+
+        foreach ($items as $itemData) {
+            $product = Product::findOrFail($itemData['id']);
+            $price = $product->promo_price ?? $product->price;
+            if (!$price || $price <= 0) {
+                $price = 0.00;
+            }
+            $qty = intval($itemData['quantity']);
+            $itemSubtotal = $price * $qty;
+            $subtotal += $itemSubtotal;
+
+            $orderItemsData[] = [
+                'product_id' => $product->id,
+                'product_name' => $product->name,
+                'price' => $price,
+                'color' => $itemData['color'],
+                'quantity' => $qty,
+                'subtotal' => $itemSubtotal,
+            ];
+        }
+
+        $total = $subtotal;
+        $subtotalDb = $total / 1.18;
+        $taxDb = $total - $subtotalDb;
+
+        $orderNumber = 'YIRA-' . date('Ymd') . '-' . strtoupper(Str::random(4));
+
+        $order = \DB::transaction(function () use ($customer, $orderNumber, $request, $subtotalDb, $taxDb, $total, $orderItemsData) {
+            $order = Order::create([
+                'customer_id' => $customer->id,
+                'order_number' => $orderNumber,
+                'document_type' => $request->document_type,
+                'document_number' => $request->document_number,
+                'billing_name' => $request->billing_name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'shipping_method' => $request->shipping_method,
+                'shipping_address' => $request->shipping_method === 'recojo_tienda' ? null : $request->shipping_address,
+                'status' => 'pendiente',
+                'subtotal' => $subtotalDb,
+                'tax' => $taxDb,
+                'total' => $total,
+            ]);
+
+            foreach ($orderItemsData as $item) {
+                $order->items()->create($item);
+            }
+
+            return $order;
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => '¡Pedido registrado con éxito! Nro: ' . $order->order_number,
+            'order_number' => $order->order_number,
+            'redirect_url' => '/clientes/orders',
+        ]);
+    }
+
+    public function downloadOrderPdf($orderNumber)
+    {
+        $order = Order::where('order_number', $orderNumber)->with('items')->firstOrFail();
+
+        $isOwner = auth('customers')->check() && auth('customers')->id() === $order->customer_id;
+        $isAdmin = auth('web')->check();
+
+        if (!$isOwner && !$isAdmin) {
+            abort(403, 'No tiene autorización para descargar este comprobante.');
+        }
+
+        $pdf = Pdf::loadView('pdf.order_pdf', compact('order'));
+        return $pdf->download('comprobante-' . $order->order_number . '.pdf');
     }
 }

@@ -16,3 +16,20 @@ Route::get('/politicas', [PageController::class, 'policies'])->name('policies');
 Route::post('/cotizacion', [PageController::class, 'storeQuote'])->name('quote.store');
 Route::post('/libro-reclamaciones', [PageController::class, 'storeClaim'])->name('claim.store');
 
+// Clientes / Checkout routes under customer auth middleware
+Route::middleware('auth:customers')->group(function () {
+    Route::get('/checkout', [PageController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout/process', [PageController::class, 'processCheckout'])->name('checkout.process');
+});
+
+// PDF invoice download route (secured via owner check in controller)
+Route::get('/pedidos/{order_number}/pdf', [PageController::class, 'downloadOrderPdf'])->name('pedidos.pdf');
+
+// Customer Logout Route
+Route::post('/logout-customer', function() {
+    auth('customers')->logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect()->route('home');
+})->name('clientes.logout');
+

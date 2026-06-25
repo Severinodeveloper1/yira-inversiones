@@ -109,6 +109,11 @@ class SettingForm
                                             ->acceptedFileTypes(['application/pdf'])
                                             ->directory('catalogs')
                                             ->helperText('Solo archivos PDF. Tamaño máximo recomendado: 10MB.'),
+                                        FileUpload::make('catalog_negocio_path')
+                                            ->label('Catálogo Negocio (PDF)')
+                                            ->acceptedFileTypes(['application/pdf'])
+                                            ->directory('catalogs')
+                                            ->helperText('Solo archivos PDF. Tamaño máximo recomendado: 10MB.'),
                                     ])
                                     ->columns(2),
                             ]),

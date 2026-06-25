@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ClaimConfirmationMail;
+use App\Mail\ClaimReceivedAdminMail;
+use App\Mail\OrderAdminNotificationMail;
+use App\Mail\OrderConfirmationMail;
+use App\Mail\QuoteConfirmationMail;
+use App\Mail\QuoteReceivedAdminMail;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\PageBanner;
@@ -11,8 +17,11 @@ use App\Models\Claim;
 use App\Models\Faq;
 use App\Models\Policy;
 use App\Models\Order;
+use App\Models\Setting;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class PageController extends Controller
@@ -65,7 +74,7 @@ class PageController extends Controller
             $searchTerm = '%' . $request->search . '%';
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('name', 'like', $searchTerm)
-                  ->orWhere('description', 'like', $searchTerm);
+                    ->orWhere('description', 'like', $searchTerm);
             });
         }
 
@@ -104,9 +113,9 @@ class PageController extends Controller
     public function blog()
     {
         $posts = Post::where('is_published', true)
-            ->where(function($q) {
+            ->where(function ($q) {
                 $q->whereNull('published_at')
-                  ->orWhere('published_at', '<=', now());
+                    ->orWhere('published_at', '<=', now());
             })
             ->orderBy('published_at', 'desc')
             ->paginate(6);
@@ -166,6 +175,22 @@ class PageController extends Controller
             'status' => 'pendiente',
         ]);
 
+        // ── Correos reclamo/queja (después de responder) ─────────────────
+        defer(function () use ($claim) {
+            try {
+                $company      = Setting::first();
+                $companyEmail = $company?->email ?? config('mail.from.address');
+
+                Mail::to($claim->email)->send(new ClaimConfirmationMail($claim));
+
+                if (filled($companyEmail)) {
+                    Mail::to($companyEmail)->send(new ClaimReceivedAdminMail($claim));
+                }
+            } catch (\Throwable $e) {
+                Log::error('Error correo reclamo ' . $claim->claim_number . ': ' . $e->getMessage());
+            }
+        });
+
         return response()->json([
             'success' => true,
             'message' => 'Su reclamación ha sido registrada con el código: ' . $claimNumber,
@@ -183,14 +208,30 @@ class PageController extends Controller
             'message' => 'required|string',
         ]);
 
-        \App\Models\Quote::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
+        $quote = \App\Models\Quote::create([
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
             'project' => $request->project,
             'message' => $request->message,
-            'status' => 'pendiente',
+            'status'  => 'pendiente',
         ]);
+
+        // ── Correos cotización/mensaje (después de responder) ─────────────
+        defer(function () use ($quote) {
+            try {
+                $company      = Setting::first();
+                $companyEmail = $company?->email ?? config('mail.from.address');
+
+                Mail::to($quote->email)->send(new QuoteConfirmationMail($quote));
+
+                if (filled($companyEmail)) {
+                    Mail::to($companyEmail)->send(new QuoteReceivedAdminMail($quote));
+                }
+            } catch (\Throwable $e) {
+                Log::error('Error correo cotización ' . $quote->id . ': ' . $e->getMessage());
+            }
+        });
 
         return response()->json([
             'success' => true,
@@ -310,6 +351,28 @@ class PageController extends Controller
 
         // Store the order number in the session to authorize guest receipt download
         session()->put('last_order_number', $order->order_number);
+
+        // ── Correos: se envían DESPUÉS de responder al cliente ───────────
+        // defer() garantiza que el JSON llega al browser primero,
+        // y solo entonces se conecta al SMTP (evita bloquear el fetch).
+        defer(function () use ($order) {
+            try {
+                $company      = Setting::first();
+                $companyEmail = $company?->email ?? config('mail.from.address');
+
+                // 1. Confirmación al cliente
+                Mail::to($order->email)
+                    ->send(new OrderConfirmationMail($order));
+
+                // 2. Notificación interna a la empresa
+                if (filled($companyEmail)) {
+                    Mail::to($companyEmail)
+                        ->send(new OrderAdminNotificationMail($order));
+                }
+            } catch (\Throwable $e) {
+                Log::error('Error al enviar correos del pedido ' . $order->order_number . ': ' . $e->getMessage());
+            }
+        });
 
         $redirectUrl = auth('customers')->check()
             ? '/clientes/orders'

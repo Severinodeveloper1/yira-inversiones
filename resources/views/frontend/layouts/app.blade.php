@@ -290,7 +290,10 @@
                 <label class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1">Mensaje o Detalles del Pedido *</label>
                 <textarea name="message" required class="w-full px-4 py-2 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all h-24" placeholder="Detalle los productos o requerimientos de su cotización..."></textarea>
             </div>
-            <button type="submit" class="w-full py-3 bg-primary text-white font-bold rounded uppercase tracking-widest hover:bg-primary-container transition-all active:scale-[0.98]">Enviar Solicitud</button>
+            <button type="submit" id="quote-submit-btn" class="w-full py-3 bg-primary text-white font-bold rounded uppercase tracking-widest hover:bg-primary-container transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">send</span>
+                Enviar Solicitud
+            </button>
         </form>
     </div>
 </div>
@@ -350,7 +353,10 @@
                 <textarea name="description" required class="w-full px-4 py-2 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all h-24" placeholder="Describa de manera detallada lo ocurrido..."></textarea>
             </div>
             <p class="text-[11px] text-secondary">Al enviar este formulario declaro ser el titular del documento indicado y doy mi consentimiento para el tratamiento de mis datos de conformidad con la ley de protección de datos personales.</p>
-            <button type="submit" class="w-full py-3 bg-primary text-white font-bold rounded uppercase tracking-widest hover:bg-primary-container transition-all active:scale-[0.98]">Enviar Reclamación</button>
+            <button type="submit" id="claim-submit-btn" class="w-full py-3 bg-primary text-white font-bold rounded uppercase tracking-widest hover:bg-primary-container transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">gavel</span>
+                Enviar Reclamación
+            </button>
         </form>
     </div>
 </div>
@@ -378,45 +384,70 @@
     }
 
     // Modal forms submission via Fetch AJAX
+    function setButtonLoading(btn, isLoading, icon, label) {
+        btn.disabled = isLoading;
+        btn.innerHTML = isLoading
+            ? `<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> <span>${label}</span>`
+            : `<span class="material-symbols-outlined text-[18px]">${icon}</span> <span>${label}</span>`;
+    }
+
     document.getElementById('quote-form').addEventListener('submit', function(e) {
         e.preventDefault();
+        const btn = document.getElementById('quote-submit-btn');
+        setButtonLoading(btn, true, 'send', 'Enviando...');
+
         const formData = new FormData(this);
         fetch('{{ route("quote.store") }}', {
             method: 'POST',
             body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
         })
         .then(res => res.json())
         .then(data => {
-            alert(data.message);
-            closeQuoteModal();
+            // Estado de éxito
+            btn.disabled = true;
+            btn.classList.replace('bg-primary', 'bg-green-700');
+            btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">check_circle</span> <span>¡Mensaje Enviado!</span>`;
+            setTimeout(() => {
+                closeQuoteModal();
+                btn.classList.replace('bg-green-700', 'bg-primary');
+                setButtonLoading(btn, false, 'send', 'Enviar Solicitud');
+            }, 2000);
         })
         .catch(err => {
             console.error(err);
             alert('Ocurrió un error al enviar la solicitud. Intente de nuevo.');
+            setButtonLoading(btn, false, 'send', 'Enviar Solicitud');
         });
     });
 
     document.getElementById('claim-form').addEventListener('submit', function(e) {
         e.preventDefault();
+        const btn = document.getElementById('claim-submit-btn');
+        setButtonLoading(btn, true, 'gavel', 'Registrando...');
+
         const formData = new FormData(this);
         fetch('{{ route("claim.store") }}', {
             method: 'POST',
             body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
         })
         .then(res => res.json())
         .then(data => {
-            alert(data.message);
-            closeClaimModal();
+            // Mostrar código de reclamación y estado de éxito
+            btn.disabled = true;
+            btn.classList.replace('bg-primary', 'bg-green-700');
+            btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">check_circle</span> <span>${data.message || '¡Reclamación Registrada!'}</span>`;
+            setTimeout(() => {
+                closeClaimModal();
+                btn.classList.replace('bg-green-700', 'bg-primary');
+                setButtonLoading(btn, false, 'gavel', 'Enviar Reclamación');
+            }, 3000);
         })
         .catch(err => {
             console.error(err);
             alert('Ocurrió un error al registrar su reclamación. Intente de nuevo.');
+            setButtonLoading(btn, false, 'gavel', 'Enviar Reclamación');
         });
     });
 

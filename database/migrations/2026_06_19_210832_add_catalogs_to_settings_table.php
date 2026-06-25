@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->string('catalog_home_path')->nullable();
             $table->string('catalog_office_path')->nullable();
+            $table->string('catalog_negocio_path')->nullable();
         });
     }
 
@@ -23,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn(['catalog_home_path', 'catalog_office_path']);
+            $table->dropColumn(['catalog_home_path', 'catalog_office_path', 'catalog_negocio_path']);
         });
     }
 };

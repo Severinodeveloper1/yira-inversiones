@@ -23,6 +23,7 @@ class Setting extends Model
         'youtube_url',
         'catalog_home_path',
         'catalog_office_path',
+        'catalog_negocio_path',
         'about_hero_image_path',
         'about_hero_subtitle',
         'about_hero_title',

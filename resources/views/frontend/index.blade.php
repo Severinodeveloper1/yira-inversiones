@@ -341,7 +341,7 @@
                 <p class="text-secondary font-body-md">Explora las colecciones completas en formato digital de alta
                     resolución.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
                 <div
                     class="group relative overflow-hidden bg-white rounded-lg p-12 flex flex-col items-center text-center transition-all duration-500 hover:shadow-lg">
                     <div
@@ -370,6 +370,22 @@
                     <a href="{{ $company->catalog_office_path ? asset('storage/' . $company->catalog_office_path) : '#' }}"
                         @if ($company->catalog_office_path) target="_blank" @else onclick="alert('El catálogo de Oficina estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                         class="flex items-center gap-2 px-8 py-4 bg-white text-on-surface font-bold rounded hover:bg-primary hover:text-white transition-all">
+                        <span>Descargar PDF</span>
+                        <span class="material-symbols-outlined">download</span>
+                    </a>
+                </div>
+                <div
+                    class="group relative overflow-hidden bg-white rounded-lg p-12 flex flex-col items-center text-center transition-all duration-500 hover:shadow-lg">
+                    <div
+                        class="w-20 h-20 mb-6 bg-primary/5 rounded-xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-4xl">picture_as_pdf</span>
+                    </div>
+                    <h3 class="font-headline-lg text-headline-lg mb-2">Catálogo Negocio</h3>
+                    <p class="text-secondary mb-8 max-w-xs">Soluciones de mobiliario y equipamiento para negocios que
+                        buscan eficiencia y durabilidad.</p>
+                    <a href="{{ $company->catalog_negocio_path ? asset('storage/' . $company->catalog_negocio_path) : '#' }}"
+                        @if ($company->catalog_negocio_path) target="_blank" @else onclick="alert('El catálogo de Negocio estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
+                        class="flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded hover:bg-primary-container transition-colors">
                         <span>Descargar PDF</span>
                         <span class="material-symbols-outlined">download</span>
                     </a>

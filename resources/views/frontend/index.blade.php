@@ -301,15 +301,37 @@
     <section class="py-32 bg-white relative overflow-hidden">
         <div class="px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 items-center gap-16">
             <div class="md:col-span-5 z-10">
-                <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-6 block">Nuestra
-                    Esencia</span>
-                <h2 class="font-headline-xl text-headline-xl text-on-surface mb-8">Artesanía que define espacios modernos.
+                <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-6 block">
+                    {{ $company->about_workshop_subtitle ?? 'Nuestra Esencia' }}
+                </span>
+                <h2 class="font-headline-xl text-headline-xl text-on-surface mb-8">
+                    {{ $company->about_workshop_title ?? 'Artesanía que define espacios modernos.' }}
                 </h2>
-                <p class="font-body-lg text-body-lg text-secondary mb-8">En Yira Inversiones, combinamos técnicas
-                    tradicionales de ebanistería con tecnología de punta para crear piezas que no solo llenan espacios, sino
-                    que cuentan historias de calidad y compromiso.</p>
-                <p class="font-body-lg text-body-lg text-secondary mb-12">Cada material es seleccionado bajo los más altos
-                    estándares de durabilidad y estética institucional.</p>
+                @if($company->about_workshop_description_1)
+                    <p class="font-body-lg text-body-lg text-secondary mb-8">{{ $company->about_workshop_description_1 }}</p>
+                @endif
+                @if($company->about_workshop_description_2)
+                    <p class="font-body-lg text-body-lg text-secondary mb-12">{{ $company->about_workshop_description_2 }}</p>
+                @endif
+
+                {{-- Stats --}}
+                @if($company->about_workshop_stat_1_value || $company->about_workshop_stat_2_value)
+                    <div class="grid grid-cols-2 gap-8 mb-12">
+                        @if($company->about_workshop_stat_1_value)
+                            <div>
+                                <span class="block font-headline-xl text-headline-xl text-primary mb-1">{{ $company->about_workshop_stat_1_value }}</span>
+                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_1_label ?? 'Años de Excelencia' }}</span>
+                            </div>
+                        @endif
+                        @if($company->about_workshop_stat_2_value)
+                            <div>
+                                <span class="block font-headline-xl text-headline-xl text-primary mb-1">{{ $company->about_workshop_stat_2_value }}</span>
+                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_2_label ?? 'Fabricación Propia' }}</span>
+                            </div>
+                        @endif
+                    </div>
+                @endif
+
                 <a class="inline-flex items-center gap-4 text-primary font-bold hover:gap-6 transition-all group uppercase text-label-sm"
                     href="{{ route('nosotros') }}">
                     Conoce nuestro taller
@@ -319,16 +341,23 @@
             <div class="md:col-span-7 relative h-[600px]">
                 <div class="absolute top-0 right-0 w-[90%] h-full shadow-2xl rounded-lg overflow-hidden">
                     <img alt="Workshop Craftsmanship" class="w-full h-full object-cover"
-                        src="https://lh3.googleusercontent.com/aida/AP1WRLuJP25Abvdua39V3C2A_S6RNdTBGMb7k5j9CnJH48jHxZ4DVpKnVrsPaYCsbxrwIQnFQxrww_2CguykGLVMWPXaStIVwFRLTf82qwIq8ytjIrTkrMwhJWCeK3AW0RZbxj26mk6Xtka3QVUuj7ubv4j4dUzpd0su03Dn7NA27R4k_HAlPb_NNVAWnQsiippMe7U3gPvZk1pp1U6rmhIBGci1gw5MlK656y67mfHU1eFC_fAFSM6LWt4xSQ">
+                        src="{{ $company->about_workshop_image_path ? asset('storage/' . $company->about_workshop_image_path) : 'https://lh3.googleusercontent.com/aida/AP1WRLuJP25Abvdua39V3C2A_S6RNdTBGMb7k5j9CnJH48jHxZ4DVpKnVrsPaYCsbxrwIQnFQxrww_2CguykGLVMWPXaStIVwFRLTf82qwIq8ytjIrTkrMwhJWCeK3AW0RZbxj26mk6Xtka3QVUuj7ubv4j4dUzpd0su03Dn7NA27R4k_HAlPb_NNVAWnQsiippMe7U3gPvZk1pp1U6rmhIBGci1gw5MlK656y67mfHU1eFC_fAFSM6LWt4xSQ' }}">
                 </div>
-                <div
-                    class="absolute -bottom-8 -left-8 w-64 h-64 bg-surface-container-highest flex items-center justify-center p-8 border-4 border-white shadow-xl rounded">
-                    <div class="text-center">
-                        <span class="block font-headline-xl text-headline-xl text-primary mb-2">25+</span>
-                        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">Años
-                            de Excelencia</span>
+                @if($company->about_workshop_quote)
+                    <div class="absolute -bottom-8 -left-8 w-72 bg-surface p-8 shadow-xl hidden md:block border-l-4 border-primary border border-outline/10 rounded">
+                        <p class="italic text-secondary font-body-md">{{ $company->about_workshop_quote }}</p>
                     </div>
-                </div>
+                @else
+                    {{-- Fallback badge con stat 1 si no hay cita configurada --}}
+                    @if($company->about_workshop_stat_1_value)
+                        <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-surface-container-highest flex items-center justify-center p-8 border-4 border-white shadow-xl rounded">
+                            <div class="text-center">
+                                <span class="block font-headline-xl text-headline-xl text-primary mb-2">{{ $company->about_workshop_stat_1_value }}</span>
+                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_1_label ?? 'Años de Excelencia' }}</span>
+                            </div>
+                        </div>
+                    @endif
+                @endif
             </div>
         </div>
     </section>

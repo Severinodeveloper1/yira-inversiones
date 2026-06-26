@@ -121,27 +121,27 @@ class SettingForm
                         Tab::make('Sección Nosotros')
                             ->icon('heroicon-o-user-group')
                             ->schema([
-                                Section::make('Nosotros - Hero')
-                                    ->description('Personalice la sección de cabecera de la página Quiénes Somos.')
-                                    ->schema([
-                                        FileUpload::make('about_hero_image_path')
-                                            ->label('Imagen de Fondo (Hero)')
-                                            ->image()
-                                            ->directory('about')
-                                            ->helperText('Formato recomendado: JPG/PNG/WEBP de alta resolución, tamaño máximo 2MB.'),
-                                        TextInput::make('about_hero_subtitle')
-                                            ->label('Subtítulo')
-                                            ->required()
-                                            ->maxLength(255),
-                                        TextInput::make('about_hero_title')
-                                            ->label('Título Principal')
-                                            ->required()
-                                            ->maxLength(255),
-                                        Textarea::make('about_hero_description')
-                                            ->label('Descripción / Párrafo principal')
-                                            ->rows(3),
-                                    ])
-                                    ->columns(2),
+                                // Section::make('Nosotros - Hero')
+                                //     ->description('Personalice la sección de cabecera de la página Quiénes Somos.')
+                                //     ->schema([
+                                //         FileUpload::make('about_hero_image_path')
+                                //             ->label('Imagen de Fondo (Hero)')
+                                //             ->image()
+                                //             ->directory('about')
+                                //             ->helperText('Formato recomendado: JPG/PNG/WEBP de alta resolución, tamaño máximo 2MB.'),
+                                //         TextInput::make('about_hero_subtitle')
+                                //             ->label('Subtítulo')
+                                //             ->required()
+                                //             ->maxLength(255),
+                                //         TextInput::make('about_hero_title')
+                                //             ->label('Título Principal')
+                                //             ->required()
+                                //             ->maxLength(255),
+                                //         Textarea::make('about_hero_description')
+                                //             ->label('Descripción / Párrafo principal')
+                                //             ->rows(3),
+                                //     ])
+                                //     ->columns(2),
 
                                 Section::make('Nosotros - El Taller')
                                     ->description('Personalice el contenido de la sección del Taller Artesanal.')

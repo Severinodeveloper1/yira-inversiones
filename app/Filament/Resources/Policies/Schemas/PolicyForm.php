@@ -17,16 +17,12 @@ class PolicyForm
             ->components([
                 Section::make('Política de la Empresa')
                     ->schema([
-                        Select::make('key')
-                            ->label('Tipo de Política')
+                        TextInput::make('key')
+                            ->label('Identificador Único (ej: envios, devoluciones-lima)')
+                            ->helperText('Use una sola palabra o palabras separadas por guiones. Este será el identificador interno.')
                             ->required()
-                            ->options([
-                                'envio' => 'Política de Envío',
-                                'devolucion' => 'Política de Devolución',
-                                'pago' => 'Política de Pago',
-                                'entrega' => 'Política de Entrega',
-                            ])
-                            ->unique(ignoreRecord: true),
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(50),
                         TextInput::make('title')
                             ->label('Título de la Sección')
                             ->required()

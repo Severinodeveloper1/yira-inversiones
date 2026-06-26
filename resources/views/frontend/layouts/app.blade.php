@@ -189,7 +189,7 @@
                         href="{{ route('contact') }}">Contacto</a>
                 </div>
             </div>
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-4 md:gap-6">
                 <a href="{{ route('tienda') }}"
                     class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">search</a>
                 @if (auth('customers')->check())
@@ -230,6 +230,11 @@
                     <span id="cart-badge"
                         class="absolute -top-2 -right-2 bg-primary text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold hidden">0</span>
                 </a>
+                
+                <!-- Hamburger Menu Button (Mobile) -->
+                <button class="md:hidden material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200" onclick="toggleMobileMenu(true)">
+                    menu
+                </button>
             </div>
         </div>
     </nav>
@@ -334,6 +339,49 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    @if ($company->phone)
+        @php
+            $whatsappNumber = preg_replace('/[^0-9]/', '', $company->phone);
+            $whatsappUrl = 'https://wa.me/' . $whatsappNumber . '?text=' . urlencode('Hola, me gustaría recibir más información.');
+        @endphp
+        <a href="{{ $whatsappUrl }}" target="_blank" class="fixed bottom-6 right-6 z-40 flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-green-300" aria-label="Chat on WhatsApp">
+            {{-- WhatsApp Official SVG Icon --}}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M12.031 21.172l-3.181-.85-3.18.85.85-3.18-1.558-2.698A9.972 9.972 0 013 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 01-5.111-1.398l-2.698-1.558-.85 3.18-.85-3.181 3.18.85 3.181-.85z" fill="none"/>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.66-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.198 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            </svg>
+            <span class="absolute flex h-full w-full pointer-events-none">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-40"></span>
+            </span>
+        </a>
+    @endif
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-on-surface/20 backdrop-blur-sm z-[60] hidden transition-opacity duration-300 opacity-0" onclick="toggleMobileMenu(false)"></div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobile-menu-drawer" class="fixed top-0 left-0 h-full w-[80%] max-w-sm bg-surface shadow-xl z-[70] -translate-x-full transition-transform duration-300 flex flex-col border-r border-outline/10">
+        <div class="p-6 border-b border-outline/10 flex justify-between items-center">
+            @if ($company->logo_path)
+                <img src="{{ asset('storage/' . $company->logo_path) }}" alt="{{ $company->name }}" class="h-8 object-contain">
+            @else
+                <span class="font-headline-lg text-primary font-bold tracking-tight">{{ $company->name }}</span>
+            @endif
+            <button onclick="toggleMobileMenu(false)" class="material-symbols-outlined text-secondary hover:text-primary transition-colors">close</button>
+        </div>
+        <div class="flex flex-col py-4 overflow-y-auto">
+            <a href="{{ route('home') }}" class="px-6 py-4 text-body-lg text-secondary hover:bg-surface-container-low hover:text-primary border-b border-outline/5 {{ Route::is('home') ? 'text-primary font-bold' : '' }}">Inicio</a>
+            <a href="{{ route('tienda') }}" class="px-6 py-4 text-body-lg text-secondary hover:bg-surface-container-low hover:text-primary border-b border-outline/5 {{ Route::is('tienda') ? 'text-primary font-bold' : '' }}">Tienda</a>
+            <a href="{{ route('nosotros') }}" class="px-6 py-4 text-body-lg text-secondary hover:bg-surface-container-low hover:text-primary border-b border-outline/5 {{ Route::is('nosotros') ? 'text-primary font-bold' : '' }}">Nosotros</a>
+            <a href="{{ route('blog') }}" class="px-6 py-4 text-body-lg text-secondary hover:bg-surface-container-low hover:text-primary border-b border-outline/5 {{ Route::is('blog') ? 'text-primary font-bold' : '' }}">Blog</a>
+            <a href="{{ route('contact') }}" class="px-6 py-4 text-body-lg text-secondary hover:bg-surface-container-low hover:text-primary border-b border-outline/5 {{ Route::is('contact') ? 'text-primary font-bold' : '' }}">Contacto</a>
+        </div>
+        <div class="p-6 mt-auto border-t border-outline/10">
+            <button onclick="openQuoteModal(); toggleMobileMenu(false);" class="w-full py-3 bg-primary text-white font-bold rounded uppercase tracking-widest text-xs">Solicitar Cotización</button>
+        </div>
+    </div>
 
     <!-- Modal de Cotización (Emergente) -->
     <div id="quote-modal"
@@ -499,7 +547,28 @@
     <!-- Global scripts for modal controls and shopping cart management -->
     <script>
         // Modal controls
-        function openQuoteModal(defaultMessage = '') {
+    function toggleMobileMenu(open) {
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const drawer = document.getElementById('mobile-menu-drawer');
+        
+        if (open) {
+            overlay.classList.remove('hidden');
+            drawer.classList.remove('-translate-x-full');
+            setTimeout(() => {
+                overlay.classList.add('opacity-100');
+                overlay.classList.remove('opacity-0');
+            }, 10);
+        } else {
+            overlay.classList.add('opacity-0');
+            overlay.classList.remove('opacity-100');
+            drawer.classList.add('-translate-x-full');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 300);
+        }
+    }
+
+    function openQuoteModal(defaultMessage = '') {
             document.getElementById('quote-modal').classList.remove('hidden');
             if (defaultMessage) {
                 document.querySelector('#quote-form textarea[name="message"]').value = defaultMessage;

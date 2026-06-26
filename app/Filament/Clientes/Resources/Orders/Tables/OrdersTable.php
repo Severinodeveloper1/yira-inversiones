@@ -19,7 +19,7 @@ class OrdersTable
                     ->sortable(),
                 TextColumn::make('document_type')
                     ->label('Tipo Comprobante')
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
                         'boleta' => 'Boleta de Venta',
                         'factura' => 'Factura',
                         'ticket' => 'Ticket',
@@ -35,7 +35,7 @@ class OrdersTable
                     ->searchable(),
                 TextColumn::make('shipping_method')
                     ->label('Método de Envío')
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
                         'recojo_tienda' => 'Recojo en Tienda',
                         'delivery' => 'Delivery',
                         'envio_agencia' => 'Envío por Agencia',
@@ -45,7 +45,7 @@ class OrdersTable
                 TextColumn::make('status')
                     ->label('Estado')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'pendiente' => 'warning',
                         'espera_pago' => 'info',
                         'aprobado' => 'success',
@@ -54,7 +54,7 @@ class OrdersTable
                         'anulado' => 'danger',
                         default => 'gray',
                     })
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
                         'pendiente' => 'Pendiente',
                         'espera_pago' => 'Espera de Pago',
                         'aprobado' => 'Aprobado',
@@ -66,7 +66,7 @@ class OrdersTable
                     ->sortable(),
                 TextColumn::make('total')
                     ->label('Total')
-                    ->formatStateUsing(fn ($state) => 'S/. ' . number_format((float) $state, 2))
+                    ->formatStateUsing(fn($state) => 'S/. ' . number_format((float) $state, 2))
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Fecha Pedido')
@@ -83,7 +83,7 @@ class OrdersTable
                     ->label('PDF')
                     ->icon('heroicon-o-arrow-down-tray')
                     ->color('success')
-                    ->url(fn ($record) => route('pedidos.pdf', ['order_number' => $record->order_number]))
+                    ->url(fn($record) => route('pedidos.pdf', ['order_number' => $record->order_number]))
                     ->openUrlInNewTab(),
             ])
             ->toolbarActions([
@@ -91,4 +91,3 @@ class OrdersTable
             ]);
     }
 }
-

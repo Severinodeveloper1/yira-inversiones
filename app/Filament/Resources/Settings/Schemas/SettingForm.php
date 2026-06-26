@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Settings\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Components\Section;
@@ -192,9 +193,27 @@ class SettingForm
                                     ->description('Personalice los tres pilares institucionales que aparecen abajo.')
                                     ->schema([
                                         // Pilar 1
-                                        TextInput::make('about_pilar_1_icon')
+                                        Select::make('about_pilar_1_icon')
                                             ->label('Pilar 1 - Icono (Material Symbol)')
-                                            ->helperText('Nombre del icono de Google Material Symbols. Ej: verified, chair_alt, eco'),
+                                            ->options([
+                                                'verified' => '<span class="material-symbols-outlined align-middle mr-2">verified</span> Verificado (Premium)',
+                                                'chair_alt' => '<span class="material-symbols-outlined align-middle mr-2">chair_alt</span> Mobiliario (Silla)',
+                                                'eco' => '<span class="material-symbols-outlined align-middle mr-2">eco</span> Ecológico / Sustentable',
+                                                'local_shipping' => '<span class="material-symbols-outlined align-middle mr-2">local_shipping</span> Envíos Rápidos',
+                                                'support_agent' => '<span class="material-symbols-outlined align-middle mr-2">support_agent</span> Soporte 24/7',
+                                                'workspace_premium' => '<span class="material-symbols-outlined align-middle mr-2">workspace_premium</span> Calidad Premium',
+                                                'handyman' => '<span class="material-symbols-outlined align-middle mr-2">handyman</span> Fabricación / Hecho a mano',
+                                                'design_services' => '<span class="material-symbols-outlined align-middle mr-2">design_services</span> Diseño Exclusivo',
+                                                'inventory_2' => '<span class="material-symbols-outlined align-middle mr-2">inventory_2</span> Stock Asegurado',
+                                                'stars' => '<span class="material-symbols-outlined align-middle mr-2">stars</span> Excelencia / Valoración',
+                                                'diversity_3' => '<span class="material-symbols-outlined align-middle mr-2">diversity_3</span> Equipo de Expertos',
+                                                'thumb_up' => '<span class="material-symbols-outlined align-middle mr-2">thumb_up</span> Satisfacción Garantizada',
+                                                'security' => '<span class="material-symbols-outlined align-middle mr-2">security</span> Seguridad y Confianza',
+                                                'storefront' => '<span class="material-symbols-outlined align-middle mr-2">storefront</span> Tienda Física',
+                                                'weekend' => '<span class="material-symbols-outlined align-middle mr-2">weekend</span> Comodidad / Confort',
+                                            ])
+                                            ->allowHtml()
+                                            ->searchable(),
                                         TextInput::make('about_pilar_1_title')
                                             ->label('Pilar 1 - Título'),
                                         Textarea::make('about_pilar_1_desc')
@@ -202,8 +221,27 @@ class SettingForm
                                             ->rows(2),
 
                                         // Pilar 2
-                                        TextInput::make('about_pilar_2_icon')
-                                            ->label('Pilar 2 - Icono (Material Symbol)'),
+                                        Select::make('about_pilar_2_icon')
+                                            ->label('Pilar 2 - Icono (Material Symbol)')
+                                            ->options([
+                                                'verified' => '<span class="material-symbols-outlined align-middle mr-2">verified</span> Verificado (Premium)',
+                                                'chair_alt' => '<span class="material-symbols-outlined align-middle mr-2">chair_alt</span> Mobiliario (Silla)',
+                                                'eco' => '<span class="material-symbols-outlined align-middle mr-2">eco</span> Ecológico / Sustentable',
+                                                'local_shipping' => '<span class="material-symbols-outlined align-middle mr-2">local_shipping</span> Envíos Rápidos',
+                                                'support_agent' => '<span class="material-symbols-outlined align-middle mr-2">support_agent</span> Soporte 24/7',
+                                                'workspace_premium' => '<span class="material-symbols-outlined align-middle mr-2">workspace_premium</span> Calidad Premium',
+                                                'handyman' => '<span class="material-symbols-outlined align-middle mr-2">handyman</span> Fabricación / Hecho a mano',
+                                                'design_services' => '<span class="material-symbols-outlined align-middle mr-2">design_services</span> Diseño Exclusivo',
+                                                'inventory_2' => '<span class="material-symbols-outlined align-middle mr-2">inventory_2</span> Stock Asegurado',
+                                                'stars' => '<span class="material-symbols-outlined align-middle mr-2">stars</span> Excelencia / Valoración',
+                                                'diversity_3' => '<span class="material-symbols-outlined align-middle mr-2">diversity_3</span> Equipo de Expertos',
+                                                'thumb_up' => '<span class="material-symbols-outlined align-middle mr-2">thumb_up</span> Satisfacción Garantizada',
+                                                'security' => '<span class="material-symbols-outlined align-middle mr-2">security</span> Seguridad y Confianza',
+                                                'storefront' => '<span class="material-symbols-outlined align-middle mr-2">storefront</span> Tienda Física',
+                                                'weekend' => '<span class="material-symbols-outlined align-middle mr-2">weekend</span> Comodidad / Confort',
+                                            ])
+                                            ->allowHtml()
+                                            ->searchable(),
                                         TextInput::make('about_pilar_2_title')
                                             ->label('Pilar 2 - Título'),
                                         Textarea::make('about_pilar_2_desc')
@@ -211,8 +249,27 @@ class SettingForm
                                             ->rows(2),
 
                                         // Pilar 3
-                                        TextInput::make('about_pilar_3_icon')
-                                            ->label('Pilar 3 - Icono (Material Symbol)'),
+                                        Select::make('about_pilar_3_icon')
+                                            ->label('Pilar 3 - Icono (Material Symbol)')
+                                            ->options([
+                                                'verified' => '<span class="material-symbols-outlined align-middle mr-2">verified</span> Verificado (Premium)',
+                                                'chair_alt' => '<span class="material-symbols-outlined align-middle mr-2">chair_alt</span> Mobiliario (Silla)',
+                                                'eco' => '<span class="material-symbols-outlined align-middle mr-2">eco</span> Ecológico / Sustentable',
+                                                'local_shipping' => '<span class="material-symbols-outlined align-middle mr-2">local_shipping</span> Envíos Rápidos',
+                                                'support_agent' => '<span class="material-symbols-outlined align-middle mr-2">support_agent</span> Soporte 24/7',
+                                                'workspace_premium' => '<span class="material-symbols-outlined align-middle mr-2">workspace_premium</span> Calidad Premium',
+                                                'handyman' => '<span class="material-symbols-outlined align-middle mr-2">handyman</span> Fabricación / Hecho a mano',
+                                                'design_services' => '<span class="material-symbols-outlined align-middle mr-2">design_services</span> Diseño Exclusivo',
+                                                'inventory_2' => '<span class="material-symbols-outlined align-middle mr-2">inventory_2</span> Stock Asegurado',
+                                                'stars' => '<span class="material-symbols-outlined align-middle mr-2">stars</span> Excelencia / Valoración',
+                                                'diversity_3' => '<span class="material-symbols-outlined align-middle mr-2">diversity_3</span> Equipo de Expertos',
+                                                'thumb_up' => '<span class="material-symbols-outlined align-middle mr-2">thumb_up</span> Satisfacción Garantizada',
+                                                'security' => '<span class="material-symbols-outlined align-middle mr-2">security</span> Seguridad y Confianza',
+                                                'storefront' => '<span class="material-symbols-outlined align-middle mr-2">storefront</span> Tienda Física',
+                                                'weekend' => '<span class="material-symbols-outlined align-middle mr-2">weekend</span> Comodidad / Confort',
+                                            ])
+                                            ->allowHtml()
+                                            ->searchable(),
                                         TextInput::make('about_pilar_3_title')
                                             ->label('Pilar 3 - Título'),
                                         Textarea::make('about_pilar_3_desc')

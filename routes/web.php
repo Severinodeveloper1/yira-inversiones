@@ -35,25 +35,3 @@ Route::post('/logout-customer', function () {
 Route::get('/login', function () {
     return redirect()->route('filament.clientes.auth.login');
 })->name('login');
-// Ruta de prueba rápida para verificar el envío de correos y ver errores en pantalla
-Route::get('/test-mail', function (\Illuminate\Http\Request $request) {
-    $email = $request->get('to', 'developer1@vesergenperu.com');
-
-    try {
-        \Illuminate\Support\Facades\Mail::raw('Este es un correo de prueba desde Laravel para verificar la configuración SMTP.', function ($message) use ($email) {
-            $message->to($email)
-                ->subject('Correo de prueba Yira Inversiones');
-        });
-        return response()->json([
-            'success' => true,
-            'message' => '¡Correo enviado con éxito a ' . $email . '! La configuración SMTP funciona.'
-        ]);
-    } catch (\Throwable $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Error al enviar el correo.',
-            'error_details' => $e->getMessage(),
-            'error_trace' => $e->getTraceAsString()
-        ], 500);
-    }
-});

@@ -24,7 +24,7 @@ Route::post('/checkout/process', [PageController::class, 'processCheckout'])->na
 Route::get('/pedidos/{order_number}/pdf', [PageController::class, 'downloadOrderPdf'])->name('pedidos.pdf');
 
 // Customer Logout Route
-Route::post('/logout-customer', function() {
+Route::post('/logout-customer', function () {
     auth('customers')->logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
@@ -32,17 +32,17 @@ Route::post('/logout-customer', function() {
 })->name('clientes.logout');
 
 // Login redirect fallback for auth middleware
-Route::get('/login', function() {
+Route::get('/login', function () {
     return redirect()->route('filament.clientes.auth.login');
 })->name('login');
 // Ruta de prueba rápida para verificar el envío de correos y ver errores en pantalla
 Route::get('/test-mail', function (\Illuminate\Http\Request $request) {
-    $email = $request->get('to', 'tu-correo-aqui@gmail.com');
-    
+    $email = $request->get('to', 'developer1@vesergenperu.com');
+
     try {
         \Illuminate\Support\Facades\Mail::raw('Este es un correo de prueba desde Laravel para verificar la configuración SMTP.', function ($message) use ($email) {
             $message->to($email)
-                    ->subject('Correo de prueba Yira Inversiones');
+                ->subject('Correo de prueba Yira Inversiones');
         });
         return response()->json([
             'success' => true,

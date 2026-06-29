@@ -175,21 +175,19 @@ class PageController extends Controller
             'status' => 'pendiente',
         ]);
 
-        // ── Correos reclamo/queja (después de responder) ─────────────────
-        defer(function () use ($claim) {
-            try {
-                $company      = Setting::first();
-                $companyEmail = $company?->email ?? config('mail.from.address');
+        // ── Correos reclamo/queja (Sincrónico) ─────────────────
+        try {
+            $company      = Setting::first();
+            $companyEmail = $company?->email ?? config('mail.from.address');
 
-                Mail::to($claim->email)->send(new ClaimConfirmationMail($claim));
+            Mail::to($claim->email)->send(new ClaimConfirmationMail($claim));
 
-                if (filled($companyEmail)) {
-                    Mail::to($companyEmail)->send(new ClaimReceivedAdminMail($claim));
-                }
-            } catch (\Throwable $e) {
-                Log::error('Error correo reclamo ' . $claim->claim_number . ': ' . $e->getMessage());
+            if (filled($companyEmail)) {
+                Mail::to($companyEmail)->send(new ClaimReceivedAdminMail($claim));
             }
-        });
+        } catch (\Throwable $e) {
+            Log::error('Error correo reclamo ' . $claim->claim_number . ': ' . $e->getMessage());
+        }
 
         return response()->json([
             'success' => true,
@@ -217,21 +215,19 @@ class PageController extends Controller
             'status'  => 'pendiente',
         ]);
 
-        // ── Correos cotización/mensaje (después de responder) ─────────────
-        defer(function () use ($quote) {
-            try {
-                $company      = Setting::first();
-                $companyEmail = $company?->email ?? config('mail.from.address');
+        // ── Correos cotización/mensaje (Sincrónico) ─────────────
+        try {
+            $company      = Setting::first();
+            $companyEmail = $company?->email ?? config('mail.from.address');
 
-                Mail::to($quote->email)->send(new QuoteConfirmationMail($quote));
+            Mail::to($quote->email)->send(new QuoteConfirmationMail($quote));
 
-                if (filled($companyEmail)) {
-                    Mail::to($companyEmail)->send(new QuoteReceivedAdminMail($quote));
-                }
-            } catch (\Throwable $e) {
-                Log::error('Error correo cotización ' . $quote->id . ': ' . $e->getMessage());
+            if (filled($companyEmail)) {
+                Mail::to($companyEmail)->send(new QuoteReceivedAdminMail($quote));
             }
-        });
+        } catch (\Throwable $e) {
+            Log::error('Error correo cotización ' . $quote->id . ': ' . $e->getMessage());
+        }
 
         return response()->json([
             'success' => true,
@@ -352,27 +348,23 @@ class PageController extends Controller
         // Store the order number in the session to authorize guest receipt download
         session()->put('last_order_number', $order->order_number);
 
-        // ── Correos: se envían DESPUÉS de responder al cliente ───────────
-        // defer() garantiza que el JSON llega al browser primero,
-        // y solo entonces se conecta al SMTP (evita bloquear el fetch).
-        defer(function () use ($order) {
-            try {
-                $company      = Setting::first();
-                $companyEmail = $company?->email ?? config('mail.from.address');
+        // ── Correos: Se envían sincrónicamente para evitar que LiteSpeed (cPanel) mate el proceso ───────────
+        try {
+            $company      = Setting::first();
+            $companyEmail = $company?->email ?? config('mail.from.address');
 
-                // 1. Confirmación al cliente
-                Mail::to($order->email)
-                    ->send(new OrderConfirmationMail($order));
+            // 1. Confirmación al cliente
+            Mail::to($order->email)
+                ->send(new OrderConfirmationMail($order));
 
-                // 2. Notificación interna a la empresa
-                if (filled($companyEmail)) {
-                    Mail::to($companyEmail)
-                        ->send(new OrderAdminNotificationMail($order));
-                }
-            } catch (\Throwable $e) {
-                Log::error('Error al enviar correos del pedido ' . $order->order_number . ': ' . $e->getMessage());
+            // 2. Notificación interna a la empresa
+            if (filled($companyEmail)) {
+                Mail::to($companyEmail)
+                    ->send(new OrderAdminNotificationMail($order));
             }
-        });
+        } catch (\Throwable $e) {
+            Log::error('Error al enviar correos del pedido ' . $order->order_number . ': ' . $e->getMessage());
+        }
 
         $redirectUrl = auth('customers')->check()
             ? '/clientes/orders'

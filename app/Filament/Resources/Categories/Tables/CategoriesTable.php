@@ -27,12 +27,13 @@ class CategoriesTable
                 TextColumn::make('type')
                     ->label('Línea de Negocio')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'hogar' => 'success',
                         'oficina' => 'warning',
+                        'negocio' => 'info',
                         default => 'gray',
                     })
-                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->formatStateUsing(fn(string $state): string => ucfirst($state))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('created_at')

@@ -23,7 +23,7 @@ class CategoryForm
                             ->label('Nombre de la Categoría')
                             ->required()
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($set, $state) => $set('slug', Str::slug($state)))
+                            ->afterStateUpdated(fn($set, $state) => $set('slug', Str::slug($state)))
                             ->maxLength(255),
                         TextInput::make('slug')
                             ->label('Slug / URL Amigable')
@@ -36,6 +36,7 @@ class CategoryForm
                             ->options([
                                 'hogar' => 'Hogar',
                                 'oficina' => 'Oficina',
+                                'negocio' => 'Negocio',
                             ])
                             ->default('hogar'),
                         FileUpload::make('image_path')

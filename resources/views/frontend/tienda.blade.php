@@ -288,6 +288,11 @@
                                 {{ request('type') === 'oficina' ? 'checked' : '' }}
                                 class="w-5 h-5 border-outline rounded-full text-primary focus:ring-primary">
                             <span class="text-body-md group-hover:text-primary transition-colors">Oficina</span>
+                        </label><label class="flex items-center gap-3 cursor-pointer group">
+                            <input name="type" type="radio" value="negocio"
+                                {{ request('type') === 'negocio' ? 'checked' : '' }}
+                                class="w-5 h-5 border-outline rounded-full text-primary focus:ring-primary">
+                            <span class="text-body-md group-hover:text-primary transition-colors">Negocio</span>
                         </label>
                     </div>
                 </div>

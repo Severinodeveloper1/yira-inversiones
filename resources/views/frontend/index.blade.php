@@ -126,45 +126,74 @@
             <div class="flex gap-6 overflow-x-auto hide-scroll pb-8 snap-x snap-mandatory" id="category-scroll">
                 @if ($categories->count() > 0)
                     @foreach ($categories as $category)
-                        <div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
+                        <a href="{{ route('tienda', ['category' => $category->slug]) }}"
+                            class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start block">
                             <img alt="{{ $category->name }}"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 src="{{ $category->image_path ? asset('storage/' . $category->image_path) : 'https://placehold.co/300x400' }}">
                             <div
-                                class="absolute inset-0 bg-black/40 flex flex-col justify-end p-6 group-hover:bg-black/0 transition-all duration-500">
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 group-hover:from-black/90 group-hover:via-black/40 transition-all duration-500">
                                 <span
-                                    class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-1 group-hover:opacity-0 transition-opacity duration-500">{{ ucfirst($category->type) }}</span>
-                                <a href="{{ route('tienda', ['category' => $category->slug]) }}"
-                                    class="text-white font-headline-lg text-body-lg font-bold hover:underline group-hover:opacity-0 transition-opacity duration-500">
+                                    class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                    {{ ucfirst($category->type) }}
+                                </span>
+                                <span
+                                    class="text-white font-headline-lg text-body-lg font-bold transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                                     {{ $category->name }}
-                                </a>
+                                </span>
+                                {{-- <div
+                                    class="flex items-center gap-1.5 text-primary text-xs font-bold opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 mt-2">
+                                    <span>VER CATEGORÍA</span>
+                                    <span class="material-symbols-outlined text-xs font-bold">arrow_forward</span>
+                                </div> --}}
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 @else
                     <!-- Fallback categories -->
-                    <div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
+                    <a href="{{ route('tienda', ['type' => 'oficina']) }}"
+                        class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start block">
                         <img alt="Mobiliario Oficina"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             src="https://lh3.googleusercontent.com/aida/AP1WRLtSE3TB-5aqg1Yzq3JRqVyhQ2Em7vlMj7uY5EYUtIlNER-KZFDuZi9a2iVlF5lvoyZByn2m-dA5lwF8MnEo1m4uG_HB8zANArN6awiS6l0M2SdfZOwtRxgMPgEK7K7B3zcsk4lZZoTfZftxgFwvaS2ApJOvJChNB9gKPe9hjlvSGnV2Jj2UCfo3X1G3DK90Dy8Y75tYhyZ3NAaI7NYFaN55fYL9fQq38Z6HChHMS-D4_JBxtOgpUgyRYS4">
                         <div
-                            class="absolute inset-0 bg-black/0 flex items-end p-6 group-hover:bg-black/0 transition-all duration-500">
-                            <a href="{{ route('tienda', ['type' => 'oficina']) }}"
-                                class="text-white font-headline-lg text-body-lg font-bold group-hover:opacity-0 transition-opacity duration-500">Oficina
-                                Ejecutiva</a>
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 group-hover:from-black/90 group-hover:via-black/40 transition-all duration-500">
+                            <span
+                                class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                Oficina
+                            </span>
+                            <span
+                                class="text-white font-headline-lg text-body-lg font-bold transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                Oficina Ejecutiva
+                            </span>
+                            {{-- <div class="flex items-center gap-1.5 text-primary text-xs font-bold opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 mt-2">
+                                <span>VER CATEGORÍA</span>
+                                <span class="material-symbols-outlined text-xs font-bold">arrow_forward</span>
+                            </div> --}}
                         </div>
-                    </div>
-                    <div class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start">
+                    </a>
+                    <a href="{{ route('tienda', ['type' => 'hogar']) }}"
+                        class="flex-shrink-0 w-72 aspect-[3/4] group relative overflow-hidden rounded-lg snap-start block">
                         <img alt="Mobiliario Hogar"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             src="https://lh3.googleusercontent.com/aida/AP1WRLs0NmaJeLTYqrTAhSV2PlT4eh4CEcNjUTjlqDq7iB8TkLlyVno1p9Usn37pVWv2DRZKFl1OgOMik0UOGL_T53whPHK8qIUWom8B6MtvZSMR7y3uYgKVTm1yvISuiNA9HWB2o8NfgORK2CCJgJjaxbv9EqeWDGUZkMdu8EGojxPe3TccgvcQL6xPdkJe9d_H74LIxM6dU9ZiUlCO0KIgTJh3jnK-wsxzvGhXQRy5ymQfdIcQ6PG0OfQZOg">
                         <div
-                            class="absolute inset-0 bg-black/00 flex items-end p-6 group-hover:bg-black/0 transition-all duration-500">
-                            <a href="{{ route('tienda', ['type' => 'hogar']) }}"
-                                class="text-white font-headline-lg text-body-lg font-bold group-hover:opacity-0 transition-opacity duration-500">Sala
-                                &amp; Confort</a>
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 group-hover:from-black/90 group-hover:via-black/40 transition-all duration-500">
+                            <span
+                                class="text-white/70 text-xs font-semibold uppercase tracking-wider mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                Hogar
+                            </span>
+                            <span
+                                class="text-white font-headline-lg text-body-lg font-bold transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                Sala &amp; Confort
+                            </span>
+                            <div
+                                class="flex items-center gap-1.5 text-primary text-xs font-bold opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 mt-2">
+                                <span>VER CATEGORÍA</span>
+                                <span class="material-symbols-outlined text-xs font-bold">arrow_forward</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 @endif
             </div>
         </div>
@@ -307,26 +336,32 @@
                 <h2 class="font-headline-xl text-headline-xl text-on-surface mb-8">
                     {{ $company->about_workshop_title ?? 'Artesanía que define espacios modernos.' }}
                 </h2>
-                @if($company->about_workshop_description_1)
-                    <p class="font-body-lg text-body-lg text-secondary mb-8">{{ $company->about_workshop_description_1 }}</p>
+                @if ($company->about_workshop_description_1)
+                    <p class="font-body-lg text-body-lg text-secondary mb-8">{{ $company->about_workshop_description_1 }}
+                    </p>
                 @endif
-                @if($company->about_workshop_description_2)
-                    <p class="font-body-lg text-body-lg text-secondary mb-12">{{ $company->about_workshop_description_2 }}</p>
+                @if ($company->about_workshop_description_2)
+                    <p class="font-body-lg text-body-lg text-secondary mb-12">{{ $company->about_workshop_description_2 }}
+                    </p>
                 @endif
 
                 {{-- Stats --}}
-                @if($company->about_workshop_stat_1_value || $company->about_workshop_stat_2_value)
+                @if ($company->about_workshop_stat_1_value || $company->about_workshop_stat_2_value)
                     <div class="grid grid-cols-2 gap-8 mb-12">
-                        @if($company->about_workshop_stat_1_value)
+                        @if ($company->about_workshop_stat_1_value)
                             <div>
-                                <span class="block font-headline-xl text-headline-xl text-primary mb-1">{{ $company->about_workshop_stat_1_value }}</span>
-                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_1_label ?? 'Años de Excelencia' }}</span>
+                                <span
+                                    class="block font-headline-xl text-headline-xl text-primary mb-1">{{ $company->about_workshop_stat_1_value }}</span>
+                                <span
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_1_label ?? 'Años de Excelencia' }}</span>
                             </div>
                         @endif
-                        @if($company->about_workshop_stat_2_value)
+                        @if ($company->about_workshop_stat_2_value)
                             <div>
-                                <span class="block font-headline-xl text-headline-xl text-primary mb-1">{{ $company->about_workshop_stat_2_value }}</span>
-                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_2_label ?? 'Fabricación Propia' }}</span>
+                                <span
+                                    class="block font-headline-xl text-headline-xl text-primary mb-1">{{ $company->about_workshop_stat_2_value }}</span>
+                                <span
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_2_label ?? 'Fabricación Propia' }}</span>
                             </div>
                         @endif
                     </div>
@@ -343,17 +378,21 @@
                     <img alt="Workshop Craftsmanship" class="w-full h-full object-cover"
                         src="{{ $company->about_workshop_image_path ? asset('storage/' . $company->about_workshop_image_path) : 'https://lh3.googleusercontent.com/aida/AP1WRLuJP25Abvdua39V3C2A_S6RNdTBGMb7k5j9CnJH48jHxZ4DVpKnVrsPaYCsbxrwIQnFQxrww_2CguykGLVMWPXaStIVwFRLTf82qwIq8ytjIrTkrMwhJWCeK3AW0RZbxj26mk6Xtka3QVUuj7ubv4j4dUzpd0su03Dn7NA27R4k_HAlPb_NNVAWnQsiippMe7U3gPvZk1pp1U6rmhIBGci1gw5MlK656y67mfHU1eFC_fAFSM6LWt4xSQ' }}">
                 </div>
-                @if($company->about_workshop_quote)
-                    <div class="absolute -bottom-8 -left-8 w-72 bg-surface p-8 shadow-xl hidden md:block border-l-4 border-primary border border-outline/10 rounded">
+                @if ($company->about_workshop_quote)
+                    <div
+                        class="absolute -bottom-8 -left-8 w-72 bg-surface p-8 shadow-xl hidden md:block border-l-4 border-primary border border-outline/10 rounded">
                         <p class="italic text-secondary font-body-md">{{ $company->about_workshop_quote }}</p>
                     </div>
                 @else
                     {{-- Fallback badge con stat 1 si no hay cita configurada --}}
-                    @if($company->about_workshop_stat_1_value)
-                        <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-surface-container-highest flex items-center justify-center p-8 border-4 border-white shadow-xl rounded">
+                    @if ($company->about_workshop_stat_1_value)
+                        <div
+                            class="absolute -bottom-8 -left-8 w-64 h-64 bg-surface-container-highest flex items-center justify-center p-8 border-4 border-white shadow-xl rounded">
                             <div class="text-center">
-                                <span class="block font-headline-xl text-headline-xl text-primary mb-2">{{ $company->about_workshop_stat_1_value }}</span>
-                                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_1_label ?? 'Años de Excelencia' }}</span>
+                                <span
+                                    class="block font-headline-xl text-headline-xl text-primary mb-2">{{ $company->about_workshop_stat_1_value }}</span>
+                                <span
+                                    class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter">{{ $company->about_workshop_stat_1_label ?? 'Años de Excelencia' }}</span>
                             </div>
                         </div>
                     @endif

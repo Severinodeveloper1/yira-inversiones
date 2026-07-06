@@ -110,7 +110,7 @@
                     @endphp
                     <div class="group cursor-pointer" onclick="window.location.href='{{ route('product.detail', $recommended->slug) }}'">
                         <div class="aspect-[4/5] bg-surface-container-low overflow-hidden rounded-sm relative mb-4 shadow-sm">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('{{ $recImage }}')"></div>
+                            <div class="absolute inset-0 bg-contain bg-no-repeat bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('{{ $recImage }}')"></div>
                         </div>
                         <h4 class="font-headline-lg text-[18px] mb-1 group-hover:underline">{{ $recommended->name }}</h4>
                         <p class="text-secondary font-label-sm mb-2 uppercase">{{ $recommended->category->name }}</p>

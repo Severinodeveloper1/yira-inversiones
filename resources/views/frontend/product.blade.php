@@ -34,7 +34,7 @@
                     </button>
                 @endif
                 <!-- Main Image -->
-                <div id="main-image" class="w-full h-full bg-cover bg-center transition-transform duration-700 hover:scale-105" style="background-image: url('{{ $firstImageUrl }}')">
+                <div id="main-image" class="w-full h-full bg-contain bg-no-repeat bg-center transition-transform duration-700 hover:scale-102" style="background-image: url('{{ $firstImageUrl }}')">
                 </div>
                 <!-- Pagination Indicators -->
                 @if($hasImages && $mediaItems->count() > 1)
@@ -50,7 +50,7 @@
             @if($hasImages && $mediaItems->count() > 1)
                 <div class="flex gap-4 overflow-x-auto hide-scroll pb-2">
                     @foreach($mediaItems as $index => $media)
-                        <div onclick="updateGallery({{ $index }})" class="thumb-btn flex-shrink-0 w-24 h-24 bg-cover bg-center rounded cursor-pointer hover:opacity-80 transition-opacity {{ $index === 0 ? 'active-thumb' : '' }}" style="background-image: url('{{ $media->getUrl() }}')"></div>
+                        <div onclick="updateGallery({{ $index }})" class="thumb-btn flex-shrink-0 w-24 h-24 bg-contain bg-no-repeat bg-center bg-surface-container rounded cursor-pointer hover:opacity-80 transition-opacity {{ $index === 0 ? 'active-thumb' : '' }}" style="background-image: url('{{ $media->getUrl() }}')"></div>
                     @endforeach
                 </div>
             @endif
@@ -164,7 +164,7 @@
                     @endphp
                     <div class="group cursor-pointer" onclick="window.location.href='{{ route('product.detail', $related->slug) }}'">
                         <div class="aspect-square bg-surface-container mb-6 overflow-hidden relative rounded shadow-sm">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('{{ $relatedImage }}')"></div>
+                            <div class="absolute inset-0 bg-contain bg-no-repeat bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('{{ $relatedImage }}')"></div>
                         </div>
                         <h3 class="font-body-md text-body-md font-bold text-on-surface group-hover:underline">{{ $related->name }}</h3>
                         <p class="font-body-md text-body-md text-secondary">

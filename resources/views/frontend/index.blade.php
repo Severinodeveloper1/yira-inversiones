@@ -11,13 +11,17 @@
                 @foreach ($banners as $banner)
                     <div class="h-full relative flex items-center" style="width: {{ 100 / $banners->count() }}%;">
                         <div class="absolute inset-0 z-0">
-                            <picture class="w-full h-full block">
-                                @if ($banner->mobile_image_path)
-                                    <source media="(max-w: 640px)" srcset="{{ asset('storage/' . $banner->mobile_image_path) }}">
-                                @endif
+                            @if ($banner->mobile_image_path)
+                                <!-- Imagen para Móviles (Pantallas menores a 768px) -->
+                                <img alt="{{ $banner->title ?? 'Banner' }}" class="w-full h-full object-cover md:hidden"
+                                    src="{{ asset('storage/' . $banner->mobile_image_path) }}">
+                                <!-- Imagen para Escritorio (Pantallas de 768px a más) -->
+                                <img alt="{{ $banner->title ?? 'Banner' }}" class="w-full h-full object-cover hidden md:block"
+                                    src="{{ asset('storage/' . $banner->image_path) }}">
+                            @else
                                 <img alt="{{ $banner->title ?? 'Banner' }}" class="w-full h-full object-cover"
                                     src="{{ asset('storage/' . $banner->image_path) }}">
-                            </picture>
+                            @endif
                             @if ($banner->title || $banner->button_text)
                                 <div class="absolute inset-0 bg-gradient-to-r from-surface/60 to-transparent"></div>
                             @endif

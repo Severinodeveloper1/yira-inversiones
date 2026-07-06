@@ -14,6 +14,7 @@ class Banner extends Model implements Auditable
     protected $fillable = [
         'title',
         'image_path',
+        'mobile_image_path',
         'button_text',
         'button_url',
         'is_active',

@@ -25,12 +25,18 @@ class BannerForm
                             ->inline(false)
                             ->default(true),
                         FileUpload::make('image_path')
-                            ->label('Imagen del Banner')
+                            ->label('Imagen del Banner (Escritorio)')
                             ->image()
                             ->directory('banners')
                             ->required()
                             ->columnSpanFull()
                             ->helperText('Tamaño recomendado: 1200x500px, máx 2MB.'),
+                        FileUpload::make('mobile_image_path')
+                            ->label('Imagen del Banner (Móviles)')
+                            ->image()
+                            ->directory('banners/mobile')
+                            ->columnSpanFull()
+                            ->helperText('Opcional. Relación sugerida: vertical (800x1000px) o cuadrada (800x800px) para que se visualice correctamente en celulares.'),
                         TextInput::make('button_text')
                             ->label('Texto del Botón (CTA)')
                             ->maxLength(255),

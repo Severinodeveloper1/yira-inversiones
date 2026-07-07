@@ -13,25 +13,26 @@
     <main class="py-12 pb-24 max-w-container-max mx-auto px-margin-desktop">
         <!-- Page Header -->
         <header class="mb-12">
-            <nav class="flex text-label-sm font-label-sm text-secondary mb-4">
-                <a class="hover:text-primary" href="{{ route('home') }}">Inicio</a>
-                <span class="mx-2">/</span>
-                <span class="text-on-surface-variant">Tienda</span>
-            </nav>
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div class="flex items-center gap-4">
-                    <button onclick="toggleDrawer(true)"
-                        class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest hover:bg-surface-variant rounded-lg transition-colors active:scale-95 border border-outline/10">
-                        <span class="material-symbols-outlined text-primary">tune</span>
-                        <span class="font-label-sm uppercase tracking-widest text-[11px]">Filtros</span>
-                    </button>
-                    <h1 class="font-headline-xl text-headline-lg md:text-headline-xl text-on-surface">Tienda y Catálogos
-                    </h1>
-                </div>
-
+            <div class="flex justify-between items-center gap-4 mb-6">
+                <nav class="flex text-label-sm font-label-sm text-secondary">
+                    <a class="hover:text-primary" href="{{ route('home') }}">Inicio</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-on-surface-variant">Tienda</span>
+                </nav>
+                <button onclick="toggleDrawer(true)"
+                    class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-highest hover:bg-surface-variant rounded-lg transition-colors active:scale-95 border border-outline/10 shrink-0">
+                    <span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+                    <span class="font-label-sm uppercase tracking-widest text-[11px] font-bold">Filtros</span>
+                </button>
+            </div>
+            
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <!-- Title -->
+                <h1 class="font-headline-xl text-headline-lg md:text-headline-xl text-on-surface">Tienda y Catálogos</h1>
+                
                 <!-- Search bar -->
                 <form action="{{ route('tienda') }}" method="GET"
-                    class="flex border border-outline/20 rounded-lg overflow-hidden bg-white max-w-md w-full">
+                    class="flex border border-outline/20 rounded-lg overflow-hidden bg-white max-w-md w-full md:w-80">
                     @if (request('category'))
                         <input type="hidden" name="category" value="{{ request('category') }}">
                     @endif
@@ -205,7 +206,7 @@
                     <p class="text-secondary mb-8 max-w-xs text-sm">Mobiliario de diseño para salas, dormitorios y comedores
                         con estilo contemporáneo.</p>
                     <a href="{{ $company->catalog_home_path ? asset('storage/' . $company->catalog_home_path) : '#' }}"
-                        @if ($company->catalog_home_path) target="_blank" @else onclick="alert('El catálogo de Hogar estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
+                         @if ($company->catalog_home_path) target="_blank" @else onclick="showCustomDialog('El catálogo de Hogar estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                         class="flex items-center gap-2 px-8 py-3 bg-primary text-white font-bold rounded text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">
                         <span>Descargar PDF</span>
                         <span class="material-symbols-outlined text-sm">download</span>
@@ -221,7 +222,7 @@
                     <p class="text-surface-variant mb-8 max-w-xs text-sm">Soluciones ergonómicas y arquitectura de espacios
                         corporativos de alto rendimiento.</p>
                     <a href="{{ $company->catalog_office_path ? asset('storage/' . $company->catalog_office_path) : '#' }}"
-                        @if ($company->catalog_office_path) target="_blank" @else onclick="alert('El catálogo de Oficina estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
+                         @if ($company->catalog_office_path) target="_blank" @else onclick="showCustomDialog('El catálogo de Oficina estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                         class="flex items-center gap-2 px-8 py-3 bg-white text-on-surface font-bold rounded text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
                         <span>Descargar PDF</span>
                         <span class="material-symbols-outlined text-sm">download</span>
@@ -239,7 +240,7 @@
                         negocios que
                         buscan eficiencia y durabilidad.</p>
                     <a href="{{ $company->catalog_negocio_path ? asset('storage/' . $company->catalog_negocio_path) : '#' }}"
-                        @if ($company->catalog_negocio_path) target="_blank" @else onclick="alert('El catálogo de Negocio estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
+                         @if ($company->catalog_negocio_path) target="_blank" @else onclick="showCustomDialog('El catálogo de Negocio estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                         class="flex items-center gap-2 px-8 py-3 bg-primary text-white font-bold rounded text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">
                         <span>Descargar PDF</span>
                         <span class="material-symbols-outlined text-sm">download</span>

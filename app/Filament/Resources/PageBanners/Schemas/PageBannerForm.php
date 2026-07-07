@@ -38,8 +38,9 @@ class PageBannerForm
                             ->label('Imagen del Banner')
                             ->image()
                             ->directory('page-banners')
+                            ->maxSize(2048)
                             ->columnSpanFull()
-                            ->helperText('Tamaño recomendado: 1920×600px, formato JPG/WEBP. Máx. 5MB.'),
+                            ->helperText('Tamaño recomendado: 1920×600px, formato JPG/WEBP. Máx. 2MB.'),
                     ])
                     ->columns(2),
 

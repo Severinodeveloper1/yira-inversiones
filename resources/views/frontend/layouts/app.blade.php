@@ -249,8 +249,8 @@
     <!-- Footer -->
     <footer class="bg-surface-container py-16 border-t border-outline/10">
         <div
-            class="flex flex-col md:flex-row justify-between items-start px-margin-desktop max-w-container-max mx-auto gap-gutter">
-            <div class="flex-1">
+            class="flex flex-col md:flex-row justify-between items-start px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto gap-gutter">
+            <div class="flex-1 w-full">
                 <h4 class="font-headline-lg text-headline-lg text-on-surface mb-6">{{ $company->name }}</h4>
                 <p class="text-secondary max-w-xs mb-8">Arquitectura y Confort para espacios que inspiran grandeza.
                     Calidad artesanal con visión moderna.</p>
@@ -281,7 +281,7 @@
                     @endif
                 </div>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-12 flex-[2]">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 md:gap-12 flex-[2] w-full">
                 <div>
                     <h5 class="font-label-sm text-label-sm text-on-surface uppercase mb-6 tracking-widest">Catálogo</h5>
                     <ul class="space-y-4">
@@ -312,7 +312,7 @@
                     </h5>
                     <ul class="space-y-4 text-secondary font-body-md">
                         @if ($company->address)
-                            <li><span class="block text-on-surface font-semibold">Taller y Showroom:</span>
+                            <li><span class="block text-on-surface font-semibold">Dirección:</span>
                                 {{ $company->address }}</li>
                         @endif
                         @if ($company->phone)
@@ -328,7 +328,7 @@
             </div>
         </div>
         <div
-            class="max-w-container-max mx-auto px-margin-desktop mt-16 pt-8 border-t border-outline/10 flex flex-col md:flex-row justify-between items-center gap-4">
+            class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-16 pt-8 border-t border-outline/10 flex flex-col md:flex-row justify-between items-center gap-4 w-full">
             <p class="text-secondary font-body-md text-body-md text-center md:text-left">© {{ date('Y') }}
                 {{ $company->name }}. Todos los derechos reservados.</p>
             <div class="flex gap-4">
@@ -342,6 +342,22 @@
             </div>
         </div>
     </footer>
+
+    <!-- Custom Dialog Modal -->
+    <div id="custom-dialog-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCustomDialog()"></div>
+        <!-- Modal Content -->
+        <div class="relative bg-white rounded-lg shadow-xl max-w-md w-full p-6 border border-outline/10 text-left">
+            <h4 id="custom-dialog-title" class="font-headline-md text-lg font-bold text-on-surface mb-3">Atención</h4>
+            <p id="custom-dialog-message" class="text-secondary font-body-md text-body-md mb-6 leading-relaxed"></p>
+            <div class="flex justify-end">
+                <button id="custom-dialog-ok-btn" class="bg-primary text-white px-6 py-2.5 rounded font-label-sm text-label-sm uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Floating WhatsApp Button -->
     @if ($company->phone)
@@ -423,7 +439,7 @@
                     <label
                         class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1">Nombre
                         Completo *</label>
-                    <input name="name" required
+                    <input name="name" required maxlength="100"
                         class="w-full px-4 py-2 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all"
                         placeholder="Tu nombre" type="text">
                 </div>
@@ -488,7 +504,7 @@
                     <label
                         class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1">Nombre
                         Completo *</label>
-                    <input name="fullname" required
+                    <input name="fullname" required maxlength="100"
                         class="w-full px-4 py-2 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all"
                         placeholder="Nombre completo" type="text">
                 </div>
@@ -499,6 +515,7 @@
                             de Documento *</label>
                         <select name="document_type" required
                             class="w-full px-4 py-2 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
+                            <option value="" disabled selected>Seleccione tipo...</option>
                             <option value="DNI">DNI (Documento Nacional de Identidad)</option>
                             <option value="RUC">RUC</option>
                             <option value="CE">Carnet de Extranjería</option>
@@ -509,9 +526,9 @@
                         <label
                             class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1">Número
                             de Documento *</label>
-                        <input name="document_number" required
-                            class="w-full px-4 py-2 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all"
-                            placeholder="12345678" type="text">
+                        <input name="document_number" required disabled
+                            class="w-full px-4 py-2 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                            placeholder="Seleccione tipo de documento primero" type="text">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -569,6 +586,87 @@
 
     <!-- Global scripts for modal controls and shopping cart management -->
     <script>
+        // Custom dynamic Toast Notification
+        function showToast(message, type = 'success') {
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                container.className = 'fixed bottom-6 right-6 z-[9999] flex flex-col gap-3 pointer-events-none max-w-sm w-full px-4';
+                document.body.appendChild(container);
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'p-4 rounded-lg shadow-lg text-white pointer-events-auto flex items-center justify-between gap-3 transition-all duration-300 transform translate-y-2 opacity-0';
+            
+            if (type === 'success') {
+                toast.classList.add('bg-primary');
+            } else if (type === 'error') {
+                toast.classList.add('bg-red-600');
+            } else if (type === 'warning') {
+                toast.classList.add('bg-amber-600');
+            } else {
+                toast.classList.add('bg-slate-800');
+            }
+            
+            let icon = 'info';
+            if (type === 'success') icon = 'check_circle';
+            if (type === 'error') icon = 'error';
+            if (type === 'warning') icon = 'warning';
+            
+            toast.innerHTML = `
+                <div class="flex items-center gap-2.5">
+                    <span class="material-symbols-outlined notranslate" translate="no">${icon}</span>
+                    <span class="text-sm font-semibold">${message}</span>
+                </div>
+                <button class="text-white/80 hover:text-white transition-colors shrink-0" onclick="this.parentElement.remove()">
+                    <span class="material-symbols-outlined text-sm notranslate" translate="no">close</span>
+                </button>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Force reflow
+            toast.offsetHeight;
+            
+            toast.classList.remove('translate-y-2', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4000);
+        }
+
+        // Custom Dialog Modal controls
+        let customDialogCallback = null;
+
+        function showCustomDialog(message, title = 'Atención', callback = null) {
+            document.getElementById('custom-dialog-title').innerText = title;
+            document.getElementById('custom-dialog-message').innerText = message;
+            
+            const modal = document.getElementById('custom-dialog-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            customDialogCallback = callback;
+            
+            const okBtn = document.getElementById('custom-dialog-ok-btn');
+            if (okBtn) okBtn.focus();
+        }
+
+        function closeCustomDialog() {
+            const modal = document.getElementById('custom-dialog-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            
+            if (customDialogCallback && typeof customDialogCallback === 'function') {
+                customDialogCallback();
+                customDialogCallback = null;
+            }
+        }
+
         // Modal controls
         function toggleMobileMenu(open) {
             const overlay = document.getElementById('mobile-menu-overlay');
@@ -623,8 +721,30 @@
         document.getElementById('quote-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = document.getElementById('quote-submit-btn');
-            setButtonLoading(btn, true, 'send', 'Enviando...');
 
+            const name = this.querySelector('input[name="name"]').value.trim();
+            const email = this.querySelector('input[name="email"]').value.trim();
+            const phone = this.querySelector('input[name="phone"]').value.trim();
+            const message = this.querySelector('textarea[name="message"]').value.trim();
+
+            if (name.length < 5) {
+                showToast('Por favor, ingrese su nombre completo (mínimo 5 caracteres).', 'warning');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('El correo electrónico no es válido.', 'warning');
+                return;
+            }
+            if (!/^\+?[0-9]{7,15}$/.test(phone)) {
+                showToast('El número de teléfono no es válido (ingrese entre 7 y 15 dígitos sin espacios ni guiones).', 'warning');
+                return;
+            }
+            if (message.length < 10) {
+                showToast('El mensaje o detalles deben tener al menos 10 caracteres.', 'warning');
+                return;
+            }
+
+            setButtonLoading(btn, true, 'send', 'Enviando...');
             const formData = new FormData(this);
             fetch('{{ route('quote.store') }}', {
                     method: 'POST',
@@ -633,7 +753,12 @@
                         'X-Requested-With': 'XMLHttpRequest'
                     }
                 })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(err => { throw err; });
+                    }
+                    return res.json();
+                })
                 .then(data => {
                     // Estado de éxito
                     btn.disabled = true;
@@ -648,7 +773,8 @@
                 })
                 .catch(err => {
                     console.error(err);
-                    alert('Ocurrió un error al enviar la solicitud. Intente de nuevo.');
+                    const errMsg = err.message || 'Ocurrió un error al enviar la solicitud. Intente de nuevo.';
+                    showToast(errMsg, 'error');
                     setButtonLoading(btn, false, 'send', 'Enviar Solicitud');
                 });
         });
@@ -656,8 +782,52 @@
         document.getElementById('claim-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = document.getElementById('claim-submit-btn');
-            setButtonLoading(btn, true, 'gavel', 'Registrando...');
 
+            const fullname = this.querySelector('input[name="fullname"]').value.trim();
+            const docType = this.querySelector('select[name="document_type"]').value;
+            const docNum = this.querySelector('input[name="document_number"]').value.trim();
+            const phone = this.querySelector('input[name="phone"]').value.trim();
+            const email = this.querySelector('input[name="email"]').value.trim();
+            const description = this.querySelector('textarea[name="description"]').value.trim();
+
+            if (fullname.length < 5) {
+                showToast('Por favor, ingrese su nombre completo (mínimo 5 caracteres).', 'warning');
+                return;
+            }
+            if (!docType) {
+                showToast('Debe seleccionar el tipo de documento.', 'warning');
+                return;
+            }
+            if (docType === 'DNI' && docNum.length !== 8) {
+                showToast('El DNI debe tener exactamente 8 dígitos.', 'warning');
+                return;
+            }
+            if (docType === 'RUC' && docNum.length !== 11) {
+                showToast('El RUC debe tener exactamente 11 dígitos.', 'warning');
+                return;
+            }
+            if (docType === 'CE' && (docNum.length < 8 || docNum.length > 12)) {
+                showToast('El Carnet de Extranjería debe tener entre 8 y 12 caracteres.', 'warning');
+                return;
+            }
+            if (docType === 'Pasaporte' && (docNum.length < 6 || docNum.length > 15)) {
+                showToast('El Pasaporte debe tener entre 6 y 15 caracteres.', 'warning');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('El correo electrónico no es válido.', 'warning');
+                return;
+            }
+            if (!/^\+?[0-9]{7,15}$/.test(phone)) {
+                showToast('El número de celular no es válido (ingrese entre 7 y 15 dígitos).', 'warning');
+                return;
+            }
+            if (description.length < 15) {
+                showToast('El detalle del reclamo o queja debe tener al menos 15 caracteres.', 'warning');
+                return;
+            }
+
+            setButtonLoading(btn, true, 'gavel', 'Registrando...');
             const formData = new FormData(this);
             fetch('{{ route('claim.store') }}', {
                     method: 'POST',
@@ -666,7 +836,12 @@
                         'X-Requested-With': 'XMLHttpRequest'
                     }
                 })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(err => { throw err; });
+                    }
+                    return res.json();
+                })
                 .then(data => {
                     // Mostrar código de reclamación y estado de éxito
                     btn.disabled = true;
@@ -681,7 +856,8 @@
                 })
                 .catch(err => {
                     console.error(err);
-                    alert('Ocurrió un error al registrar su reclamación. Intente de nuevo.');
+                    const errMsg = err.message || 'Ocurrió un error al registrar su reclamación. Intente de nuevo.';
+                    showToast(errMsg, 'error');
                     setButtonLoading(btn, false, 'gavel', 'Enviar Reclamación');
                 });
         });
@@ -718,7 +894,7 @@
                     });
                 }
                 this.saveItems(items);
-                alert('¡Producto añadido al carrito!');
+                showToast('¡Producto añadido al carrito!', 'success');
             },
             removeItem(id, color) {
                 let items = this.getItems().filter(item => !(item.id === id && item.color === color));
@@ -749,9 +925,48 @@
             }
         };
 
-        // Initialize cart badge
+        // Initialize cart badge and document validations
         document.addEventListener('DOMContentLoaded', () => {
             Cart.updateBadge();
+
+            // Claim form document type and number logic
+            const claimDocType = document.querySelector('#claim-form select[name="document_type"]');
+            const claimDocNumber = document.querySelector('#claim-form input[name="document_number"]');
+
+            if (claimDocType && claimDocNumber) {
+                claimDocType.addEventListener('change', function() {
+                    const val = this.value;
+                    claimDocNumber.value = "";
+                    if (val) {
+                        claimDocNumber.disabled = false;
+                        if (val === 'DNI') {
+                            claimDocNumber.placeholder = "8 dígitos (solo números)";
+                            claimDocNumber.maxLength = 8;
+                        } else if (val === 'RUC') {
+                            claimDocNumber.placeholder = "11 dígitos (solo números)";
+                            claimDocNumber.maxLength = 11;
+                        } else if (val === 'CE') {
+                            claimDocNumber.placeholder = "Alfanumérico (8 a 12 caracteres)";
+                            claimDocNumber.maxLength = 12;
+                        } else {
+                            claimDocNumber.placeholder = "Pasaporte (hasta 15 caracteres)";
+                            claimDocNumber.maxLength = 15;
+                        }
+                    } else {
+                        claimDocNumber.disabled = true;
+                        claimDocNumber.placeholder = "Seleccione tipo de documento primero";
+                    }
+                });
+
+                claimDocNumber.addEventListener('input', function(e) {
+                    const valType = claimDocType.value;
+                    if (valType === 'DNI' || valType === 'RUC') {
+                        this.value = this.value.replace(/\D/g, '');
+                    } else if (valType === 'CE' || valType === 'Pasaporte') {
+                        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+                    }
+                });
+            }
 
             // Proteger íconos de Material Symbols de la traducción del navegador.
             // Los traductores (Google Translate, etc.) convierten "picture_as_pdf" → "imagen_como_pdf"

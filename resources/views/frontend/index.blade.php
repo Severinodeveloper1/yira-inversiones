@@ -210,13 +210,13 @@
 
     <!-- Shop Preview / Featured Products -->
     <section class="py-24 px-margin-desktop max-w-container-max mx-auto bg-surface grain-texture relative">
-        <div class="flex justify-between items-end mb-16">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-16">
             <div>
                 <span
                     class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Destacados</span>
                 <h2 class="font-headline-lg text-headline-lg text-on-surface">Diseño para el Confort</h2>
             </div>
-            <a class="text-secondary hover:text-primary transition-colors font-label-sm text-label-sm underline underline-offset-4"
+            <a class="text-secondary hover:text-primary transition-colors font-label-sm text-label-sm underline underline-offset-4 shrink-0"
                 href="{{ route('tienda') }}">VER TODO EL CATÁLOGO</a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -283,13 +283,13 @@
         <!-- Special Promotions Section -->
         <section
             class="py-24 px-margin-desktop max-w-container-max mx-auto bg-surface-container-low relative rounded-lg border border-outline/5 my-12">
-            <div class="flex justify-between items-end mb-16">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-16">
                 <div>
                     <span
                         class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Promociones</span>
                     <h2 class="font-headline-lg text-headline-lg text-on-surface">Ofertas Especiales de Temporada</h2>
                 </div>
-                <a class="text-secondary hover:text-primary transition-colors font-label-sm text-label-sm underline underline-offset-4"
+                <a class="text-secondary hover:text-primary transition-colors font-label-sm text-label-sm underline underline-offset-4 shrink-0"
                     href="{{ route('tienda') }}">VER TODO EL CATÁLOGO</a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -429,7 +429,7 @@
                     <p class="text-secondary mb-8 max-w-xs">Mobiliario de diseño para salas, dormitorios y comedores con
                         estilo contemporáneo.</p>
                     <a href="{{ $company->catalog_home_path ? asset('storage/' . $company->catalog_home_path) : '#' }}"
-                        @if ($company->catalog_home_path) target="_blank" @else onclick="alert('El catálogo de Hogar estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
+                        @if ($company->catalog_home_path) target="_blank" @else onclick="showCustomDialog('El catálogo de Hogar estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                         class="flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded hover:bg-primary-container transition-colors">
                         <span>Descargar PDF</span>
                         <span class="material-symbols-outlined">download</span>
@@ -445,7 +445,7 @@
                     <p class="text-surface-variant mb-8 max-w-xs">Soluciones ergonómicas y arquitectura de espacios
                         corporativos de alto rendimiento.</p>
                     <a href="{{ $company->catalog_office_path ? asset('storage/' . $company->catalog_office_path) : '#' }}"
-                        @if ($company->catalog_office_path) target="_blank" @else onclick="alert('El catálogo de Oficina estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
+                        @if ($company->catalog_office_path) target="_blank" @else onclick="showCustomDialog('El catálogo de Oficina estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                         class="flex items-center gap-2 px-8 py-4 bg-white text-on-surface font-bold rounded hover:bg-primary hover:text-white transition-all">
                         <span>Descargar PDF</span>
                         <span class="material-symbols-outlined">download</span>
@@ -461,7 +461,7 @@
                     <p class="text-secondary mb-8 max-w-xs">Soluciones de mobiliario y equipamiento para negocios que
                         buscan eficiencia y durabilidad.</p>
                     <a href="{{ $company->catalog_negocio_path ? asset('storage/' . $company->catalog_negocio_path) : '#' }}"
-                        @if ($company->catalog_negocio_path) target="_blank" @else onclick="alert('El catálogo de Negocio estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
+                        @if ($company->catalog_negocio_path) target="_blank" @else onclick="showCustomDialog('El catálogo de Negocio estará disponible muy pronto. Por favor, contáctanos para enviarte información.'); return false;" @endif
                         class="flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded hover:bg-primary-container transition-colors">
                         <span>Descargar PDF</span>
                         <span class="material-symbols-outlined">download</span>
@@ -509,7 +509,7 @@
                         <div class="space-y-2">
                             <label
                                 class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Nombre</label>
-                            <input name="name" required
+                            <input name="name" required maxlength="100"
                                 class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all"
                                 placeholder="Tu nombre" type="text">
                         </div>
@@ -523,7 +523,7 @@
                     </div>
                     <div class="space-y-2">
                         <label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Teléfono</label>
-                        <input name="phone" required
+                        <input name="phone" required maxlength="15"
                             class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all"
                             placeholder="+51 999 999 999" type="text">
                     </div>
@@ -586,6 +586,29 @@
         // Handle home contact form submit
         document.getElementById('home-contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            const name = this.querySelector('input[name="name"]').value.trim();
+            const email = this.querySelector('input[name="email"]').value.trim();
+            const phone = this.querySelector('input[name="phone"]').value.trim();
+            const message = this.querySelector('textarea[name="message"]').value.trim();
+
+            if (name.length < 5) {
+                showToast('Por favor, ingrese su nombre completo (mínimo 5 caracteres).', 'warning');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('El correo electrónico no es válido.', 'warning');
+                return;
+            }
+            if (!/^\+?[0-9]{7,15}$/.test(phone)) {
+                showToast('El número de teléfono no es válido (ingrese entre 7 y 15 dígitos sin letras ni símbolos).', 'warning');
+                return;
+            }
+            if (message.length < 10) {
+                showToast('El mensaje debe tener al menos 10 caracteres.', 'warning');
+                return;
+            }
+
             const formData = new FormData(this);
             fetch('{{ route('quote.store') }}', {
                     method: 'POST',
@@ -594,15 +617,29 @@
                         'X-Requested-With': 'XMLHttpRequest'
                     }
                 })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(err => { throw err; });
+                    }
+                    return res.json();
+                })
                 .then(data => {
-                    alert(data.message);
+                    showToast(data.message || '¡Mensaje enviado con éxito!', 'success');
                     this.reset();
                 })
                 .catch(err => {
                     console.error(err);
-                    alert('Ocurrió un error al enviar el mensaje. Intente de nuevo.');
+                    const errMsg = err.message || 'Ocurrió un error al enviar el mensaje. Intente de nuevo.';
+                    showToast(errMsg, 'error');
                 });
         });
+
+        // Restrict phone input to numbers and +
+        const homePhoneInput = document.querySelector('#home-contact-form input[name="phone"]');
+        if (homePhoneInput) {
+            homePhoneInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9+]/g, '');
+            });
+        }
     </script>
 @endsection

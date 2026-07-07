@@ -20,6 +20,17 @@ class Category extends Model implements Auditable
         'type',
     ];
 
+    protected static function booted()
+    {
+        static::deleting(function ($category) {
+            if ($category->products()->exists()) {
+                throw \Illuminate\Validation\ValidationException::withMessages([
+                    'category' => 'No se puede eliminar la categoría "' . $category->name . '" porque tiene productos asociados. Reasigne o elimine los productos primero.'
+                ]);
+            }
+        });
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

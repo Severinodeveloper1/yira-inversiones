@@ -61,7 +61,7 @@
                                 <label
                                     class="font-label-sm text-label-xs uppercase tracking-wider text-secondary block mb-1"
                                     id="billing-name-label">Nombre Completo *</label>
-                                <input type="text" name="billing_name" value="{{ $customer?->name }}" required
+                                <input type="text" name="billing_name" value="{{ $customer?->name }}" required maxlength="100"
                                     class="w-full px-4 py-3 bg-surface border border-outline/20 focus:border-primary focus:ring-0 outline-none rounded transition-all">
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -208,13 +208,36 @@
             renderCheckoutSummary();
             toggleDocType('boleta'); // Default
             toggleShipping('recojo_tienda'); // Default
+
+            // Checkout document number dynamic typings
+            const docInput = document.querySelector('input[name="document_number"]');
+            const docSelect = document.getElementById('doc_type_select');
+            if (docInput && docSelect) {
+                docInput.addEventListener('input', function() {
+                    const valType = docSelect.value;
+                    if (valType === 'DNI' || valType === 'RUC') {
+                        this.value = this.value.replace(/\D/g, '');
+                    } else if (valType === 'CE' || valType === 'PASAPORTE') {
+                        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+                    }
+                });
+            }
+
+            // Restrict phone input to numbers and +
+            const phoneInput = document.querySelector('input[name="phone"]');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    this.value = this.value.replace(/[^0-9+]/g, '');
+                });
+            }
         });
 
         function validateCart() {
             const items = Cart.getItems();
             if (items.length === 0) {
-                alert('Su carrito está vacío. Será redirigido al catálogo.');
-                window.location.href = '{{ route("tienda") }}';
+                showCustomDialog('Su carrito está vacío. Será redirigido al catálogo.', 'Atención', function() {
+                    window.location.href = '{{ route("tienda") }}';
+                });
             }
         }
 
@@ -294,7 +317,26 @@
         function updateDocFieldLabel() {
             const docSelect = document.getElementById('doc_type_select');
             const label = document.getElementById('doc-number-label');
+            const docInput = document.querySelector('input[name="document_number"]');
+            
             label.textContent = `Número de Documento (${docSelect.value}) *`;
+            
+            if (docInput) {
+                const val = docSelect.value;
+                if (val === 'DNI') {
+                    docInput.placeholder = "8 dígitos (solo números)";
+                    docInput.maxLength = 8;
+                } else if (val === 'RUC') {
+                    docInput.placeholder = "11 dígitos (solo números)";
+                    docInput.maxLength = 11;
+                } else if (val === 'CE') {
+                    docInput.placeholder = "Alfanumérico (8 a 12 caracteres)";
+                    docInput.maxLength = 12;
+                } else {
+                    docInput.placeholder = "Pasaporte (hasta 15 caracteres)";
+                    docInput.maxLength = 15;
+                }
+            }
         }
 
         function toggleShipping(method) {
@@ -342,10 +384,51 @@
             formData.append('document_type', document.querySelector('input[name="document_type"]:checked').value);
             formData.append('document_type_detail', docSelect.value);
 
-            // Validation for RUC
+            // Client-side validations
+            const billingName = formData.get('billing_name').trim();
+            const docType = docSelect.value;
             const docNumber = formData.get('document_number').trim();
-            if (docSelect.value === 'RUC' && docNumber.length !== 11) {
-                alert('El RUC debe tener exactamente 11 dígitos.');
+            const phone = formData.get('phone').trim();
+            const email = formData.get('email').trim();
+
+            if (billingName.length < 5) {
+                showToast('Por favor, ingrese el nombre o razón social completo (mínimo 5 caracteres).', 'warning');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
+                return;
+            }
+            if (docType === 'DNI' && docNumber.length !== 8) {
+                showToast('El DNI debe tener exactamente 8 dígitos.', 'warning');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
+                return;
+            }
+            if (docType === 'RUC' && docNumber.length !== 11) {
+                showToast('El RUC debe tener exactamente 11 dígitos.', 'warning');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
+                return;
+            }
+            if (docType === 'CE' && (docNumber.length < 8 || docNumber.length > 12)) {
+                showToast('El Carnet de Extranjería debe tener entre 8 y 12 caracteres.', 'warning');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
+                return;
+            }
+            if (docType === 'PASAPORTE' && (docNumber.length < 6 || docNumber.length > 15)) {
+                showToast('El Pasaporte debe tener entre 6 y 15 caracteres.', 'warning');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('El correo electrónico no es válido.', 'warning');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
+                return;
+            }
+            if (!/^\+?[0-9]{7,15}$/.test(phone)) {
+                showToast('El número de teléfono no es válido (ingrese entre 7 y 15 dígitos sin letras ni símbolos).', 'warning');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
                 return;
@@ -366,22 +449,29 @@
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(err => { throw err; });
+                    }
+                    return res.json();
+                })
                 .then(data => {
                     if (data.success) {
                         // Clear cart locally
                         Cart.clear();
-                        alert(data.message);
-                        window.location.href = data.redirect_url;
+                        showCustomDialog(data.message || 'Pedido registrado con éxito.', 'Pedido Registrado', function() {
+                            window.location.href = data.redirect_url;
+                        });
                     } else {
-                        alert(data.message || 'Ocurrió un error al procesar la compra.');
+                        showCustomDialog(data.message || 'Ocurrió un error al procesar la compra.', 'Atención');
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
                     }
                 })
                 .catch(err => {
                     console.error(err);
-                    alert('Error en el servidor. Intente de nuevo.');
+                    const errMsg = err.message || 'Error en el servidor. Intente de nuevo.';
+                    showToast(errMsg, 'error');
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = `<span class="material-symbols-outlined">shopping_cart_checkout</span> Registrar Pedido y Comprobante`;
                 });

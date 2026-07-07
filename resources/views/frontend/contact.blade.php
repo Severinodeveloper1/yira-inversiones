@@ -66,7 +66,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-2">
                         <label class="text-label-sm uppercase tracking-widest text-secondary" for="name">Nombre Completo *</label>
-                        <input name="name" class="w-full bg-transparent border-0 border-b border-outline/30 focus:ring-0 focus:border-primary transition-all py-3 px-0 font-body-md" id="name" placeholder="Juan Pérez" required type="text">
+                        <input name="name" maxlength="100" class="w-full bg-transparent border-0 border-b border-outline/30 focus:ring-0 focus:border-primary transition-all py-3 px-0 font-body-md" id="name" placeholder="Juan Pérez" required type="text">
                     </div>
                     <div class="space-y-2">
                         <label class="text-label-sm uppercase tracking-widest text-secondary" for="email">Email *</label>
@@ -76,7 +76,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-2">
                         <label class="text-label-sm uppercase tracking-widest text-secondary" for="phone">Teléfono / WhatsApp *</label>
-                        <input name="phone" class="w-full bg-transparent border-0 border-b border-outline/30 focus:ring-0 focus:border-primary transition-all py-3 px-0 font-body-md" id="phone" placeholder="+51 999 999 999" required type="text">
+                        <input name="phone" maxlength="15" class="w-full bg-transparent border-0 border-b border-outline/30 focus:ring-0 focus:border-primary transition-all py-3 px-0 font-body-md" id="phone" placeholder="+51 999 999 999" required type="text">
                     </div>
                     <div class="space-y-2">
                         <label class="text-label-sm uppercase tracking-widest text-secondary" for="project">Proyecto / Asunto (Opcional)</label>
@@ -149,6 +149,36 @@
         const originalText = submitBtn.innerText;
         submitBtn.innerText = 'Enviando...';
         submitBtn.disabled = true;
+
+        const name = this.querySelector('input[name="name"]').value.trim();
+        const email = this.querySelector('input[name="email"]').value.trim();
+        const phone = this.querySelector('input[name="phone"]').value.trim();
+        const message = this.querySelector('textarea[name="message"]').value.trim();
+
+        if (name.length < 5) {
+            showToast('Por favor, ingrese su nombre completo (mínimo 5 caracteres).', 'warning');
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showToast('El correo electrónico no es válido.', 'warning');
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
+        if (!/^\+?[0-9]{7,15}$/.test(phone)) {
+            showToast('El número de teléfono no es válido (ingrese entre 7 y 15 dígitos sin letras ni símbolos).', 'warning');
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
+        if (message.length < 10) {
+            showToast('El mensaje debe tener al menos 10 caracteres.', 'warning');
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
         
         const formData = new FormData(this);
         fetch('{{ route("quote.store") }}', {
@@ -158,9 +188,14 @@
                 'X-Requested-With': 'XMLHttpRequest'
             }
         })
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) {
+                return res.json().then(err => { throw err; });
+            }
+            return res.json();
+        })
         .then(data => {
-            alert(data.message);
+            showToast(data.message || '¡Mensaje enviado con éxito!', 'success');
             this.reset();
             submitBtn.innerText = '¡Mensaje Enviado!';
             submitBtn.classList.replace('bg-primary', 'bg-green-700');
@@ -172,11 +207,20 @@
         })
         .catch(err => {
             console.error(err);
-            alert('Ocurrió un error al enviar el mensaje. Intente de nuevo.');
+            const errMsg = err.message || 'Ocurrió un error al enviar el mensaje. Intente de nuevo.';
+            showToast(errMsg, 'error');
             submitBtn.innerText = originalText;
             submitBtn.disabled = false;
         });
     });
+
+    // Restrict phone input to numbers and +
+    const contactPhoneInput = document.getElementById('phone');
+    if (contactPhoneInput) {
+        contactPhoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9+]/g, '');
+        });
+    }
 
     // FAQs Accordion Behavior
     document.querySelectorAll('details').forEach((detail) => {

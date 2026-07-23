@@ -329,8 +329,11 @@
         </div>
         <div
             class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-16 pt-8 border-t border-outline/10 flex flex-col md:flex-row justify-between items-center gap-4 w-full">
-            <p class="text-secondary font-body-md text-body-md text-center md:text-left">© {{ date('Y') }}
-                {{ $company->name }}. Todos los derechos reservados.</p>
+            <div class="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-secondary font-body-md text-body-md text-center md:text-left">
+                <span>© {{ date('Y') }} {{ $company->name }}. Todos los derechos reservados.</span>
+                <span class="hidden md:inline text-outline/30">|</span>
+                <span>Desarrollado por <a href="https://vesergenperu.com/" target="_blank" class="hover:underline font-bold text-primary">GRUPO VESERGENPERU</a></span>
+            </div>
             <div class="flex gap-4">
                 <a href="{{ route('policies') }}"
                     class="text-xs text-secondary hover:text-primary underline">Políticas</a>
